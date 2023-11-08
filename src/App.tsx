@@ -1,7 +1,7 @@
-import {Component, lazy, Suspense} from 'react';
+import React, {Component, lazy, Suspense} from 'react';
 import 'antd/dist/antd.min.css';
 import './App.less';
-import {Route, Switch} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import JsonSchemaDemo from "./test/JsonSchemaDemo";
 import Loading from "./ui/loading/Loading";
 
@@ -14,12 +14,12 @@ class App extends Component {
         return (
             <>
                 <Suspense fallback={<Loading/>}>
-                    <Switch>
-                        <Route path={'/designer'} component={Designer}/>
-                        <Route path={'/view'} component={DesignerView}/>
-                        <Route path={'/test'} component={JsonSchemaDemo}/>
-                        <Route path={'/'} component={LightChaserList}/>
-                    </Switch>
+                    <Routes>
+                        <Route path={'/designer'} element={<Designer />}/>
+                        <Route path={'/view'} element={<DesignerView />}/>
+                        <Route path={'/test'} element={<JsonSchemaDemo />}/>
+                        <Route path={'/'} element={<LightChaserList />}/>
+                    </Routes>
                 </Suspense>
             </>
         );

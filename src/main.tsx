@@ -1,13 +1,19 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+
+import { BrowserRouter } from 'react-router-dom';
 import App from './App';
-import {BrowserRouter} from "react-router-dom";
+import { createRoot } from 'react-dom/client';
 
 export let designerRouter: any = null;
-
-ReactDOM.render(
-    <BrowserRouter ref={ref => designerRouter = ref}>
-        <App/>
-    </BrowserRouter>,
-    document.getElementById('root')
-);
+const container : any = document.getElementById('root');
+const root = createRoot(container);
+root.render((
+    <BrowserRouter>
+        <App />
+    </BrowserRouter>
+));
+// ReactDOM.render(
+//     <BrowserRouter ref={ref => designerRouter = ref}>
+//         <App/>
+//     </BrowserRouter>,
+//     document.getElementById('root')
+// );
