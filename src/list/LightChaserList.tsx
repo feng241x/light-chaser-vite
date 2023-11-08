@@ -40,7 +40,7 @@ class LightChaserList extends Component<any> {
     loadProjectList = () => {
         EditorDesignerLoader.getInstance().scannerProjectOperators();
         const {projectConfig: {saveType = SaveType.LOCAL}} = designerStore;
-        EditorDesignerLoader.getInstance().abstractOperatorMap[saveType].getProjectSimpleInfoList().then((data: any) => {
+        EditorDesignerLoader.getInstance().abstractOperatorMap[saveType]?.getProjectSimpleInfoList().then((data: any) => {
             if (data && data.length > 0) {
                 this.setState({data});
                 let imageIds: any = [];

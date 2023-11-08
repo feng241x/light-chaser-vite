@@ -141,7 +141,7 @@ export const doSave = throttle(() => {
             proData.bpAPLineMap = bpAPLineMap;
             proData.bpNodeConfigMap = getAllNodeConfig();
             proData.bpNodeLayoutMap = bpNodeLayoutMap;
-            DesignerLoaderFactory.getLoader().abstractOperatorMap[saveType].saveProject(cloneDeep(proData));
+            DesignerLoaderFactory.getLoader().abstractOperatorMap[saveType]?.saveProject(cloneDeep(proData));
         } else if (saveType === SaveType.SERVER) {
             alert("server save");
         }
