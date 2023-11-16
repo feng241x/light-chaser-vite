@@ -84,28 +84,12 @@ class LayerList extends Component {
                 dataSource={this.buildLayerList()}
                 renderItem={(item: LayerItemDataProps) => (
                     <List.Item>
-                        <LayerContainer key={item.compId} item={item}/>
+                        <Card size='small'>
+                            <LayerContainer key={item.compId} item={item}/>
+                        </Card>
                     </List.Item>
                 )}
             />
-            // <>
-            //     {/* {this.buildLayerList()} */}
-            //     {/* <div className={'list-search'}>
-            //         <Input placeholder="搜索图层" onChange={this.searchLayer}/>
-            //     </div>
-            //     <div className={'layer-items'}>
-            //         {this.buildLayerList()}
-            //     </div> */}
-            // </>
-            // <FloatPanel title={'图层'} onClose={this.onClose} initPosition={{x: 250, y: -window.innerHeight + 50}}
-            //             className={'layer-list'}>
-            //     <div className={'list-search'}>
-            //         <Input placeholder="搜索图层" onChange={this.searchLayer}/>
-            //     </div>
-            //     <div className={'layer-items'}>
-            //         {this.buildLayerList()}
-            //     </div>
-            // </FloatPanel>
         );
     }
 }

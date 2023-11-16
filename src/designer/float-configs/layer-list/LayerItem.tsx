@@ -75,23 +75,6 @@ class LayerItem extends React.PureComponent<LayerItemDataProps> {
                     </span>
                 </Col>
             </Row>
-            // <div className={itemClass}
-            //      onClick={this.onSelected}>
-            //     <div className={'layer-item-name'}>{name}</div>
-            //     <div className={'layer-item-operators'}>
-            //         <div className={'layer-item-operator'}>
-            //             <span onClick={this.toggleHide}>
-            //                 <img src={hide ? previewClose : previewOpen} alt={hide ? '显示' : '隐藏'}
-            //                      style={{width: 14}}/>
-            //             </span>
-            //         </div>
-            //         <div className={'layer-item-operator'}>
-            //             <span onClick={this.toggleLock}>
-            //                 <img src={lock ? lockImg : unlockImg} alt={lock ? '锁定' : '解锁'}/>
-            //             </span>
-            //         </div>
-            //     </div>
-            // </div>
         );
     }
 }
