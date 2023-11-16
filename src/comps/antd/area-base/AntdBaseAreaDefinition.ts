@@ -4,6 +4,7 @@ import AbstractAreaDefinition from "../../antd-common/area/AbstractAreaDefinitio
 import {AntdAreaProps} from "../../antd-common/area/AntdCommonAreaController";
 import {MenuToConfigMappingType} from "../../../framework/core/AbstractComponentDefinition";
 import React from "react";
+import { ChartTypeCNEnum, ChartTypeEnum, CategoryEnum } from "../../../const/index.const";
 
 const AntdBaseAreaStyleConfig = React.lazy(() => import("./AntdBaseAreaConfig").then((module) => ({default: module.AntdBaseAreaStyleConfig})));
 const AntdBaseAreaFieldMapping = React.lazy(() => import("./AntdBaseAreaConfig").then((module) => ({default: module.AntdBaseAreaFieldMapping})));
@@ -14,8 +15,9 @@ class AntdBaseAreaDefinition extends AbstractAreaDefinition {
         return {
             compName: "Antd基础面积图",
             compKey: "AntdBaseArea",
-            type: "条形图",
-            typeKey: "area",
+            category: CategoryEnum.CHART,
+            type: ChartTypeCNEnum.area,
+            typeKey: ChartTypeEnum.AREA,
             desc: "基于Antd Designer实现的基础面积图组件",
         };
     }

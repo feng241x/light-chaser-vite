@@ -2,6 +2,7 @@ import {BaseInfoType} from "../../../designer/DesignerType";
 import rangeColumnImg from "./range-column.png";
 import {AntdColumnProps} from "../../antd-common/column/AntdCommonColumn";
 import AbstractColumnDefinition from "../../antd-common/column/AbstractColumnDefinition";
+import { CategoryEnum, ChartTypeCNEnum, ChartTypeEnum } from "../../../const/index.const";
 
 class AntdRangeColumnDefinition extends AbstractColumnDefinition {
 
@@ -9,8 +10,9 @@ class AntdRangeColumnDefinition extends AbstractColumnDefinition {
         return {
             compName: "Antd区间柱状图",
             compKey: "AntdRangeColumn",
-            type: "柱状图",
-            typeKey: "column",
+            category: CategoryEnum.CHART,
+            type: ChartTypeCNEnum.column,
+            typeKey: ChartTypeEnum.COLUMN,
             desc: "基于Antd Designer实现的区间柱状图组件",
         };
     }

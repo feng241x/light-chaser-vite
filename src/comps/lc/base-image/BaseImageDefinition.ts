@@ -10,14 +10,16 @@ import {MenuInfo} from "../../../designer/right/MenuType";
 import {getDefaultMenuList} from "../../../designer/right/util";
 import BaseInfo from "../../common-component/base-info/BaseInfo";
 import {BaseImageStyleConfig} from "./BaseImageConfig";
+import { CategoryEnum, ChartTypeCNEnum, ChartTypeEnum } from "../../../const/index.const";
 
 export default class BaseImageDefinition extends AbstractComponentDefinition<BaseImageController, BaseImageComponentProps> {
     getBaseInfo(): BaseInfoType {
         return {
             compName: "基础图片",
             compKey: "LcBaseImage",
-            type: "基础",
-            typeKey: "base",
+            category: CategoryEnum.BASE,
+            type: ChartTypeCNEnum.base,
+            typeKey: ChartTypeEnum.BASE,
             desc: "标准提供的基础图片",
         };
     }

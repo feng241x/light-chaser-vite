@@ -4,6 +4,7 @@ import AbstractLineDefinition from "../../antd-common/line/AbstractLineDefinitio
 import {AntdLineProps} from "../../antd-common/line/AntdCommonLineController";
 import {MenuToConfigMappingType} from "../../../framework/core/AbstractComponentDefinition";
 import React from "react";
+import { CategoryEnum, ChartTypeCNEnum, ChartTypeEnum } from "../../../const/index.const";
 
 const AntdStepLineStyleConfig = React.lazy(() => import("./AntdStepLineConfig").then((module) => ({default: module.AntdStepLineStyleConfig})));
 
@@ -14,8 +15,9 @@ class AntdStepLineDefinition extends AbstractLineDefinition {
         return {
             compName: "Antd阶梯折线图",
             compKey: "AntdStepLine",
-            type: "折线图",
-            typeKey: "line",
+            category: CategoryEnum.CHART,
+            type: ChartTypeCNEnum.line,
+            typeKey: ChartTypeEnum.LINE,
             desc: "基于Antd Designer实现的阶梯折线图组件",
         };
     }

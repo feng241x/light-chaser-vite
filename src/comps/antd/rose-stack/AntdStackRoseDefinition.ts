@@ -2,6 +2,7 @@ import {BaseInfoType} from "../../../designer/DesignerType";
 import stackRoseImg from "./stack-rose.png";
 import AbstractRoseDefinition from "../../antd-common/rose/AbstractRoseDefinition";
 import {AntdRoseProps} from "../../antd-common/rose/AntdCommonRose";
+import { CategoryEnum, ChartTypeCNEnum, ChartTypeEnum } from "../../../const/index.const";
 
 class AntdStackRoseDefinition extends AbstractRoseDefinition {
 
@@ -9,8 +10,9 @@ class AntdStackRoseDefinition extends AbstractRoseDefinition {
         return {
             compName: "Antd堆叠玫瑰图",
             compKey: "AntdStackRose",
-            type: "玫瑰图",
-            typeKey: "rose",
+            category: CategoryEnum.CHART,
+            type: ChartTypeCNEnum.rose,
+            typeKey: ChartTypeEnum.ROSE,
             desc: "基于Antd Designer实现的堆叠玫瑰图组件",
         };
     }

@@ -1,25 +1,29 @@
-import React, {Component} from 'react';
+import { Component } from 'react';
 import compListStore from "./CompListStore";
-import classifyListStore from "../../left/classify-list/ClassifyListStore";
 import './CompList.less';
 import {observer} from "mobx-react";
 import designerStore from "../../store/DesignerStore";
 import {idGenerate} from "../../../utils/IdGenerate";
 import {MovableItemType} from "../../operate-provider/movable/types";
 import eventOperateStore from "../../operate-provider/EventOperateStore";
-import FloatPanel from "../common/FloatPanel";
 import {BaseInfoType} from "../../DesignerType";
-import Input from "../../../ui/input/Input";
 import DesignerLoaderFactory from "../../loader/DesignerLoaderFactory";
+import { Card } from 'antd';
+import antdChartListStore from '../../left/antdChartList/antdChartListStore';
+import { Category } from '../../../const/index.const';
+import baseComponentsStore from '../../left/baseComponents/baseComponentsStore';
 
-class CompList extends Component {
-
-    constructor(props: any) {
+class CompList extends Component<{}, { twoCategories: string }> {
+    private category: Category = 'chart';
+    constructor(props: { category: Category }) {
         super(props);
+        this.category = props.category;
         const {doInit} = compListStore;
         doInit && doInit();
+        this.state = {
+            twoCategories: ''
+        }
     }
-
 
     componentDidMount() {
         //处理拖拽元素到画布中
@@ -28,6 +32,22 @@ class CompList extends Component {
         dragElements && dragElements.addEventListener('dragstart', this.dragStart);
         dragContainer && dragContainer.addEventListener('dragover', this.dragover);
         dragContainer && dragContainer.addEventListener('drop', this.drop);
+        switch (this.category) {
+            case 'chart':
+                const { antdChartItemKey } = antdChartListStore;
+                this.setState({
+                    twoCategories: antdChartItemKey
+                })
+                break;
+            case 'base':
+                const { baseComponentsItemKey } = baseComponentsStore;
+                this.setState({
+                    twoCategories: baseComponentsItemKey
+                })
+                break;
+            default:
+                break;
+        }
     }
 
     componentWillUnmount() {
@@ -85,11 +105,16 @@ class CompList extends Component {
 
     getChartDom = () => {
         let chartDom = [];
-        let {classifyKey} = classifyListStore
+        let { twoCategories } = this.state
         let {compInfoArr, compKey} = compListStore;
-        if (classifyKey !== 'all') {
+        if (this.category) {
             compInfoArr = compInfoArr.filter((item: BaseInfoType) => {
-                return item.typeKey === classifyKey;
+                return item.category === this.category;
+            })
+        }
+        if (twoCategories !== 'all') {
+            compInfoArr = compInfoArr.filter((item: BaseInfoType) => {
+                return item.typeKey === twoCategories;
             })
         }
         if (compKey !== '') {
@@ -103,21 +128,24 @@ class CompList extends Component {
             let lcCompInit: any = DesignerLoaderFactory.getLoader().customComponentInfoMap[compKey];
             let chartImg = lcCompInit.getChartImg();
             chartDom.push(
-                <div key={i + ''} className={'list-item droppable-element'} draggable={true}
-                     onDoubleClick={() => this.addItem(compKey, compName)}
-                     data-type={compKey}
-                    //todo 想想办法，中文变量值能否不放在这里
-                     data-name={compName}>
+                <Card 
+                    key={i + ''}
+                    className={'list-item droppable-element'}
+                    draggable={true}
+                    onDoubleClick={() => this.addItem(compKey, compName)}
+                    data-type={compKey}
+                    data-name={compName}
+                    type="inner"
+                    title={compName}
+                    size='small'
+                    style={{marginBottom: 4}}
+                >
                     <div style={{pointerEvents: 'none'}}>
-                        <div className={'item-header'} ref={'drag-target'}>
-                            <div className={'item-name'}>{compName}</div>
-                            <div className={'item-type'}>Antd</div>
-                        </div>
                         <div className={'item-content'}>
-                            <img src={chartImg} alt={'组件预览图'}/>
+                            <img style={{width: 150, height: 80}} src={chartImg} alt={'组件预览图'}/>
                         </div>
                     </div>
-                </div>
+                </Card>
             )
         }
         return chartDom;
@@ -135,15 +163,9 @@ class CompList extends Component {
 
     render() {
         return (
-            <FloatPanel className={'comp-list'} title={'组件列表'} onClose={this.onClose}
-                        initPosition={{x: 60, y: -window.innerHeight + 50}} width={190}>
-                <div className={'list-search'}>
-                    <Input placeholder="搜索图层" onChange={this.searchChart}/>
-                </div>
-                <div className={'list-items'} id={'component-drag-container'}>
-                    {this.getChartDom()}
-                </div>
-            </FloatPanel>
+            <div className={'list-items'} id={'component-drag-container'}>
+                {this.getChartDom()}
+            </div>
         );
     }
 }

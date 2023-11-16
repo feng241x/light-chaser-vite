@@ -5,6 +5,7 @@ import {BaseMenuMapping, ClazzTemplate} from "../../common-component/common-type
 import AntdGaugeController, {AntdGaugeProps} from "./AntdGaugeController";
 import gaugeImg from './gauge.png';
 import {BaseInfoType} from "../../../designer/DesignerType";
+import { CategoryEnum, ChartTypeCNEnum, ChartTypeEnum } from "../../../const/index.const";
 
 const AnimationConfig = React.lazy(() => import("../../common-component/animation-config/AnimationConfig"));
 const AntdGaugeConfig = React.lazy(() => import("./AntdGaugeConfig").then((module) => ({default: module.AntdGaugeConfig})));
@@ -37,8 +38,9 @@ class AntdGaugeDefinition /*extends AbstractComponentDefinition<AntdGauge, BaseM
         return {
             compName: "Antd仪表盘",
             compKey: "AntdGauge",
-            type: "仪表盘",
-            typeKey: "gauge",
+            category: CategoryEnum.CHART,
+            type: ChartTypeCNEnum.gauge,
+            typeKey: ChartTypeEnum.GAUGE,
             desc: "基于Antd Designer实现的仪表盘组件",
         };
     }

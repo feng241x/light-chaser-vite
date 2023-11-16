@@ -7,6 +7,7 @@ import pieImg from './pie.png';
 import {BaseInfoType} from "../../../designer/DesignerType";
 import AntdPieController, {AntdPieProps} from "./AntdPieController";
 import {AntdCommonDefinition} from "../../antd-common/AntdCommonDefinition";
+import { CategoryEnum, ChartTypeCNEnum, ChartTypeEnum } from "../../../const/index.const";
 
 const AnimationConfig = React.lazy(() => import("../../common-component/animation-config/AnimationConfig"));
 const AntdPieConfig = React.lazy(() => import("./AntdPieStyleConfig"));
@@ -40,8 +41,9 @@ class AntdPieDefinition extends AntdCommonDefinition<AntdPieController, AntdPieP
         return {
             compName: "Antd饼图",
             compKey: "AntdPie",
-            type: "饼图",
-            typeKey: "pie",
+            category: CategoryEnum.CHART,
+            type: ChartTypeCNEnum.pie,
+            typeKey: ChartTypeEnum.PIE,
             desc: "基于Antd Designer实现的饼图组件",
         };
     }

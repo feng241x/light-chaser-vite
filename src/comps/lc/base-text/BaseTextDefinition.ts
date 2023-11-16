@@ -13,14 +13,16 @@ import BaseInfo from "../../common-component/base-info/BaseInfo";
 import AnimationConfig from "../../common-component/animation-config/AnimationConfig";
 import ThemeConfig from "../../common-component/theme-config/ThemeConfig";
 import {BaseTextStyleConfig} from "./BaseTextConfig";
+import { CategoryEnum, ChartTypeCNEnum, ChartTypeEnum } from "../../../const/index.const";
 
 export default class BaseTextDefinition extends AbstractComponentDefinition<BaseTextController, BaseTextComponentProps> {
     getBaseInfo(): BaseInfoType {
         return {
             compName: "基础文本",
             compKey: "LcBaseText",
-            type: "基础",
-            typeKey: "base",
+            category: CategoryEnum.BASE,
+            type: ChartTypeCNEnum.base,
+            typeKey: ChartTypeEnum.BASE,
             desc: "标准提供的基础文本",
         };
     }

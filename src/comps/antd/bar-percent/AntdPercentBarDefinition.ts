@@ -2,6 +2,7 @@ import {BaseInfoType} from "../../../designer/DesignerType";
 import percentBarImg from "./percent-bar.png";
 import {AntdBarProps} from "../../antd-common/bar/AntdCommonBarController";
 import AbstractBarDefinition from "../../antd-common/bar/AbstractBarDefinition";
+import { CategoryEnum, ChartTypeCNEnum, ChartTypeEnum } from "../../../const/index.const";
 
 class AntdPercentBarDefinition extends AbstractBarDefinition {
 
@@ -9,8 +10,9 @@ class AntdPercentBarDefinition extends AbstractBarDefinition {
         return {
             compName: "Antd百分比条形图",
             compKey: "AntdPercentBar",
-            type: "条形图",
-            typeKey: "bar",
+            category: CategoryEnum.CHART,
+            type: ChartTypeCNEnum.bar,
+            typeKey: ChartTypeEnum.BAR,
             desc: "基于Antd Designer实现的百分比条形图组件",
         };
     }

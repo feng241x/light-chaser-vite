@@ -10,6 +10,7 @@ import eventManager from "../../operate-provider/core/EventManager";
 import LayerContainer from "./LayerContainer";
 import {MovableItemType} from "../../operate-provider/movable/types";
 import Input from "../../../ui/input/Input";
+import { Card, List } from 'antd';
 
 class LayerList extends Component {
 
@@ -42,7 +43,7 @@ class LayerList extends Component {
     }
 
 
-    buildLayerList = () => {
+    buildLayerList = () :any[] => {
         const {layoutConfigs} = designerStore;
         const {targetIds} = eventOperateStore;
         let {searchContent} = layerListStore;
@@ -70,21 +71,41 @@ class LayerList extends Component {
                     compId: item.id,
                     selected: targetIds.includes(item.id!)
                 }
-                return <LayerContainer key={item.id} item={_props}/>
+                return _props;
+                // return <LayerContainer key={item.id} item={_props}/>
             });
     }
 
     render() {
         return (
-            <FloatPanel title={'图层'} onClose={this.onClose} initPosition={{x: 250, y: -window.innerHeight + 50}}
-                        className={'layer-list'}>
-                <div className={'list-search'}>
-                    <Input placeholder="搜索图层" onChange={this.searchLayer}/>
-                </div>
-                <div className={'layer-items'}>
-                    {this.buildLayerList()}
-                </div>
-            </FloatPanel>
+            <List
+                grid={{ column: 1 }}
+                style={{height: 30}}
+                dataSource={this.buildLayerList()}
+                renderItem={(item: LayerItemDataProps) => (
+                    <List.Item>
+                        <LayerContainer key={item.compId} item={item}/>
+                    </List.Item>
+                )}
+            />
+            // <>
+            //     {/* {this.buildLayerList()} */}
+            //     {/* <div className={'list-search'}>
+            //         <Input placeholder="搜索图层" onChange={this.searchLayer}/>
+            //     </div>
+            //     <div className={'layer-items'}>
+            //         {this.buildLayerList()}
+            //     </div> */}
+            // </>
+            // <FloatPanel title={'图层'} onClose={this.onClose} initPosition={{x: 250, y: -window.innerHeight + 50}}
+            //             className={'layer-list'}>
+            //     <div className={'list-search'}>
+            //         <Input placeholder="搜索图层" onChange={this.searchLayer}/>
+            //     </div>
+            //     <div className={'layer-items'}>
+            //         {this.buildLayerList()}
+            //     </div>
+            // </FloatPanel>
         );
     }
 }

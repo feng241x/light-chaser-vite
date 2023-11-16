@@ -2,6 +2,7 @@ import {BaseInfoType} from "../../../designer/DesignerType";
 import stackBarImg from "./stack-bar.png";
 import {AntdBarProps} from "../../antd-common/bar/AntdCommonBarController";
 import AbstractBarDefinition from "../../antd-common/bar/AbstractBarDefinition";
+import { CategoryEnum, ChartTypeCNEnum, ChartTypeEnum } from "../../../const/index.const";
 
 class AntdStackBarDefinition extends AbstractBarDefinition {
 
@@ -9,8 +10,9 @@ class AntdStackBarDefinition extends AbstractBarDefinition {
         return {
             compName: "Antd堆叠条形图",
             compKey: "AntdStackBar",
-            type: "条形图",
-            typeKey: "bar",
+            category: CategoryEnum.CHART,
+            type: ChartTypeCNEnum.bar,
+            typeKey: ChartTypeEnum.BAR,
             desc: "基于Antd Designer实现的堆叠条形图组件",
         };
     }

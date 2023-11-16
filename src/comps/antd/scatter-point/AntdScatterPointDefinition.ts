@@ -2,6 +2,7 @@ import {BaseInfoType} from "../../../designer/DesignerType";
 import scatterPoint from "./scatter-point.png";
 import AbstractScatterDefinition from "../../antd-common/scatter/AbstractScatterDefinition";
 import {AntdScatterProps} from "../../antd-common/scatter/AntdCommonScatterController";
+import { CategoryEnum, ChartTypeCNEnum, ChartTypeEnum } from "../../../const/index.const";
 
 class AntdScatterPointDefinition extends AbstractScatterDefinition {
 
@@ -9,8 +10,9 @@ class AntdScatterPointDefinition extends AbstractScatterDefinition {
         return {
             compName: "Antd散点图",
             compKey: "AntdScatterPoint",
-            type: "散点图",
-            typeKey: "scatter",
+            category: CategoryEnum.CHART,
+            type: ChartTypeCNEnum.scatter,
+            typeKey: ChartTypeEnum.SCATTER,
             desc: "基于Antd Designer实现的散点图组件",
         };
     }

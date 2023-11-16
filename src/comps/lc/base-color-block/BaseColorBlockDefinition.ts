@@ -13,14 +13,16 @@ import BaseInfo from "../../common-component/base-info/BaseInfo";
 import AnimationConfig from "../../common-component/animation-config/AnimationConfig";
 import ThemeConfig from "../../common-component/theme-config/ThemeConfig";
 import {BaseColorBlockConfig} from "./BaseColorBlockConfig";
+import { CategoryEnum, ChartTypeCNEnum, ChartTypeEnum } from "../../../const/index.const";
 
 export default class BaseColorBlockDefinition extends AbstractComponentDefinition<BaseColorBlock, BaseColorBlockComponentProps> {
     getBaseInfo(): BaseInfoType {
         return {
             compName: "基础色块",
             compKey: "LcBaseColorBlock",
-            type: "基础",
-            typeKey: "base",
+            category: CategoryEnum.BASE,
+            type: ChartTypeCNEnum.base,
+            typeKey: ChartTypeEnum.BASE,
             desc: "标准提供的基础色块",
         };
     }

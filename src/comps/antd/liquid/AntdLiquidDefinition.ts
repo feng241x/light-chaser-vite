@@ -5,6 +5,7 @@ import {BaseMenuMapping, ClazzTemplate} from "../../common-component/common-type
 import AntdLiquidController, {AntdLiquidProps} from "./AntdLiquidController";
 import liquidImg from './liquid.png';
 import {BaseInfoType} from "../../../designer/DesignerType";
+import { CategoryEnum, ChartTypeCNEnum, ChartTypeEnum } from "../../../const/index.const";
 
 const AnimationConfig = React.lazy(() => import("../../common-component/animation-config/AnimationConfig"));
 const AntdLiquidConfig = React.lazy(() => import("./AntdLiquidConfig").then((module) => ({default: module.AntdLiquidConfig})));
@@ -37,8 +38,9 @@ class AntdLiquidDefinition /*extends AbstractComponentDefinition<AntdLiquid, Bas
         return {
             compName: "Antd水波图",
             compKey: "AntdLiquid",
-            type: "水波图",
-            typeKey: "liquid",
+            category: CategoryEnum.CHART,
+            type: ChartTypeCNEnum.liquid,
+            typeKey: ChartTypeEnum.LIQUID,
             desc: "基于Antd Designer实现的水波图组件",
         };
     }

@@ -4,6 +4,7 @@
 import {MovableItemType} from "./operate-provider/movable/types";
 import {BPLineType} from "../blueprint/BPTypes";
 import {BPNodeLayoutType} from "../blueprint/store/BPStore";
+import { Category, ChartType } from "../const/index.const";
 
 export interface ThemeColors {
     //主体色
@@ -258,13 +259,17 @@ export interface BaseInfoType {
      */
     compKey: string;
     /**
+     * 分组标识
+     */
+    category: Category;
+    /**
      * 类型名称
      */
     type: string;
     /**
      * 类型标识
      */
-    typeKey: string;
+    typeKey: ChartType;
     /**
      * 组件描述
      */

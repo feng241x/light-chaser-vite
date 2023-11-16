@@ -2,6 +2,7 @@ import {BaseInfoType} from "../../../designer/DesignerType";
 import baseColumnImg from "./base-column.png";
 import {AntdColumnProps} from "../../antd-common/column/AntdCommonColumn";
 import AbstractColumnDefinition from "../../antd-common/column/AbstractColumnDefinition";
+import { CategoryEnum, ChartTypeCNEnum, ChartTypeEnum } from "../../../const/index.const";
 
 class AntdBaseColumnDefinition extends AbstractColumnDefinition {
 
@@ -9,8 +10,9 @@ class AntdBaseColumnDefinition extends AbstractColumnDefinition {
         return {
             compName: "Antd基础柱状图",
             compKey: "AntdBaseColumn",
-            type: "柱状图",
-            typeKey: "column",
+            category: CategoryEnum.CHART,
+            type: ChartTypeCNEnum.column,
+            typeKey: ChartTypeEnum.COLUMN,
             desc: "基于Antd Designer实现的基础柱状图组件",
         };
     }

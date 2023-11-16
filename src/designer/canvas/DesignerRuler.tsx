@@ -123,6 +123,7 @@ class DesignerRuler extends PureComponent<RulerProps & DesignerRulerProps> {
                     overflow: 'hidden',
                     top: this.baseOffset,
                     left: this.baseOffset,
+                    width: '100%'
                 }}>
                     {this.props.children}
                 </div>

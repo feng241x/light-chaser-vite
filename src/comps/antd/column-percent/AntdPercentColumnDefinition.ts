@@ -2,6 +2,7 @@ import {BaseInfoType} from "../../../designer/DesignerType";
 import percentColumnImg from "./percent-column.png";
 import AbstractColumnDefinition from "../../antd-common/column/AbstractColumnDefinition";
 import {AntdColumnProps} from "../../antd-common/column/AntdCommonColumn";
+import { CategoryEnum, ChartTypeCNEnum, ChartTypeEnum } from "../../../const/index.const";
 
 class AntdPercentColumnDefinition extends AbstractColumnDefinition {
 
@@ -9,8 +10,9 @@ class AntdPercentColumnDefinition extends AbstractColumnDefinition {
         return {
             compName: "Antd百分比柱状图",
             compKey: "AntdPercentColumn",
-            type: "柱状图",
-            typeKey: "column",
+            category: CategoryEnum.CHART,
+            type: ChartTypeCNEnum.column,
+            typeKey: ChartTypeEnum.COLUMN,
             desc: "基于Antd Designer实现的百分比柱状图组件",
         };
     }

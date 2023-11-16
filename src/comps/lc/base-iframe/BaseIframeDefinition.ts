@@ -11,14 +11,16 @@ import {BaseIframeComponentProps} from "./BaseIframeComponent";
 import BaseInfo from "../../common-component/base-info/BaseInfo";
 import {BaseIframeStyleConfig} from "./BaseIframeConfig";
 import {HighlightFilled, MediumCircleFilled} from "@ant-design/icons";
+import { CategoryEnum, ChartTypeCNEnum, ChartTypeEnum } from "../../../const/index.const";
 
 export default class BaseIframeDefinition extends AbstractComponentDefinition<BaseIframe, BaseIframeComponentProps> {
     getBaseInfo(): BaseInfoType {
         return {
             compName: "基础iframe",
             compKey: "LcBaseIframe",
-            type: "基础",
-            typeKey: "base",
+            category: CategoryEnum.BASE,
+            type: ChartTypeCNEnum.base,
+            typeKey: ChartTypeEnum.BASE,
             desc: "标准提供的基础iframe",
         };
     }

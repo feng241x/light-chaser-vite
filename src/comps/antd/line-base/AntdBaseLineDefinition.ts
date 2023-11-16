@@ -4,6 +4,7 @@ import AbstractLineDefinition from "../../antd-common/line/AbstractLineDefinitio
 import {AntdLineProps} from "../../antd-common/line/AntdCommonLineController";
 import {MenuToConfigMappingType} from "../../../framework/core/AbstractComponentDefinition";
 import React from "react";
+import { CategoryEnum, ChartTypeCNEnum, ChartTypeEnum } from "../../../const/index.const";
 
 const AntdBaseLineStyleConfig = React.lazy(() => import("./AntdBaseLineConfig").then((module) => ({default: module.AntdBaseLineStyleConfig})));
 
@@ -13,8 +14,9 @@ class AntdBaseLineDefinition extends AbstractLineDefinition {
         return {
             compName: "Antd基础折线图",
             compKey: "AntdBaseLine",
-            type: "折线图",
-            typeKey: "line",
+            category: CategoryEnum.CHART,
+            type: ChartTypeCNEnum.line,
+            typeKey: ChartTypeEnum.LINE,
             desc: "基于Antd Designer实现的基础折线图组件",
         };
     }

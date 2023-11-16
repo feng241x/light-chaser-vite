@@ -10,7 +10,7 @@ import layerIcon from './layers-icon.svg';
 import footerStore from "./FooterStore";
 import eventOperateStore from "../operate-provider/EventOperateStore";
 
-class Footer extends Component {
+class MyFooter extends Component {
 
     toggleHotKeyDes = () => {
         const {hotKeyVisible, setHotKeyVisible} = footerStore;
@@ -67,4 +67,4 @@ class Footer extends Component {
     }
 }
 
-export default observer(Footer);
+export default observer(MyFooter);

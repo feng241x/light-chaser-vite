@@ -14,9 +14,10 @@
     "@antv/g2plot": "^2.4.31",
     "@monaco-editor/react": "^4.6.0",
     "@scena/react-ruler": "^0.17.1",
-    "antd": "^4.17.3",
+    "antd": "^5.11.1",
     "bfj": "^7.0.2",
     "camelcase": "^6.1.0",
+    "darkreader": "^4.9.67",
     "dotenv": "8.2.0",
     "dotenv-expand": "5.1.0",
     "fs-extra": "^9.0.1",
@@ -68,5 +69,7 @@
     "vite": "^4.4.5",
     "web-vitals": "^3.5.0"
   },
-  "resolutions": { "monaco-editor": "0.31.1" }
+  "resolutions": {
+    "monaco-editor": "0.31.1"
+  }
 }

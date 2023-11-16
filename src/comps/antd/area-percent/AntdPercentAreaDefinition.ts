@@ -2,6 +2,7 @@ import {BaseInfoType} from "../../../designer/DesignerType";
 import percentAreaImg from "./percent-area.png";
 import AbstractAreaDefinition from "../../antd-common/area/AbstractAreaDefinition";
 import {AntdAreaProps} from "../../antd-common/area/AntdCommonAreaController";
+import { CategoryEnum, ChartTypeCNEnum, ChartTypeEnum } from "../../../const/index.const";
 
 class AntdPercentAreaDefinition extends AbstractAreaDefinition {
 
@@ -9,8 +10,9 @@ class AntdPercentAreaDefinition extends AbstractAreaDefinition {
         return {
             compName: "Antd百分比面积图",
             compKey: "AntdPercentArea",
-            type: "条形图",
-            typeKey: "area",
+            category: CategoryEnum.CHART,
+            type: ChartTypeCNEnum.area,
+            typeKey: ChartTypeEnum.AREA,
             desc: "基于Antd Designer实现的百分比面积图组件",
         };
     }

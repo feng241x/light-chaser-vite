@@ -2,6 +2,7 @@ import {BaseInfoType} from "../../../designer/DesignerType";
 import baseBarImg from "./base-bar.png";
 import {AntdBarProps} from "../../antd-common/bar/AntdCommonBarController";
 import AbstractBarDefinition from "../../antd-common/bar/AbstractBarDefinition";
+import { CategoryEnum, ChartTypeCNEnum, ChartTypeEnum } from "../../../const/index.const";
 
 class AntdBaseBarDefinition extends AbstractBarDefinition {
 
@@ -9,8 +10,9 @@ class AntdBaseBarDefinition extends AbstractBarDefinition {
         return {
             compName: "Antd基础条形图",
             compKey: "AntdBaseBar",
-            type: "条形图",
-            typeKey: "bar",
+            category: CategoryEnum.CHART,
+            type: ChartTypeCNEnum.bar,
+            typeKey: ChartTypeEnum.BAR,
             desc: "基于Antd Designer实现的基础条形图组件",
         };
     }

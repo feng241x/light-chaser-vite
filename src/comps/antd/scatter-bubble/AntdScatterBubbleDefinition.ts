@@ -2,6 +2,7 @@ import {BaseInfoType} from "../../../designer/DesignerType";
 import scatterBubble from "./scatter-bubble.png";
 import AbstractScatterDefinition from "../../antd-common/scatter/AbstractScatterDefinition";
 import {AntdScatterProps} from "../../antd-common/scatter/AntdCommonScatterController";
+import { CategoryEnum, ChartTypeCNEnum, ChartTypeEnum } from "../../../const/index.const";
 
 class AntdScatterBubbleDefinition extends AbstractScatterDefinition {
 
@@ -9,8 +10,9 @@ class AntdScatterBubbleDefinition extends AbstractScatterDefinition {
         return {
             compName: "Antd气泡图",
             compKey: "AntdScatterBubble",
-            type: "散点图",
-            typeKey: "scatter",
+            category: CategoryEnum.CHART,
+            type: ChartTypeCNEnum.scatter,
+            typeKey: ChartTypeEnum.SCATTER,
             desc: "基于Antd Designer实现的气泡图组件",
         };
     }

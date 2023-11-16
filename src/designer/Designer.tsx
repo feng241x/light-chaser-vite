@@ -1,14 +1,7 @@
 import React, {Component} from 'react';
-import LcHeader from "./structure/LcHeader";
-import LcBody from "./structure/LcBody";
-import LcLeft from "./structure/LcLeft";
-import LcContent from "./structure/LcContent";
-import LcRight from "./structure/LcRight";
-import LcStructure from "./structure/LcStructure";
-import LcFoot from "./structure/LcFoot";
 import DesignerLeft from "./left";
 import Right from "./right";
-import Footer from "./footer/Footer";
+import MyFooter from "./footer/Footer";
 import FloatConfigs from "./float-configs/FloatConfigs";
 import contextMenuStore from "./operate-provider/right-click-menu/ContextMenuStore";
 import eventOperateStore from "./operate-provider/EventOperateStore";
@@ -19,6 +12,35 @@ import DesignerCanvas from "./canvas/DesignerCanvas";
 import {observer} from "mobx-react";
 import Loading from "../ui/loading/Loading";
 import DesignerLoaderFactory from "./loader/DesignerLoaderFactory";
+import { Layout, Menu, MenuProps } from 'antd';
+import mainStore from '../mainStore';
+import { PieChartOutlined, DesktopOutlined, ContainerOutlined } from '@ant-design/icons';
+import './Designer.less';
+const { Header, Footer, Sider, Content } = Layout;
+
+type MenuItem = Required<MenuProps>['items'][number];
+
+function getItem(
+  label: React.ReactNode,
+  key: React.Key,
+  icon?: React.ReactNode,
+  children?: MenuItem[],
+  type?: 'group',
+): MenuItem {
+  return {
+    key,
+    icon,
+    children,
+    label,
+    type,
+  } as MenuItem;
+}
+
+const items: MenuItem[] = [
+    getItem('', '1', <PieChartOutlined />),
+    getItem('', '2', <DesktopOutlined />),
+    getItem('', '3', <ContainerOutlined />)
+];
 
 class Designer extends Component {
 
@@ -40,23 +62,30 @@ class Designer extends Component {
 
     render() {
         const {loaded} = designerStore;
+        const { leftSiderWidth } = mainStore;
         if (!loaded)
             return <Loading/>;
         return (
-            <LcStructure>
-                <LcHeader>
+            <Layout>
+                <Header style={{height: 50}}>
                     <DesignerHeader/>
-                </LcHeader>
-                <LcBody>
-                    <LcLeft><DesignerLeft/></LcLeft>
-                    <LcContent><DesignerCanvas/></LcContent>
-                    <LcRight><Right/></LcRight>
-                </LcBody>
-                <LcFoot>
-                    <Footer/>
-                </LcFoot>
+                </Header>
+                <Layout>
+                    <Sider theme='light' width={leftSiderWidth}>
+                        <DesignerLeft/>
+                    </Sider>
+                    <Content>
+                        <DesignerCanvas/>
+                    </Content>
+                    {/* <Sider theme="light">
+                        <Right/>
+                    </Sider> */}
+                </Layout>
+                <Footer>
+                    <MyFooter />
+                </Footer>
                 <FloatConfigs/>
-            </LcStructure>
+            </Layout>
         );
     }
 }

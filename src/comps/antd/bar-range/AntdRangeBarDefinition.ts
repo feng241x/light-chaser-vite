@@ -2,6 +2,7 @@ import {BaseInfoType} from "../../../designer/DesignerType";
 import rangeBarImg from "./range-bar.png";
 import {AntdBarProps} from "../../antd-common/bar/AntdCommonBarController";
 import AbstractBarDefinition from "../../antd-common/bar/AbstractBarDefinition";
+import { CategoryEnum, ChartTypeCNEnum, ChartTypeEnum } from "../../../const/index.const";
 
 class AntdRangeBarDefinition extends AbstractBarDefinition {
 
@@ -9,8 +10,9 @@ class AntdRangeBarDefinition extends AbstractBarDefinition {
         return {
             compName: "Antd区间条形图",
             compKey: "AntdRangeBar",
-            type: "条形图",
-            typeKey: "bar",
+            category: CategoryEnum.CHART,
+            type: ChartTypeCNEnum.bar,
+            typeKey: ChartTypeEnum.BAR,
             desc: "基于Antd Designer实现的区间条形图组件",
         };
     }

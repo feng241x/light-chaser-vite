@@ -7,6 +7,7 @@ import AntdRingProgressController, {AntdRingProgressProps} from "./AntdRingProgr
 import ringProgressImg from './ring-progress.png';
 import {BaseInfoType} from "../../../designer/DesignerType";
 import {AntdCommonDefinition} from "../../antd-common/AntdCommonDefinition";
+import { CategoryEnum, ChartTypeCNEnum, ChartTypeEnum } from "../../../const/index.const";
 
 const AnimationConfig = React.lazy(() => import("../../common-component/animation-config/AnimationConfig"));
 const DataConfig = React.lazy(() => import("../../common-component/data-config/DataConfig"));
@@ -39,8 +40,9 @@ class AntdRingProgressDefinition extends AntdCommonDefinition<AntdRingProgressCo
         return {
             compName: "Antd迷你环图",
             compKey: "AntdRingProgress",
-            type: "进度图",
-            typeKey: "progress",
+            category: CategoryEnum.CHART,
+            type: ChartTypeCNEnum.progress,
+            typeKey: ChartTypeEnum.PROGRESS,
             desc: "基于Antd Designer实现的迷你环图组件",
         };
     }
