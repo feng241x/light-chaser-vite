@@ -130,7 +130,6 @@ export const AntdBaseAreaGraphics: React.FC<ConfigType> = ({controller}) => {
                                                     radius: 3,
                                                     showBorder: true,
                                                     showText: true,
-                                                    height: 16,
                                                     hideControls: true
                                                 }
                                             }
@@ -197,7 +196,6 @@ export const AntdBaseAreaGraphics: React.FC<ConfigType> = ({controller}) => {
                                             radius: 3,
                                             showBorder: true,
                                             showText: true,
-                                            height: 16,
                                             hideControls: true
                                         }
                                     }]
@@ -229,7 +227,6 @@ export const AntdBaseAreaGraphics: React.FC<ConfigType> = ({controller}) => {
                                         radius: 3,
                                         showBorder: true,
                                         showText: true,
-                                        height: 16
                                     }
                                 }]
                             }

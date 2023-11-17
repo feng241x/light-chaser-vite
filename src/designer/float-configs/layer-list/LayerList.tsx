@@ -79,8 +79,8 @@ class LayerList extends Component {
     render() {
         return (
             <List
+                className='layerListComponent'
                 grid={{ column: 1 }}
-                style={{height: 30}}
                 dataSource={this.buildLayerList()}
                 renderItem={(item: LayerItemDataProps) => (
                     <List.Item>

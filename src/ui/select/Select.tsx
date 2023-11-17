@@ -1,7 +1,8 @@
 import React, {MutableRefObject, useEffect, useRef, useState} from "react";
 import "./Select.less";
-import {Option} from "./SelectType";
+import { Option } from './SelectType'
 import {UIContainer, UIContainerProps} from "../ui-container/UIContainer";
+import { Select } from "antd";
 
 interface SelectProps extends UIContainerProps {
     // 选项列表（非受控）
@@ -17,47 +18,24 @@ interface SelectProps extends UIContainerProps {
     disabled?: boolean;
 }
 
-const Select: React.FC<SelectProps> = (props) => {
+const MySelect: React.FC<SelectProps> = (props) => {
     const {options, placeholder = "请选择", value, defaultValue, onChange, disabled = false, tip, label} = props;
     const dom: MutableRefObject<HTMLDivElement | null> = useRef(null);
-    const valueControl: boolean = value !== undefined;
-    const _options = options || [];
-    const getTargetOption = (value: string = ''): Option | null => {
-        for (let i = 0; i < _options.length; i++) {
-            const option = _options[i];
-            if (option.value === value)
-                return option;
-        }
-        return null;
-    }
-    const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
-    const [selectedOption, setSelectedOption] = useState<Option | null>(getTargetOption(value || defaultValue));
-    const toggleDropdown = (): void => setDropdownOpen(!dropdownOpen);
-    const handleOptionClick = (option: Option): void => {
-        if (!valueControl)
-            setSelectedOption(option);
+    const handleOptionClick = (value: string, option: any): void => {
         onChange && onChange(option.value || '');
-        setDropdownOpen(false);
     };
-
-    const handleClickOutside = (event: MouseEvent) => {
-        if (dom.current && !dom.current.contains(event.target as HTMLElement)) {
-            setDropdownOpen(false);
-        }
-    };
-
-    useEffect(() => {
-        document.addEventListener("mousedown", handleClickOutside);
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    });
-
-    const showContent = valueControl ? getTargetOption(value)?.label || placeholder : selectedOption?.label || placeholder;
 
     return (
         <UIContainer tip={tip} label={label}>
-            <div className="lc-select" ref={dom}>
+            <Select
+                disabled={disabled}
+                defaultValue={defaultValue}
+                placeholder={placeholder}
+                style={{width: dom?.current?.offsetWidth || 90}}
+                onChange={handleOptionClick}
+                options={options}
+            />
+            {/* <div className="lc-select" ref={dom}>
                 <div className={`lc-select-header`} style={{cursor: `${disabled ? 'not-allowed' : 'pointer'}`}}
                      onClick={disabled ? undefined : toggleDropdown}>
                     {showContent}
@@ -74,8 +52,8 @@ const Select: React.FC<SelectProps> = (props) => {
                         </ul>
                     )}
                 </div>
-            </div>
+            </div> */}
         </UIContainer>
     );
 };
-export default Select;
+export default MySelect;

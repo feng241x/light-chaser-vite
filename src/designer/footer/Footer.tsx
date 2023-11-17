@@ -47,11 +47,11 @@ class MyFooter extends Component {
                         &nbsp;
                         <span style={{position: 'relative', top: 2}}>快捷键</span>
                     </div>
-                    <div className={'footer-item'} onClick={this.toggleLayerList}>
+                    {/* <div className={'footer-item'} onClick={this.toggleLayerList}>
                         <img width={16} alt={'图层'} src={layerIcon}/>
                         &nbsp;
                         <span style={{position: 'relative', top: 2}}>图层</span>
-                    </div>
+                    </div> */}
                 </div>
                 <div className={'footer-right'}>
                     <div className={'right-info-item'}>缩放 : {(scale * 100).toFixed(0)}%</div>

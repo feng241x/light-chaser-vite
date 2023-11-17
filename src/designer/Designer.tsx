@@ -67,24 +67,23 @@ class Designer extends Component {
             return <Loading/>;
         return (
             <Layout>
-                <Header style={{height: 50}}>
+                <Header style={{height: 50, borderBottom: '1px solid rgba(5, 5, 5, 0.06)'}}>
                     <DesignerHeader/>
                 </Header>
                 <Layout>
-                    <Sider theme='light' width={leftSiderWidth}>
+                    <Sider style={{borderRight: '2px solid rgba(5, 5, 5, 0.06)'}} theme='light' width={leftSiderWidth}>
                         <DesignerLeft/>
                     </Sider>
                     <Content>
                         <DesignerCanvas/>
                     </Content>
-                    {/* <Sider theme="light">
+                    <Sider theme="light" width={300}>
                         <Right/>
-                    </Sider> */}
+                    </Sider>
                 </Layout>
                 <Footer>
                     <MyFooter />
                 </Footer>
-                <FloatConfigs/>
             </Layout>
         );
     }

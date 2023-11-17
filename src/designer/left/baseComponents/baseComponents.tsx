@@ -71,7 +71,7 @@ const BaseComponents = () => {
     return (
         <>
             <div className="componentListTabName">
-                <Divider>模板</Divider>
+                <Divider>基础</Divider>
                 <Search placeholder="关键字检索" onSearch={onSearch} enterButton />
             </div>
             <Tabs

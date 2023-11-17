@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 
 import './Radio.less';
 import {UIContainer, UIContainerProps} from "../ui-container/UIContainer";
+import { Radio } from 'antd';
 
 export interface Option {
     label: string;
@@ -16,7 +17,7 @@ export interface RadioProps extends UIContainerProps {
     disabled?: boolean;
 }
 
-class Radio extends Component<RadioProps> {
+class MyRadio extends Component<RadioProps> {
 
     valueControl: boolean = true;
     timestamp: string = 'radio_' + Math.random().toString(36).substr(2, 9);
@@ -44,35 +45,40 @@ class Radio extends Component<RadioProps> {
     }
 
     generateOptions = () => {
-        const {options = [], disabled = false} = this.props;
+        const {options = []} = this.props;
         return options.map((option: Option, index: number) => {
             const value = this.valueControl ? this.props.value : this.state.value;
             let checked = false;
             if (option.value === value)
                 checked = true;
             return (
-                <label className="radio-button" key={index + ''}
-                       style={{cursor: `${disabled ? 'not-allowed' : 'pointer'}`}}>
-                    <input checked={checked} disabled={disabled} onChange={this.onChange} value={option.value}
-                           name={this.timestamp}
-                           type="radio"/>
-                    <div className="radio-circle"/>
-                    <span className="radio-label">{option.label}</span>
-                </label>
+                <Radio.Button  key={index + ''} value={option.value}>{option.label}</Radio.Button >
+                // <label className="radio-button" key={index + ''}
+                //        style={{cursor: `${disabled ? 'not-allowed' : 'pointer'}`}}>
+                //     <input checked={checked} disabled={disabled} onChange={this.onChange} value={option.value}
+                //            name={this.timestamp}
+                //            type="radio"/>
+                //     <div className="radio-circle"/>
+                //     <span className="radio-label">{option.label}</span>
+                // </label>
             );
         });
     }
 
     render() {
-        const {label, tip, padding, margin} = this.props;
+        const {label, tip, padding, margin, disabled = false} = this.props;
+        const value = this.valueControl ? this.props.value : this.state.value;
         return (
             <UIContainer label={label} tip={tip} className={'lc-radio'} padding={padding} margin={margin}>
-                <div className="radio-buttons">
+                <Radio.Group buttonStyle="solid" defaultValue={value} name={this.timestamp} size='small' disabled={disabled} onChange={this.onChange}>
                     {this.generateOptions()}
-                </div>
+                </Radio.Group>
+                {/* <div className="radio-buttons">
+                    {this.generateOptions()}
+                </div> */}
             </UIContainer>
         );
     }
 }
 
-export default Radio;
+export default MyRadio;

@@ -40,7 +40,8 @@
     "react-router-dom": "^6.18.0",
     "react-selecto": "^1.26.0",
     "semver": "7.3.2",
-    "ts-pnp": "1.2.0"
+    "ts-pnp": "1.2.0",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@types/js-beautify": "^1.14.3",

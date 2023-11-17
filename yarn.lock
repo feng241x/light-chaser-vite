@@ -6593,6 +6593,11 @@
   dependencies:
     "base64-arraybuffer" "^1.0.2"
 
+"uuid@^9.0.1":
+  "integrity" "sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA=="
+  "resolved" "https://registry.npmmirror.com/uuid/-/uuid-9.0.1.tgz"
+  "version" "9.0.1"
+
 "vite@^4", "vite@^4.4.5":
   "integrity" "sha512-ulr8rNLA6rkyFAlVWw2q5YJ91v098AFQ2R0PRFwPzREXOUJQPtFUG0t+/ZikhaOCDqFoDhN6/v8Sq0o4araFAw=="
   "resolved" "https://registry.npmmirror.com/vite/-/vite-4.5.0.tgz"

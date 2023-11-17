@@ -1,9 +1,8 @@
-import React, {Component} from 'react';
+import React, {CSSProperties, Component} from 'react';
 import './Accordion.less';
-import {QuestionCircleOutlined, RightOutlined} from "@ant-design/icons";
-import Switch from "../switch/Switch";
-import {Tooltip} from "antd";
-
+import {CaretRightOutlined, QuestionCircleOutlined, RightOutlined} from "@ant-design/icons";
+import {Collapse, CollapseProps, Switch, Tooltip, theme} from "antd";
+import { v4 as uuidv4 } from 'uuid';
 interface AccordionProps {
     // 标题（非受控）
     label?: string;
@@ -32,34 +31,33 @@ class Accordion extends Component<AccordionProps> {
     valueControl: boolean = true;
     pendingTimer: NodeJS.Timer | null = null;
 
-    state: any = {
+    state: {
+        value: boolean;
+        label: string;
+        showSwitch: boolean;
+        randomGuid: string;
+    } = {
         value: false,
         label: '',
         showSwitch: false,
+        randomGuid: ''
     }
 
     constructor(props: AccordionProps) {
         super(props);
-        let {value, label, showSwitch, defaultValue} = this.props;
+        let {value, label, showSwitch, defaultValue} : any = this.props;
         if (defaultValue !== undefined && value === undefined)
             this.valueControl = false;
         value = !!(value || defaultValue);
-        this.state = {value, label, showSwitch};
+        const randomGuid = uuidv4();
+        this.state = {value, label, showSwitch, randomGuid};
     }
 
     componentDidMount() {
-        const {showSwitch = false, value} = this.state;
+        const {showSwitch = false} = this.state;
         if (!showSwitch) {
             //普通模式
             this.headerRef!.addEventListener("click", this.titleClickMode);
-            this.accordionBodyRef!.style.display = 'none';
-        }
-        if (showSwitch && value) {
-            //开关模式处于开启
-            this.accordionBodyRef!.style.display = 'block';
-        } else {
-            //开关模式处于关闭
-            this.accordionBodyRef!.style.display = 'none';
         }
     }
 
@@ -72,11 +70,6 @@ class Accordion extends Component<AccordionProps> {
         if (!this.headerRef || !this.accordionBodyRef) return;
         if (!showSwitch)
             this.headerRef!.classList.toggle("accordion-active");
-        if (value) {
-            this.accordionBodyRef!.style.display = 'block';
-        } else {
-            this.accordionBodyRef!.style.display = 'none';
-        }
     }
 
 
@@ -101,23 +94,55 @@ class Accordion extends Component<AccordionProps> {
     }
 
     render() {
-        const {label, showSwitch} = this.state;
+        const { label, showSwitch, randomGuid } = this.state;
         const {tip} = this.props;
+        const panelStyle: React.CSSProperties = {
+            marginBottom: 24,
+            border: 'none',
+        };
+        const getItems: (panelStyle: CSSProperties) => CollapseProps['items'] = (panelStyle) => [
+            {
+              key: randomGuid,
+              label: (
+                <div className={'title-content'}>{label} &nbsp;
+                    {tip && <Tooltip title={tip}><QuestionCircleOutlined/>&nbsp;&nbsp;</Tooltip>}
+                </div>
+              ),
+              children: this.props.children,
+              style: panelStyle,
+              extra: showSwitch ? (
+                <Switch
+                    size='small'
+                    checked={this.valueControl ? this.props.value : this.state.value}
+                    onChange={this.switchChange}
+                />) : ''
+            }
+        ];
+          
         return (
-            <div className={'lc-accordion'}>
-                <div className="accordion-header" ref={ref => this.headerRef = ref}>
-                    <div className={'title-content'}>{label} &nbsp;
-                        {tip && <Tooltip title={tip}><QuestionCircleOutlined/>&nbsp;&nbsp;</Tooltip>}</div>
-                    <div className={'title-switch'}>{showSwitch ?
-                        <Switch
-                            value={this.valueControl ? this.props.value : this.state.value}
-                            onChange={this.switchChange}/> :
-                        <RightOutlined className={'accordion-icon'}/>}</div>
-                </div>
-                <div className="lc-accordion-body" ref={ref => this.accordionBodyRef = ref}>
-                    {this.props.children}
-                </div>
-            </div>
+            <Collapse
+                accordion={true}
+                ref={ref => this.headerRef = ref}
+                bordered={false}
+                size='small'
+                defaultActiveKey={showSwitch && this.state.value ? [randomGuid] : []}
+                expandIcon={({ isActive }) => <CaretRightOutlined rotate={isActive ? 90 : 0} />}
+                items={getItems(panelStyle)}
+            />
+            // <div className={'lc-accordion'}>
+            //     <div className="accordion-header" ref={ref => this.headerRef = ref}>
+            //         <div className={'title-content'}>{label} &nbsp;
+            //             {tip && <Tooltip title={tip}><QuestionCircleOutlined/>&nbsp;&nbsp;</Tooltip>}</div>
+            //         <div className={'title-switch'}>{showSwitch ?
+            //             <Switch
+            //                 value={this.valueControl ? this.props.value : this.state.value}
+            //                 onChange={this.switchChange}/> :
+            //             <RightOutlined className={'accordion-icon'}/>}</div>
+            //     </div>
+            //     <div className="lc-accordion-body" ref={ref => this.accordionBodyRef = ref}>
+            //         {this.props.children}
+            //     </div>
+            // </div>
         );
     }
 }

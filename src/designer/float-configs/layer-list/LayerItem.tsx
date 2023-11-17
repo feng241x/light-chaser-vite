@@ -65,12 +65,12 @@ class LayerItem extends React.PureComponent<LayerItemDataProps> {
                 <Col className={'layer-item-operators'} flex={'100px'}>
                     <span className={'layer-item-operator'}>
                         <span onClick={this.toggleHide}>
-                            {hide ? <EyeInvisibleOutlined alt='显示' /> : <EyeOutlined alt='隐藏' />}
+                            {hide ? <EyeInvisibleOutlined title='显示' /> : <EyeOutlined title='隐藏' />}
                         </span>
                     </span>
                     <span className={'layer-item-operator'}>
                         <span onClick={this.toggleLock}>
-                            {lock ? <LockOutlined alt='锁定' /> : <UnlockOutlined alt='解锁' />}
+                            {lock ? <LockOutlined title='解锁' /> : <UnlockOutlined title='锁定' />}
                         </span>
                     </span>
                 </Col>

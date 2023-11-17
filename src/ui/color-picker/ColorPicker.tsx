@@ -1,8 +1,6 @@
-import React, {Component} from 'react';
-import {Popover} from 'antd';
-import './ColorPicker.less';
+import {Component} from 'react';
+import {ColorPicker} from 'antd';
 import {colorConversion, rgbaToHex} from '../../utils/ColorUtil';
-import {GradientColorPicker} from "./GradientColorPicker";
 import {UIContainer, UIContainerProps} from "../ui-container/UIContainer";
 
 interface ColorPickerProps extends UIContainerProps {
@@ -19,7 +17,7 @@ interface ColorPickerProps extends UIContainerProps {
     onChange?: (color: string, id?: string) => void;
 }
 
-class ColorPicker extends Component<ColorPickerProps> {
+class MyColorPicker extends Component<ColorPickerProps> {
 
     control: boolean = true;
 
@@ -34,13 +32,13 @@ class ColorPicker extends Component<ColorPickerProps> {
         this.state = {value: defaultValue || value || '#00e9ff'};
     }
 
-    onChangeComplete = (color: string) => {
+    onChangeComplete = (value: Color, hex: string) => {
         const {onChange} = this.props;
-        if (color.indexOf('gradient') === -1 && color.indexOf('rgba') !== -1)
-            color = rgbaToHex(color);
-        onChange && onChange(color);
+        if (hex.indexOf('gradient') === -1 && hex.indexOf('rgba') !== -1)
+            hex = rgbaToHex(hex);
+        onChange && onChange(hex);
         if (!this.control) {
-            this.setState({value: color});
+            this.setState({value: hex});
         }
     };
 
@@ -53,15 +51,10 @@ class ColorPicker extends Component<ColorPickerProps> {
         } else if (showText && color?.indexOf('#') !== -1) {
             hex = color;
         }
-        let _style = {
-            width,
-            height,
-            borderRadius: radius,
-            cursor: disabled ? 'not-allowed' : 'pointer'
-        };
         return (
             <UIContainer tip={tip} label={label} className={'lc-color-pick'}>
-                <Popover content={(disabled ? null :
+                <ColorPicker size='small' showText={showText} value={color} onChange={this.onChangeComplete} />
+                {/* <Popover content={(disabled ? null :
                     <div style={{padding: 4}}>
                         <GradientColorPicker value={color} onChange={this.onChangeComplete}
                                              hideControls={hideControls}/>
@@ -72,10 +65,10 @@ class ColorPicker extends Component<ColorPickerProps> {
                             {showText ? <span>{hex}</span> : null}
                         </div>
                     </div>
-                </Popover>
+                </Popover> */}
             </UIContainer>
         );
     }
 }
 
-export default ColorPicker;
+export default MyColorPicker;

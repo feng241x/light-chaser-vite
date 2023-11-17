@@ -9,6 +9,7 @@ import TemplateList from './templateList/templateList';
 import { CategoryEnum } from '../../const/index.const';
 import BaseComponents from './baseComponents/baseComponents';
 import LayerList from '../float-configs/layer-list/LayerList';
+import layerListStore from '../float-configs/layer-list/LayerListStore';
 
 // class DesignerLeft extends Component {
 
@@ -47,8 +48,10 @@ const items: MenuItem[] = [
 ];
 const { Content, Sider } = Layout;
 const DesignerLeft = () => {
-    const [collapsed, setCollapsed] = useState(true);
+    // const [collapsed, setCollapsed] = useState(true);
     const { setLeftSiderWidth } = mainStore;
+    //更新图层列表状态
+    const { setVisible } = layerListStore;
     // 当前菜单内容区域显示状态
     const [siderCollapsed, setSiderCollapsed] = useState(true);
     // 当前菜单选中项
@@ -58,7 +61,7 @@ const DesignerLeft = () => {
         setSelectedKeys(selectedKeys);
         setSiderCollapsed(selectedKeys.length === 0);
         setLeftSiderWidth(340);
-        setCollapsed(false);
+        // setCollapsed(false);
     }
     // 点击菜单事件
     const onClick = ({ key }: { key: string }) => {
@@ -66,12 +69,13 @@ const DesignerLeft = () => {
             setSelectedKeys([]);
             setSiderCollapsed(true);
             setLeftSiderWidth(120);
-            setCollapsed(true);
+            // setCollapsed(true);
         }
     }
     // 选中菜单状态下 展示对应内容
     const getSiderPanel = (selectKey: string) => {
         // const selectKey = selectedKeys[0];
+        setVisible(selectKey === CategoryEnum.COVERAGE);
         switch (selectKey) {
             case CategoryEnum.CHART:
                 return <AntdChartList />
@@ -96,7 +100,7 @@ const DesignerLeft = () => {
                     mode="inline"
                     theme="light"
                     selectedKeys={selectedKeys}
-                    inlineCollapsed={collapsed}
+                    // inlineCollapsed={collapsed}
                     items={items}
                     onSelect={onSelect}
                     onClick={onClick}

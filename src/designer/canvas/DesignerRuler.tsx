@@ -89,15 +89,15 @@ class DesignerRuler extends PureComponent<RulerProps & DesignerRulerProps> {
                          left: this.baseOffset
                      }}>
                     <Ruler ref={ref => this.rulerX = ref}
-                           scrollPos={this.scrollPos.x}
-                           zoom={scale}
-                           lineColor={'#444b4d'}
-                           textColor={'#a6a6a6'}
-                           segment={2}
-                           negativeRuler={true}
-                           textOffset={[0, 10]}
-                           backgroundColor={'#1a1a1a'}
-                           unit={this.unit}/>
+                        scrollPos={this.scrollPos.x}
+                        zoom={scale}
+                        lineColor={'#444b4d'}
+                        textColor={'#a6a6a6'}
+                        segment={2}
+                        negativeRuler={true}
+                        textOffset={[0, 10]}
+                        backgroundColor={'#1a1a1a'}
+                        unit={this.unit}/>
                 </div>
                 <div className={'lc-ruler-vertical'}
                      style={{

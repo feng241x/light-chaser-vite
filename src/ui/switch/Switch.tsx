@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import { Switch } from 'antd';
 import "./Switch.less";
 import {UIContainer, UIContainerProps} from "../ui-container/UIContainer";
 
@@ -11,7 +12,7 @@ interface SwitchProps extends UIContainerProps {
     disabled?: boolean;
 }
 
-class Switch extends Component<SwitchProps> {
+class MySwitch extends Component<SwitchProps> {
 
     valueControl: boolean = true;
 
@@ -27,8 +28,7 @@ class Switch extends Component<SwitchProps> {
         this.state = {value: value || defaultValue || false};
     }
 
-    handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const {checked} = e.target;
+    handleChange = (checked: boolean) => {
         const {onChange} = this.props;
         onChange && onChange(checked);
         if (!this.valueControl)
@@ -39,17 +39,24 @@ class Switch extends Component<SwitchProps> {
         const {disabled = false, tip, label} = this.props;
         return (
             <UIContainer tip={tip} label={label} className={'lc-switch'}>
-                <div style={{display: 'flex'}}>
+                <Switch
+                    style={{marginLeft: 6}}
+                    size="small"
+                    disabled={disabled}
+                    checked={this.valueControl ? this.props.value || false : this.state.value || false}
+                    onChange={this.handleChange} 
+                />
+                {/* <div style={{display: 'flex'}}>
                     <label className="lc-switch-body">
                         <input disabled={disabled}
                                checked={this.valueControl ? this.props.value || false : this.state.value || false}
                                onChange={this.handleChange} type="checkbox"/>
                         <span/>
                     </label>
-                </div>
+                </div> */}
             </UIContainer>
         );
     }
 }
 
-export default Switch;
+export default MySwitch;
