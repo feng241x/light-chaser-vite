@@ -1,12 +1,8 @@
 import React, {MouseEvent} from 'react';
 import './LayerItem.less';
-import lockImg from './icon/lock.svg';
-import previewClose from './icon/preview-close.svg';
-import previewOpen from './icon/preview-open.svg';
-import unlockImg from './icon/unlock.svg';
-import layerListStore from "./LayerListStore";
-import { Card, Col, List, Row } from 'antd';
+import { Card, Col, Row } from 'antd';
 import { EyeInvisibleOutlined, EyeOutlined, LockOutlined, UnlockOutlined } from '@ant-design/icons';
+import layerListStore from "../LayerListStore";
 
 export interface LayerItemDataProps {
     compId?: string;
@@ -38,43 +34,49 @@ class LayerItem extends React.PureComponent<LayerItemDataProps> {
         }
     }
 
-    toggleLock = () => {
+    toggleLock = (event: MouseEvent) => {
+        event.stopPropagation();
         const {lockChange} = layerListStore;
         lockChange && lockChange(this.state.compId, !this.state.lock);
     }
 
-    toggleHide = () => {
+    toggleHide = (event: MouseEvent) => {
+        event.stopPropagation();
         const {hideChange} = layerListStore;
         hideChange && hideChange(this.state.compId, !this.state.hide);
     }
 
     onSelected = (event: MouseEvent<HTMLDivElement>) => {
+        event.stopPropagation();
         const {selectedChange} = layerListStore;
-        selectedChange && selectedChange({...this.state, ...{selected: true}}, event);
+        selectedChange && selectedChange(this.props.compId!, event);
     }
 
     render() {
         const {name, lock, hide, selected = false} = this.state || {};
         const itemClass = `layer-item ${selected ? "layer-item-selected" : hide ? "layer-item-hide" : lock ? "layer-item-lock" : ""}`;
         return (
-            <Row 
-                className={itemClass}
-                onClick={this.onSelected}
-            >
-                <Col className={'layer-item-name'} flex={'auto'}>{name}</Col>
-                <Col className={'layer-item-operators'} flex={'100px'}>
-                    <span className={'layer-item-operator'}>
-                        <span onClick={this.toggleHide}>
-                            {hide ? <EyeInvisibleOutlined title='显示' /> : <EyeOutlined title='隐藏' />}
+            <Card size='small'>
+                <Row 
+                    className={itemClass}
+                    onClick={this.onSelected}
+                >
+                    <Col className={'layer-item-name'} flex={'auto'}>{name}</Col>
+                    <Col className={'layer-item-operators'} flex={'60px'}>
+                        <span className={'layer-item-operator'}>
+                            <span onClick={this.toggleHide}>
+                                {hide ? <EyeInvisibleOutlined title='显示' /> : <EyeOutlined title='隐藏' />}
+                            </span>
                         </span>
-                    </span>
-                    <span className={'layer-item-operator'}>
-                        <span onClick={this.toggleLock}>
-                            {lock ? <LockOutlined title='解锁' /> : <UnlockOutlined title='锁定' />}
+                        <span className={'layer-item-operator'}>
+                            <span onClick={this.toggleLock}>
+                                {lock ? <LockOutlined title='解锁' /> : <UnlockOutlined title='锁定' />}
+                            </span>
                         </span>
-                    </span>
-                </Col>
-            </Row>
+                    </Col>
+                </Row>
+            </Card>
+            
         );
     }
 }

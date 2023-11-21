@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import {Component} from 'react';
 import {ConfigType} from "../../../designer/right/ConfigType";
 import {AntdCartesianCoordinateSys} from "../config/AntdFragment";
 import {Scatter, ScatterOptions} from "@antv/g2plot";

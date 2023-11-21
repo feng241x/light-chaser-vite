@@ -17,4 +17,10 @@ export interface MovableItemType {
     lock?: boolean;
     //顺序
     order?: number;
+    //父图层id
+    pid?: string;
+    //子图层列表
+    children?: MovableItemType[];
+    //子图层id
+    childIds?: string[];
 }

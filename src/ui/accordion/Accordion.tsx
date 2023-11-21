@@ -1,4 +1,4 @@
-import React, {CSSProperties, Component} from 'react';
+import {CSSProperties, Component} from 'react';
 import './Accordion.less';
 import {CaretRightOutlined, QuestionCircleOutlined, RightOutlined} from "@ant-design/icons";
 import {Collapse, CollapseProps, Switch, Tooltip, theme} from "antd";

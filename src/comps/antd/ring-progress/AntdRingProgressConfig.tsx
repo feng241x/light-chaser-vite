@@ -1,4 +1,4 @@
-import React, {Component, useState} from 'react';
+import {Component, useState} from 'react';
 import {ConfigType} from "../../../designer/right/ConfigType";
 import {WritableRoseOptions} from "../../antd-common/types";
 import AntdCommonRose from "../../antd-common/rose/AntdCommonRose";

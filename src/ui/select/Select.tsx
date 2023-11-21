@@ -1,4 +1,4 @@
-import React, {MutableRefObject, useEffect, useRef, useState} from "react";
+import {MutableRefObject, useEffect, useRef, useState} from "react";
 import "./Select.less";
 import { Option } from './SelectType'
 import {UIContainer, UIContainerProps} from "../ui-container/UIContainer";

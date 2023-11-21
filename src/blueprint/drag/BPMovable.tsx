@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import {useEffect} from "react";
 import Moveable, {OnDrag, OnDragEnd, OnDragStart} from "react-moveable";
 import bpStore from "../store/BPStore";
 import {observer} from "mobx-react";

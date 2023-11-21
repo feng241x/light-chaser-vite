@@ -1,4 +1,4 @@
-import React, {Component, useState} from 'react';
+import {Component, useState} from 'react';
 import {ConfigType} from "../../../designer/right/ConfigType";
 import {WritableRoseOptions} from "../types";
 import {RoseOptions} from "@antv/g2plot";

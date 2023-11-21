@@ -1,4 +1,4 @@
-import React, {Component, Suspense} from 'react';
+import {Component, Suspense} from 'react';
 import {LineOutlined} from "@ant-design/icons";
 import rightStore from "./RightStore";
 import {observer} from "mobx-react";

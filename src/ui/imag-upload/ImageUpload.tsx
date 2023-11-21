@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import {useState} from "react";
 import {Upload as AntdUpLoad, UploadFile} from "antd";
 import {PlusOutlined} from "@ant-design/icons";
 import ImageCache from "../../framework/cache/ImageCache";

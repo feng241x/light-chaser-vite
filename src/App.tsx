@@ -1,11 +1,12 @@
-import React, {Component, lazy, Suspense} from 'react';
+import {lazy, Suspense} from 'react';
 import './App.less';
 import {Route, Routes} from "react-router-dom";
-import JsonSchemaDemo from "./test/JsonSchemaDemo";
 import Loading from "./ui/loading/Loading";
 import { ConfigProvider, theme } from 'antd';
 import mainStore from './mainStore';
 import { observer } from "mobx-react";
+import LayerGroupItem from "./designer/float-configs/layer-list/group/LayerGroupItem";
+import DemoMain from "./test/DemoMain";
 
 const LightChaserList = lazy(() => import('./list/LightChaserList'));
 const Designer = lazy(() => import('./designer/Designer'));
@@ -34,7 +35,9 @@ const App = () => {
                 <Routes>
                     <Route path={'/designer'} element={<Designer />}/>
                     <Route path={'/view'} element={<DesignerView />}/>
-                    <Route path={'/test'} element={<JsonSchemaDemo />}/>
+                    <Route path={'/test'} element={<DemoMain />}/>
+                    <Route path={'/layer'} element={<LayerGroupItem />}/>
+                    <Route path={'/list'} element={<LightChaserList />}/>
                     <Route path={'/'} element={<LightChaserList />}/>
                 </Routes>
             </Suspense>

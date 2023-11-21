@@ -1,7 +1,7 @@
 import {Component} from 'react';
 import {ColorPicker} from 'antd';
-import {colorConversion, rgbaToHex} from '../../utils/ColorUtil';
 import {UIContainer, UIContainerProps} from "../ui-container/UIContainer";
+import ColorUtil from "../../utils/ColorUtil";
 
 interface ColorPickerProps extends UIContainerProps {
     value?: string;
@@ -32,10 +32,10 @@ class MyColorPicker extends Component<ColorPickerProps> {
         this.state = {value: defaultValue || value || '#00e9ff'};
     }
 
-    onChangeComplete = (value: Color, hex: string) => {
+    onChangeComplete = (value: any, hex: string) => {
         const {onChange} = this.props;
         if (hex.indexOf('gradient') === -1 && hex.indexOf('rgba') !== -1)
-            hex = rgbaToHex(hex);
+            hex = ColorUtil.rgbaToHex(hex);
         onChange && onChange(hex);
         if (!this.control) {
             this.setState({value: hex});
@@ -47,25 +47,13 @@ class MyColorPicker extends Component<ColorPickerProps> {
         const {disabled, tip, label, showText, width, height, radius, showBorder, hideControls} = this.props;
         let hex = null;
         if (showText && color?.indexOf('gradient') === -1 && color?.indexOf('rgba') !== -1) {
-            hex = colorConversion(color).hex;
+            hex = ColorUtil.colorConversion(color).hex;
         } else if (showText && color?.indexOf('#') !== -1) {
             hex = color;
         }
         return (
             <UIContainer tip={tip} label={label} className={'lc-color-pick'}>
-                <ColorPicker size='small' showText={showText} value={color} onChange={this.onChangeComplete} />
-                {/* <Popover content={(disabled ? null :
-                    <div style={{padding: 4}}>
-                        <GradientColorPicker value={color} onChange={this.onChangeComplete}
-                                             hideControls={hideControls}/>
-                    </div>)} trigger={'click'}>
-                    <div className={`${showBorder && 'color-picker-border'}`} style={{..._style}}>
-                        <div style={{background: `${color}`, ..._style}}
-                             className={'color-area'}>
-                            {showText ? <span>{hex}</span> : null}
-                        </div>
-                    </div>
-                </Popover> */}
+                <ColorPicker disabled={disabled} size='small' showText={showText} value={color} onChange={this.onChangeComplete} />
             </UIContainer>
         );
     }

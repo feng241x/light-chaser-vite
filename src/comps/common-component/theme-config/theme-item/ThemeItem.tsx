@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import {Component} from 'react';
 import './ThemeItem.less';
 import {ThemeColors, ThemeItemType} from "../../../../designer/DesignerType";
 import closeIcon from './close.svg';

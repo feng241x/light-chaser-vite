@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import {Component} from "react";
 import { Switch } from 'antd';
 import "./Switch.less";
 import {UIContainer, UIContainerProps} from "../ui-container/UIContainer";

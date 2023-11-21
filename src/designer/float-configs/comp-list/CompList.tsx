@@ -3,7 +3,6 @@ import compListStore from "./CompListStore";
 import './CompList.less';
 import {observer} from "mobx-react";
 import designerStore from "../../store/DesignerStore";
-import {idGenerate} from "../../../utils/IdGenerate";
 import {MovableItemType} from "../../operate-provider/movable/types";
 import eventOperateStore from "../../operate-provider/EventOperateStore";
 import {BaseInfoType} from "../../DesignerType";
@@ -12,6 +11,7 @@ import { Card } from 'antd';
 import antdChartListStore from '../../left/antdChartList/antdChartListStore';
 import { Category } from '../../../const/index.const';
 import baseComponentsStore from '../../left/baseComponents/baseComponentsStore';
+import IdGenerate from "../../../utils/IdGenerate";
 
 class CompList extends Component<{}, { twoCategories: string }> {
     private category: Category = 'chart';
@@ -93,7 +93,7 @@ class CompList extends Component<{}, { twoCategories: string }> {
             width: 320,
             height: 200,
             position: position || [0, 0],
-            id: idGenerate.generateId(),
+            id: IdGenerate.generateId(),
             lock: false,
             hide: false,
             order: ++maxLevel,

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import {useState} from "react";
 import {ConfigType} from "../../../designer/right/ConfigType";
 import BaseImageController from "./BaseImageController";
 import {FieldChangeData, LCGUI} from "../../../json-schema/LCGUI";

@@ -1,11 +1,11 @@
-import React, {Component, ReactElement, Suspense} from 'react';
+import React, {ReactElement, Suspense} from 'react';
 import './DesignerHeader.less';
 import headerStore from "./HeaderStore";
 import {observer} from "mobx-react";
 import {BluePrintHdImpl} from "./items/blue-print/BluePrintHdImpl";
 import Loading from "../../ui/loading/Loading";
 import DesignerLoaderFactory from "../loader/DesignerLoaderFactory";
-import { Switch } from 'antd';
+import { Button, Switch } from 'antd';
 import { AlertFilled, GitlabFilled } from '@ant-design/icons';
 import mainStore from '../../mainStore';
 
@@ -19,9 +19,16 @@ const buildHeaderList = (): Array<ReactElement> => {
     for (let i = 0; i < headerItemInstances.length; i++) {
         const {icon: Icon, name, onClick} = headerItemInstances[i];
         items.push(
-            <div key={i + ''} className={'right-item'} onClick={onClick}>
+            <Button
+                key={i + ''}
+                type="text"
+                onClick={onClick}
+            >
                 <span className={'item-span'}><Icon/>&nbsp;{name}</span>
-            </div>
+            </Button>
+            // <div key={i + ''} className={'right-item'} onClick={onClick}>
+            //     <span className={'item-span'}><Icon/>&nbsp;{name}</span>
+            // </div>
         );
     }
     return items;

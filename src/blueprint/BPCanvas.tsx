@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import {useEffect} from "react";
 import LineLayer from "./line/LineLayer";
 import {NodeLayer} from "./node/NodeLayer";
 import {reRenderLine} from "./drag/BPMovable";

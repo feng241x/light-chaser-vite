@@ -1,5 +1,5 @@
 import {Control, ControlValueType} from "./SchemaTypes";
-import React, {ReactNode} from "react";
+import {ReactNode, Component} from "react";
 import LCGUIUtil from "./LCGUIUtil";
 import UIMap from "../ui";
 
@@ -30,7 +30,7 @@ export class SchemaPathNode {
 /**
  * 特殊场景的操作全交给使用方，向外提供Util方法更新schema结构
  */
-export class LCGUI extends React.Component<LCGUIProps> {
+export class LCGUI extends Component<LCGUIProps> {
 
     onControlChange = (data: ControlValueType, schemaKeyPath: SchemaPathNode[], dataKeyPath: string[], reRender?: boolean, id?: string) => {
         const {onFieldChange} = this.props;

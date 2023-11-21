@@ -250,8 +250,8 @@ class GroupMovable extends React.Component<GroupMovableProps> {
                     resizable={!readonly}
                     keepRatio={false}
 
-                    maxSnapElementGapDistance={400}
-                    maxSnapElementGuidelineDistance={400}
+                    maxSnapElementGapDistance={100}
+                    maxSnapElementGuidelineDistance={100}
                     snappable={true}
                     snapGap={true}
                     snapThreshold={5}

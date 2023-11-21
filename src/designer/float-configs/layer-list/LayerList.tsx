@@ -1,34 +1,36 @@
-import React, {Component} from 'react';
+import {Component} from 'react';
 import './LayerList.less';
 import layerListStore from "./LayerListStore";
 import designerStore from "../../store/DesignerStore";
-import {LayerItemDataProps} from "./LayerItem";
 import {observer} from "mobx-react";
-import FloatPanel from "../common/FloatPanel";
 import eventOperateStore from "../../operate-provider/EventOperateStore";
-import eventManager from "../../operate-provider/core/EventManager";
-import LayerContainer from "./LayerContainer";
+import layerBuilder from "./LayerBuilder";
 import {MovableItemType} from "../../operate-provider/movable/types";
-import Input from "../../../ui/input/Input";
-import { Card, List } from 'antd';
+import LayerUtil from "./util/LayerUtil";
+import LayerGroupItem from './group/LayerGroupItem';
+import LayerItem from './item/LayerItem';
+import { List } from 'antd';
 
 class LayerList extends Component {
-
+    floatPanelRef: any = null;
+    layerItemsContainerRef: HTMLDivElement | null = null;
     componentDidMount() {
-        eventManager.register("click", this.cancelSelected);
+        this.floatPanelRef?.panelRef?.addEventListener("click", this.cancelSelected);
     }
 
     componentWillUnmount() {
-        eventManager.unregister("click", this.cancelSelected);
+        this.floatPanelRef?.panelRef?.removeEventListener("click", this.cancelSelected);
     }
 
-    //todo: 想想怎么优化
-    cancelSelected = (e: PointerEvent) => {
-        const layerListDom = document.querySelector(".layer-list");
-        if (!layerListDom || !e.target) return;
-        if (layerListDom.contains(e.target as Node) && !(e.target as HTMLElement).classList.contains("layer-item")) {
-            const {setTargets} = eventOperateStore;
-            setTargets([]);
+    cancelSelected = (e: any) => {
+        if (!this.floatPanelRef) return;
+        const {panelRef} = this.floatPanelRef;
+        if (!panelRef) return;
+        if (panelRef.contains(e.target as Node)
+            && !this.layerItemsContainerRef?.contains(e.target as Node)) {
+            const {setTargetIds, targetIds} = eventOperateStore;
+            if (targetIds.length > 0)
+                setTargetIds([]);
         }
     }
 
@@ -45,51 +47,73 @@ class LayerList extends Component {
 
     buildLayerList = () :any[] => {
         const {layoutConfigs} = designerStore;
-        const {targetIds} = eventOperateStore;
-        let {searchContent} = layerListStore;
-        //判断是否是命令模式
-        const commandMode = searchContent.startsWith(":");
-        if (commandMode) searchContent = searchContent.substring(1);
-        return Object.values(layoutConfigs)
-            .filter((item: MovableItemType) => {
-                if (commandMode) {
-                    //使用命令模式过滤
-                    if (searchContent.trim() === "hide")
-                        return item.hide;
-                    else if (searchContent.trim() === "lock")
-                        return item.lock;
-                } else
-                    return item.name?.includes(searchContent);
-                return false;
-            })
-            .sort((a: MovableItemType, b: MovableItemType) => b.order! - a.order!)
-            .map((item: MovableItemType) => {
-                let _props: LayerItemDataProps = {
-                    name: item.name,
-                    lock: item.lock,
-                    hide: item.hide,
-                    compId: item.id,
-                    selected: targetIds.includes(item.id!)
-                }
-                return _props;
-                // return <LayerContainer key={item.id} item={_props}/>
+        const {searchContent} = layerListStore;
+        if (!searchContent || searchContent === '')
+            return layerBuilder.buildLayerList(layoutConfigs);
+        let filterLayer: Record<string, any> = {};
+        if (searchContent === ':hide') {
+            //仅过展示隐藏的图层
+            Object.values(layoutConfigs).forEach((item: MovableItemType) => {
+                if (item.hide && item.type !== 'group')
+                    filterLayer[item.id!] = item;
             });
+        } else if (searchContent === ':lock') {
+            //仅过展示锁定的图层
+            Object.values(layoutConfigs).forEach((item: MovableItemType) => {
+                if (item.lock && item.type !== 'group')
+                    filterLayer[item.id!] = item;
+            });
+        } else {
+            Object.values(layoutConfigs).forEach((item: MovableItemType) => {
+                if (item.name?.includes(searchContent) && item.type !== 'group')
+                    filterLayer[item.id!] = item;
+            });
+        }
+        //补充分组图层
+        const groupLayerId = LayerUtil.findPathGroupLayer(Object.keys(filterLayer));
+        groupLayerId.forEach((id: string) => {
+            filterLayer[id] = layoutConfigs[id];
+        });
+        return layerBuilder.buildLayerList(filterLayer);
     }
 
     render() {
+        const {layerInstances} = layerListStore;
         return (
-            <List
-                className='layerListComponent'
-                grid={{ column: 1 }}
-                dataSource={this.buildLayerList()}
-                renderItem={(item: LayerItemDataProps) => (
-                    <List.Item>
-                        <Card size='small'>
-                            <LayerContainer key={item.compId} item={item}/>
-                        </Card>
-                    </List.Item>
-                )}
-            />
+            <div 
+                ref={ref => this.floatPanelRef = ref}
+                className='layer-list'
+            >
+                <div ref={ref => this.layerItemsContainerRef = ref}>
+                    <List
+                        grid={{ column: 1 }}
+                        dataSource={this.buildLayerList()}
+                        renderItem={(item: any) => (
+                            <List.Item>
+                                {
+                                    (item.children && item.children.length) ? (
+                                        <LayerGroupItem {...item} ref={ref => layerInstances[item.compId!] = ref!}>
+                                            {item.children.map(i => (
+                                                <LayerItem {...i} ref={ref => layerInstances[i.compId!] = ref!}/>
+                                            ))}
+                                        </LayerGroupItem>
+                                    ) : (
+                                        <LayerItem {...item} ref={ref => layerInstances[item.compId!] = ref!}/>
+                                    )
+                                }
+                                {/* <Card size='small'>
+                                    <div ref={ref => this.layerItemsContainerRef = ref}>
+                                        {this.buildLayerList()}
+                                    </div>
+                                    <LayerContainer key={item.compId} item={item}/>
+                                </Card> */}
+                            </List.Item>
+                        )}
+                    />  
+                </div>
+                
+            </div>
+            
         );
     }
 }
