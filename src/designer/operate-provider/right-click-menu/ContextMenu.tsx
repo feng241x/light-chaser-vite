@@ -1,83 +1,107 @@
-import {Component} from 'react';
 import {observer} from "mobx-react";
-import contextMenuStore from "./ContextMenuStore";
 import './OperateMenu.less';
 import {
     CopyOutlined,
     DeleteOutlined,
     EyeInvisibleOutlined,
     LockOutlined,
+    MergeCellsOutlined,
+    SplitCellsOutlined,
     VerticalAlignBottomOutlined,
     VerticalAlignTopOutlined
 } from "@ant-design/icons";
-import {doCopy, doDelete, doHide, doLock, doUnLock, toBottom, toTop} from "../hot-key/HotKeyImpl";
+import {doCopy, doDelete, doGrouping, doHide, doLock, doUnGrouping, doUnLock, toBottom, toTop} from "../hot-key/HotKeyImpl";
+import { Dropdown } from 'antd';
+import type { MenuProps } from 'antd';
+import { ContextMenuType } from './ContextMenu.type';
 
-class ContextMenu extends Component {
+const items: MenuProps['items'] = [
+    {
+      label: '锁定',
+      icon: <LockOutlined />,
+      key: ContextMenuType.DO_LOCK,
+    },
+    {
+      label: '解锁',
+      icon: <LockOutlined />,
+      key: ContextMenuType.DO_UNLOCK,
+    },
+    {
+      label: '隐藏',
+      icon: <EyeInvisibleOutlined />,
+      key: ContextMenuType.DO_HIDE,
+    },
+    {
+        label: '复制',
+        icon: <CopyOutlined />,
+        key: ContextMenuType.DO_COPY,
+    },
+    {
+        label: '置顶',
+        icon: <VerticalAlignTopOutlined />,
+        key: ContextMenuType.TO_TOP,
+    },
+    {
+        label: '置底',
+        icon: <VerticalAlignBottomOutlined />,
+        key: ContextMenuType.TO_BOTTOM,
+    },
+    {
+        label: '删除',
+        icon: <DeleteOutlined />,
+        key: ContextMenuType.DO_DELETE,
+    },
+    {
+        label: '编组',
+        icon: <MergeCellsOutlined />,
+        key: ContextMenuType.DO_GROUPING,
+    },
+    {
+        label: '解除分组',
+        icon: <SplitCellsOutlined />,
+        key: ContextMenuType.DO_UNGROUPING,
+    },
+];
 
-    menuList = [
-        {
-            name: '锁定',
-            icon: LockOutlined,
-            onClick: doLock,
-        },
-        {
-            name: '解锁',
-            icon: LockOutlined,
-            onClick: doUnLock,
-        },
-        {
-            name: '隐藏',
-            icon: EyeInvisibleOutlined,
-            onClick: doHide,
-        },
-        {
-            name: '复制',
-            icon: CopyOutlined,
-            onClick: doCopy,
-        },
-        {
-            name: '置顶',
-            icon: VerticalAlignTopOutlined,
-            onClick: toTop,
-        },
-        {
-            name: '置底',
-            icon: VerticalAlignBottomOutlined,
-            onClick: toBottom,
-        },
-        {
-            name: '删除',
-            icon: DeleteOutlined,
-            onClick: doDelete,
-        },
-    ]
-
-    render() {
-        const {visible, position = [0, 0]} = contextMenuStore;
-        let menuListDom = [];
-        for (let i = 0; i < this.menuList.length; i++) {
-            let menuItem = this.menuList[i];
-            let Icon = menuItem.icon;
-            menuListDom.push(
-                <div key={i + ''} className={'menu-item'} onClick={menuItem.onClick}>
-                    <label><Icon/></label>
-                    <span>{menuItem.name}</span>
-                </div>
-            )
+const ContextMenu : React.FC = (props: any) => {
+    const onClick: MenuProps['onClick'] = ({ key }) => {
+        switch (key) {
+            case ContextMenuType.DO_LOCK:
+                doLock()
+                break;
+            case ContextMenuType.DO_UNLOCK:
+                doUnLock()
+                break;
+            case ContextMenuType.DO_HIDE:
+                doHide();
+                break;
+            case ContextMenuType.TO_TOP:
+                toTop();
+                break;
+            case ContextMenuType.TO_BOTTOM:
+                toBottom();
+                break;
+            case ContextMenuType.DO_COPY:
+                doCopy();
+                break;
+            case ContextMenuType.DO_DELETE:
+                doDelete();
+                break;
+            case ContextMenuType.DO_GROUPING:
+                doGrouping();
+                break;
+            case ContextMenuType.DO_UNGROUPING:
+                doUnGrouping();
+                break;
+            default:
+                break;
         }
-        return (
-            <>
-                {visible &&
-                <div className={'lc-right-menu'} style={{
-                    position: 'fixed',
-                    top: position[1],
-                    left: position[0]
-                }}>
-                    {menuListDom}
-                </div>}
-            </>
-        );
     }
+    return (
+        <Dropdown menu={{ items, onClick: onClick }} trigger={['contextMenu']}>
+            {props.children}
+        </Dropdown>
+    );
 }
 
 export default observer(ContextMenu);

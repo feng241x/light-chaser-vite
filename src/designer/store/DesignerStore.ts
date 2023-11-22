@@ -59,6 +59,7 @@ class DesignerStore implements AbstractBaseStore {
         resizeStep: 1, //栅格化缩放步长
         width: 1920, //画布宽
         height: 1080, //画布高
+        backgroundColor: '#000'
     };
 
     /**
@@ -260,6 +261,7 @@ class DesignerStore implements AbstractBaseStore {
      * 更新画布设置
      */
     updateCanvasConfig = (data: CanvasConfig) => {
+        debugger;
         this.canvasConfig = {...this.canvasConfig, ...data}
     }
 

@@ -1,82 +1,86 @@
 import {observer} from "mobx-react";
-import {Component, FormEvent} from 'react';
-import Dialog from "../../../../ui/dialog/Dialog";
-import {CanvasConfig} from "../../../DesignerType";
 import designerStore from "../../../store/DesignerStore";
 import headerStore from "../../HeaderStore";
 import './CanvasHdConfigImpl.less';
-import {Grid} from "../../../../ui/grid/Grid";
-import Input from "../../../../ui/input/Input";
-import Switch from "../../../../ui/switch/Switch";
-import Button from "../../../../ui/button/Button";
+import { ColorPicker, Form, InputNumber, Modal, Switch } from "antd";
 
-/**
- * 画布设置React组件实现
- */
-class CanvasHdConfigImpl extends Component {
 
-    config: CanvasConfig | null = null;
-
-    state = {
-        _rasterize: false,
-    }
-
-    constructor(props: any) {
-        super(props);
-        const {canvasConfig} = designerStore;
-        this.config = {...canvasConfig};
-        this.state = {
-            _rasterize: canvasConfig.rasterize || false
-        }
-    }
-
-    onClose = () => {
-        const {setCanvasVisible} = headerStore;
+const CanvasHdConfigImpl = () => {
+    const {canvasVisible, setCanvasVisible} = headerStore;
+    const {canvasConfig, updateCanvasConfig} = designerStore;
+    const [form] = Form.useForm();
+    const doSave = (values: any) => {
+        updateCanvasConfig(values);
         setCanvasVisible(false);
     }
-
-    doSave = (e: FormEvent<HTMLFormElement>) => {
-        const {updateCanvasConfig} = designerStore;
-        console.log(this.config);
-        updateCanvasConfig(this.config!);
-        e.preventDefault();
-        this.onClose();
+    const onClose = () => {
+        setCanvasVisible(false);
     }
-
-    render() {
-        const {_rasterize} = this.state;
-        const {canvasVisible} = headerStore;
-        const {width, height, rasterize, dragStep, resizeStep} = this.config as CanvasConfig;
-        return (
-            <Dialog className={'lc-header-canvas'} title={'画布设置'} visible={canvasVisible} onClose={this.onClose}>
-                <form onSubmit={this.doSave}>
-                    <div style={{display: 'flex', flexWrap: 'wrap'}}>
-                        <Grid gridGap={'15px'}>
-                            <Input label={'宽度'} required={true} type={'number'} defaultValue={width} min={500}
-                                   onChange={(width) => this.config!.width = width as number}/>
-                            <Input label={'高度'} required={true} type={'number'} defaultValue={height} min={300}
-                                   onChange={(height) => this.config!.height = height as number}/>
-                            <Switch label={'栅格化'} defaultValue={rasterize} onChange={value => {
-                                this.config!.rasterize = value;
-                                this.setState({_rasterize: value})
-                            }}/>
-                            <Input label={'拖拽步长'} disabled={!_rasterize} type={'number'}
-                                   defaultValue={dragStep} min={1}
-                                   onChange={(dragStep) => this.config!.dragStep = dragStep as number}/>
-                            <Input label={'缩放步长'} disabled={!_rasterize} type={'number'}
-                                   defaultValue={resizeStep} min={1}
-                                   onChange={(resizeStep) => this.config!.resizeStep = resizeStep as number}/>
-                        </Grid>
-                    </div>
-                    <p className={'canvas-config-desc'}>说明：修改画布设置，会对整体效果产生较大影响，建议先调试好画布设置后再进行大屏设计</p>
-                    <div className={'lc-header-canvas-footer'}>
-                        <Button type={'submit'}>保存</Button>
-                        <Button type={'button'} onClick={this.onClose}>取消</Button>
-                    </div>
-                </form>
-            </Dialog>
-        );
-    }
+    return (
+        <Modal 
+            title={'画布设置'}
+            open={canvasVisible}
+            onCancel={onClose}
+            okText={'确定'}
+            cancelText={'取消'}
+            onOk={() => {
+                form
+                  .validateFields()
+                  .then((values) => {
+                    form.resetFields();
+                    if (typeof values.backgroundColor === 'object') {
+                        values.backgroundColor = values.backgroundColor?.toHexString();
+                    }
+                    doSave(values);
+                  })
+                  .catch((info) => {
+                    console.log('Validate Failed:', info);
+                  });
+            }}
+        >
+            <Form form={form} initialValues={canvasConfig} onFinish={doSave}>
+                <Form.Item
+                    label="宽度"
+                    name="width"
+                    rules={[{ required: true, message: '宽度必填，最小值不能低于500!' }]}
+                    >
+                    <InputNumber style={{ width: 280 }} min={500} max={3000} />
+                </Form.Item>
+                <Form.Item
+                    label="高度"
+                    name="height"
+                    rules={[{ required: true, message: '高度必填，最小值不能低于300!' }]}
+                    >
+                    <InputNumber style={{ width: 280 }} min={300} max={10000} />
+                </Form.Item>
+                <Form.Item
+                    label="栅格化"
+                    name="rasterize"
+                    >
+                    <Switch defaultChecked={canvasConfig.rasterize} checkedChildren="开启" unCheckedChildren="关闭" />
+                </Form.Item>
+                <Form.Item
+                    label="背景色"
+                    name="backgroundColor"
+                    >
+                    <ColorPicker showText />
+                </Form.Item>
+                <Form.Item
+                    label="拖拽步长"
+                    name="dragStep"
+                    >
+                    <InputNumber style={{ width: 280 }} min={1} max={100}/>
+                </Form.Item>
+                <Form.Item
+                    label="缩放步长"
+                    name="resizeStep"
+                    >
+                    <InputNumber style={{ width: 280 }} min={1} max={100}/>
+                </Form.Item>
+                <p className={'canvas-config-desc'}>说明：修改画布设置，会对整体效果产生较大影响，建议先调试好画布设置后再进行大屏设计</p>
+            </Form>
+        </Modal>
+    )
 }
 
 export default observer(CanvasHdConfigImpl);

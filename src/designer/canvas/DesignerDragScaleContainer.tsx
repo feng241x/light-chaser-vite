@@ -57,7 +57,7 @@ export const DesignerDragScaleContainer: React.FC<DesignerDragScaleContainerProp
                  style={{
                      width: canvasConfig?.width,
                      height: canvasConfig?.height,
-                     background: '#1c1c1c',
+                     backgroundColor: canvasConfig?.backgroundColor,
                      position: 'absolute',
                  }}>
                 {children}

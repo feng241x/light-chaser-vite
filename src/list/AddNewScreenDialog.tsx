@@ -1,10 +1,6 @@
-import {Component} from 'react';
+import {Component, useEffect, useState} from 'react';
 import './style/AddNewScreenDialog.less';
-import Dialog from "../ui/dialog/Dialog";
-import Button from "../ui/button/Button";
-import {Grid} from "../ui/grid/Grid";
-import Input from "../ui/input/Input";
-import Select from "../ui/select/Select";
+import { Form, Input, Modal, Select } from 'antd';
 
 export interface NewProjectInfoType {
     name: string;
@@ -19,58 +15,79 @@ interface AddNewScreenDialogProps {
     visible?: boolean;
 }
 
-class AddNewScreenDialog extends Component<AddNewScreenDialogProps> {
-
-    projectInfo: NewProjectInfoType = {
-        name: '',
-        description: '',
-        width: 500,
-        height: 300
+const AddNewScreenDialog = (props: AddNewScreenDialogProps) => {
+    const {visible = false, onOk} = props;
+    const [_visible, setVisible] = useState(visible);
+    const [form] = Form.useForm();
+    const onCancel = () => {
+        setVisible(false);
     }
-
-    onOk = (e: any) => {
-        e.preventDefault();
-        const {onOk} = this.props;
-        onOk && onOk(this.projectInfo);
-    }
-
-    onCancel = () => {
-        console.log('关闭')
-        const {onCancel} = this.props;
-        onCancel && onCancel();
-    }
-
-    render() {
-        const {visible = false} = this.props;
-        return (
-            <Dialog title={'新建大屏'} visible={visible} className={'add-new-screen-dialog'} onClose={this.onCancel}>
-                <form onSubmit={this.onOk}>
-                    <div className={'lc-add-new-screen'}>
-                        <Grid gridGap={'15px'} columns={2}>
-                            <Input label={'名称'} required={true} maxLength={20}
-                                   onChange={(name) => this.projectInfo.name = name as string}/>
-                            <Input label={'描述'} maxLength={20}
-                                   onChange={(description) => this.projectInfo.description = description as string}/>
-                            <Input label={'宽度'} type={'number'} min={300} required={true}
-                                   onChange={(width) => this.projectInfo.width = width as number}/>
-                            <Input label={'高度'} type={'number'} min={300} required={true}
-                                   onChange={(height) => this.projectInfo.height = height as number}/>
-                            <Select label={'存储'} options={[{value: '1', label: '本地存储'}]} defaultValue={'1'}/>
-                        </Grid>
-                    </div>
-                    <div className={'add-new-screen-explain'}>
-                        <p>说明：</p>
-                        <p>1、名称不超过20字，描述不超过60字</p>
-                        <p>2、宽度必须&ge;500，高度必须&ge;300</p>
-                    </div>
-                    <div className={'add-new-screen-footer'}>
-                        <Button type={"submit"}>保存</Button>
-                        <Button onClick={this.onCancel}>取消</Button>
-                    </div>
-                </form>
-            </Dialog>
-        );
-    }
+    useEffect(() => {
+        setVisible(visible)
+    }, [visible])
+    return (
+        <Modal 
+            title={'新建大屏'} 
+            open={_visible} 
+            onCancel={onCancel}
+            okText='确定'
+            cancelText='取消'
+            onOk={() => {
+                form
+                    .validateFields()
+                    .then((values) => {
+                        form.resetFields();
+                        onOk(values);
+                    })
+                    .catch((info) => {
+                        console.log('Validate Failed:', info);
+                    });
+            }}
+        >
+            <Form
+                initialValues={{}}
+            >
+                <Form.Item
+                    label="名称"
+                    name="name"
+                    rules={[{ required: true, message: '请填写必填项' }]}
+                >
+                    <Input style={{ width: 280 }} />
+                </Form.Item>
+                <Form.Item
+                    label="描述"
+                    name="description"
+                    >
+                    <Input style={{ width: 280 }} />
+                </Form.Item>
+                <Form.Item
+                    label="宽度"
+                    name="width"
+                    rules={[{ required: true, message: '宽度必填，最小值不能低于500!' }]}
+                    >
+                    <Input style={{ width: 280 }} min={500} max={10000} />
+                </Form.Item>
+                <Form.Item
+                    label="高度"
+                    name="height"
+                    rules={[{ required: true, message: '高度必填，最小值不能低于300!' }]}
+                    >
+                    <Input style={{ width: 280 }} min={300} max={10000} />
+                </Form.Item>
+                <Form.Item
+                    label="存储"
+                    name="saveType"
+                    >
+                    <Select options={[{value: '1', label: '本地存储'}]} defaultValue={'1'}/>
+                </Form.Item>
+                <div className={'add-new-screen-explain'}>
+                    <p>说明：</p>
+                    <p>1、名称不超过20字，描述不超过60字</p>
+                    <p>2、宽度必须&ge;500，高度必须&ge;300</p>
+                </div>
+            </Form>
+        </Modal>
+    );
 }
 
 export default AddNewScreenDialog;

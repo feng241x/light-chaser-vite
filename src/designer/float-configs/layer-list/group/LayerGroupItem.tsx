@@ -1,12 +1,9 @@
 import React, {MouseEvent} from "react";
-import previewClose from "../icon/preview-close.svg";
-import previewOpen from "../icon/preview-open.svg";
-import lockImg from "../icon/lock.svg";
-import unlockImg from "../icon/unlock.svg";
-import {EyeInvisibleOutlined, EyeOutlined, FolderFilled, FolderOpenFilled, LockOutlined, UnlockOutlined} from "@ant-design/icons";
+import {DisconnectOutlined, EyeInvisibleOutlined, EyeOutlined, FolderFilled, FolderOpenFilled, LockOutlined, UnlockOutlined} from "@ant-design/icons";
 import layerListStore from "../LayerListStore";
 import './LayerGroupItem.less';
-import { Collapse } from "antd";
+import { Collapse, Popconfirm } from "antd";
+import { doUnGrouping } from "../../../operate-provider/hot-key/HotKeyImpl";
 
 
 export interface GroupItemProps {
@@ -53,21 +50,35 @@ export default class LayerGroupItem extends React.Component<GroupItemProps> {
     }
 
     onSelected = () => {
+        const {hide, compId} = this.props;
+        if (hide) return;
         this.setState({showContent: true})
         const {selectedChange} = layerListStore;
-        selectedChange && selectedChange(this.props.compId!);
+        selectedChange && selectedChange(compId!);
     }
     render() {
         const {children} = this.props;
         const {hide, lock, showContent, name} = this.state;
         return (
             <Collapse
+            accordion
                 onChange={(activeKeys: string[]) => activeKeys.length ? this.onSelected() : this.setState({showContent: false})}
                 bordered={showContent}
                 size='small'
                 expandIcon={({ isActive }) => isActive ?  <FolderOpenFilled /> : <FolderFilled /> }
                 items={[{key: '1', label: name, children: children, extra: (
                     <div className={'layer-group-item'}>
+                        <Popconfirm
+                            placement="topRight"
+                            title={'确认要取消当前分组吗?'}
+                            onConfirm={() => {
+                                doUnGrouping()
+                            }}
+                            okText="确定"
+                            cancelText="取消"
+                        >
+                            <DisconnectOutlined style={{marginRight: 4}} />
+                        </Popconfirm>
                         <span style={{marginRight: 4}} className={'layer-item-operator'}>
                             <span onClick={this.toggleHide}>
                                 {hide ? <EyeInvisibleOutlined title='显示' /> : <EyeOutlined title='隐藏' />}
@@ -81,36 +92,6 @@ export default class LayerGroupItem extends React.Component<GroupItemProps> {
                     </div>
                 )}]}
             />
-            // <div className={'layer-group-item'} onClick={this.onSelected}>
-            //     <div
-            //         className={`layer-group-header ${selected
-            //             ? "layer-group-header-selected" : hide
-            //                 ? "layer-group-header-hide" : lock
-            //                     ? "layer-group-header-lock" : ""}`}
-            //         onClick={() => {
-            //             this.setState({showContent: !showContent})
-            //         }}>
-            //         <div className={'layer-group-left'}>
-            //             <div className={'layer-group-icon'}><FolderOpenFilled/></div>
-            //             <div className={'layer-group-name'}>{name}</div>
-            //         </div>
-            //         <div className={'layer-group-operators'}>
-            //             <div className={'layer-group-operator'}>
-            //             <span onClick={this.toggleHide}>
-            //                 <img src={hide ? previewClose : previewOpen} alt={hide ? '显示' : '隐藏'}/>
-            //             </span>
-            //             </div>
-            //             <div className={'layer-group-operator'}>
-            //             <span onClick={this.toggleLock}>
-            //                 <img src={lock ? lockImg : unlockImg} alt={lock ? '锁定' : '解锁'}/>
-            //             </span>
-            //             </div>
-            //         </div>
-            //     </div>
-            //     {showContent && <div className={'layer-group-content'}>
-            //         {children}
-            //     </div>}
-            // </div>
         );
     }
 };

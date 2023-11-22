@@ -1,23 +1,8 @@
-import {Component} from 'react';
-import MenuList from "./MenuList";
 import ConfigContent from "./ConfigContent";
 import rightStore from "./RightStore";
 import {observer} from "mobx-react";
 import { Tabs, TabsProps } from 'antd';
 import './index.less'
-
-// class Right extends Component {
-
-//     render() {
-//         const {visible} = rightStore;
-//         return (
-//             <>
-//                 <MenuList/>
-//                 {visible && <ConfigContent/>}
-//             </>
-//         );
-//     }
-// }
 
 const Right = () => {
     const { setActiveMenu } = rightStore;

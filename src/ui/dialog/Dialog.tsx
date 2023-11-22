@@ -19,7 +19,7 @@ class Dialog extends Component<DialogProps> {
     }
 
     render() {
-        const {title = '设置', visible = false, children, width = 400, height, className} = this.props;
+        const {title = '设置', visible = false, children, width = 400, className} = this.props;
         if (!visible)
             return null;
         return (

@@ -1,4 +1,4 @@
-import {useEffect} from "react";
+import React, {useEffect} from "react";
 import Selecto, {OnDragStart, OnSelectEnd} from "react-selecto";
 import bpStore from "../store/BPStore";
 

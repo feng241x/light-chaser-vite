@@ -1,4 +1,4 @@
-import {useEffect} from "react";
+import {ReactNode, createRef, useEffect} from "react";
 import Moveable, {OnDrag, OnDragEnd, OnDragStart} from "react-moveable";
 import bpStore from "../store/BPStore";
 import {observer} from "mobx-react";
@@ -6,7 +6,7 @@ import CanvasUtil from "../util/CanvasUtil";
 import {BPLineType, PointType} from "../BPTypes";
 
 export interface BPMovableProps {
-    children?: React.ReactNode;
+    children?: ReactNode;
 }
 
 export const reRenderLine = () => {
@@ -90,7 +90,7 @@ export const updNodeAndLinePos = (nodeId: string, position: PointType) => {
 
 export const BPMovable = observer((props: BPMovableProps) => {
         const {children} = props;
-        const movableRef = React.createRef<Moveable>();
+        const movableRef = createRef<Moveable>();
 
         useEffect(() => {
             const {setBpMovableRef} = bpStore;

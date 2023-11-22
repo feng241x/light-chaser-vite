@@ -2,6 +2,8 @@ import {PureComponent} from 'react';
 import Ruler, {RulerProps} from "@scena/react-ruler";
 import eventOperateStore from "../operate-provider/EventOperateStore";
 import {PointType} from "../../blueprint/BPTypes";
+import mainStore from '../../mainStore';
+import { observer } from 'mobx-react';
 
 interface DesignerRulerProps {
     offset?: PointType;
@@ -56,7 +58,7 @@ class DesignerRuler extends PureComponent<RulerProps & DesignerRulerProps> {
     ruleDrag = () => {
         const {dsContentRef, scale} = eventOperateStore;
         const {x, y} = dsContentRef?.getBoundingClientRect()!;
-        this.scrollPos.x = -(x - 80) / scale;
+        this.scrollPos.x = -(x - 140) / scale;
         this.scrollPos.y = -(y - 70) / scale;
         this.rulerX && this.rulerX.scroll(this.scrollPos.x);
         this.rulerY && this.rulerY.scroll(this.scrollPos.y);
@@ -69,6 +71,7 @@ class DesignerRuler extends PureComponent<RulerProps & DesignerRulerProps> {
 
     render() {
         const {scale} = eventOperateStore;
+        const { themeVal } = mainStore;
         return (
             <div className={'lc-ruler'} style={{position: 'relative'}}>
                 <div style={{
@@ -96,7 +99,7 @@ class DesignerRuler extends PureComponent<RulerProps & DesignerRulerProps> {
                         segment={2}
                         negativeRuler={true}
                         textOffset={[0, 10]}
-                        backgroundColor={'#1a1a1a'}
+                        backgroundColor={themeVal === 'light' ? '#fff' : '#1a1a1a'}
                         unit={this.unit}/>
                 </div>
                 <div className={'lc-ruler-vertical'}
@@ -115,7 +118,7 @@ class DesignerRuler extends PureComponent<RulerProps & DesignerRulerProps> {
                            segment={2}
                            negativeRuler={true}
                            textOffset={[10, 0]}
-                           backgroundColor={'#1a1a1a'}
+                           backgroundColor={themeVal === 'light' ? '#fff' : '#1a1a1a'}
                            unit={this.unit}/>
                 </div>
                 <div className={'lc-ruler-content'} style={{
@@ -132,4 +135,4 @@ class DesignerRuler extends PureComponent<RulerProps & DesignerRulerProps> {
     }
 }
 
-export default DesignerRuler;
+export default observer(DesignerRuler);

@@ -244,6 +244,8 @@ export interface CanvasConfig {
     width?: number;
     //画布高
     height?: number;
+    //背景色
+    backgroundColor?: string;
 }
 
 /**

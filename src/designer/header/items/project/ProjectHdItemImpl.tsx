@@ -1,74 +1,77 @@
-import {Component} from 'react';
-import Dialog from "../../../../ui/dialog/Dialog";
 import headerStore from "../../HeaderStore";
 import './ProjectHdItemImpl.less';
 import designerStore from "../../../store/DesignerStore";
-import {ProjectConfig, ProjectState} from "../../../DesignerType";
-import {Grid} from "../../../../ui/grid/Grid";
-import Input from "../../../../ui/input/Input";
-import Radio from "../../../../ui/radio/Radio";
-import Select from "../../../../ui/select/Select";
-import Button from "../../../../ui/button/Button";
+import {ProjectState, SaveType} from "../../../DesignerType";
+import { Form, Input, Modal, Radio, Select } from 'antd';
 
-class ProjectHdItemImpl extends Component {
-
-    config: ProjectConfig | null = null;
-
-    constructor(props: any) {
-        super(props);
-        const {projectConfig} = designerStore;
-        //使用副本而不是原对象
-        this.config = {...projectConfig};
-    }
-
-    componentWillUnmount() {
-        this.config = {};
-    }
-
-    onClose = () => {
-        const {setProjectVisible} = headerStore;
+const ProjectHdItemImpl = () => {
+    const {projectConfig, updateProjectConfig} = designerStore;
+    const {projectVisible, setProjectVisible} = headerStore;
+    const [form] = Form.useForm();
+    const doSave = (values: any) => {
+        debugger;
+        updateProjectConfig(values);
         setProjectVisible(false);
     }
-
-    doSave = (e: any) => {
-        e.preventDefault();
-        const {updateProjectConfig} = designerStore;
-        console.log(this.config)
-        updateProjectConfig(this.config!);
-        this.onClose();
+    const onClose = () => {
+        setProjectVisible(false);
     }
-
-    render() {
-        const {projectVisible} = headerStore;
-        const {name, des, state, saveType} = this.config!;
-        return (
-            <Dialog title={'项目设置'} className={'lc-header-project-set'} visible={projectVisible} onClose={this.onClose}>
-                <form onSubmit={this.doSave}>
-                    <div style={{display: 'flex', flexWrap: 'wrap'}}>
-                        <Grid gridGap={'15px'}>
-                            <Input label={'项目名称'} required={true} maxLength={20} defaultValue={name}
-                                   onChange={(name) => this.config!.name = name as string}/>
-                            <Input label={'项目描述'} required={true} maxLength={60} defaultValue={des}
-                                   onChange={(des) => this.config!.des = des as string}/>
-                            <Radio label={'项目状态'} onChange={value => this.config!.state = value as ProjectState}
-                                   defaultValue={state}
-                                   options={[
-                                       {label: '草稿', value: ProjectState.DRAFT},
-                                       {label: '发布', value: ProjectState.PUBLISH},
-                                       {label: '封存', value: ProjectState.SEALED}
-                                   ]}/>
-                            <Select label={'存储类型'} options={[{value: '1', label: '本地存储'}]} defaultValue={saveType}/>
-                        </Grid>
-
-                    </div>
-                    <div className={'lc-header-project-footer'}>
-                        <Button type={'submit'}>保存</Button>
-                        <Button type={'button'} onClick={this.onClose}>取消</Button>
-                    </div>
-                </form>
-            </Dialog>
-        );
-    }
+    return (
+        <Modal 
+            title={'项目设置'} 
+            open={projectVisible} 
+            onCancel={onClose}
+            okText='确定'
+            cancelText='取消'
+            onOk={() => {
+                form
+                    .validateFields()
+                    .then((values) => {
+                        form.resetFields();
+                        doSave(values);
+                    })
+                    .catch((info) => {
+                        console.log('Validate Failed:', info);
+                    });
+            }}
+        >
+            <Form form={form} initialValues={projectConfig}>
+                <Form.Item
+                    label="项目名称"
+                    name="name"
+                    rules={[{ required: true, message: '宽度必填，最小值不能低于500!' }]}
+                    >
+                    <Input style={{ width: 280 }} />
+                </Form.Item>
+                <Form.Item
+                    label="项目描述"
+                    name="des"
+                    rules={[{ required: true, message: '高度必填，最小值不能低于300!' }]}
+                    >
+                    <Input style={{ width: 280 }} />
+                </Form.Item>
+                <Form.Item
+                    label="项目状态"
+                    name="state"
+                    >
+                    <Radio.Group
+                        buttonStyle="solid"
+                        optionType="button"
+                        options={[
+                            {label: '草稿', value: ProjectState.DRAFT},
+                            {label: '发布', value: ProjectState.PUBLISH},
+                            {label: '封存', value: ProjectState.SEALED}
+                    ]}/>
+                </Form.Item>
+                <Form.Item
+                    label="存储类型"
+                    name="saveType"
+                    >
+                    <Select defaultValue={projectConfig.saveType} options={[{value: SaveType.LOCAL, label: '本地存储'},{value: SaveType.SERVER, label: '服务器存储'}]} />
+                </Form.Item>
+            </Form>
+        </Modal>
+    );
 }
 
 export default ProjectHdItemImpl;

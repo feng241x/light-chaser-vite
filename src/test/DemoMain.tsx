@@ -1,6 +1,5 @@
 import React from 'react';
 import {observer} from "mobx-react";
-import './DemoMain.less';
 import {MovableItemType} from "../designer/operate-provider/movable/types";
 import layerBuilder from "../designer/float-configs/layer-list/LayerBuilder";
 

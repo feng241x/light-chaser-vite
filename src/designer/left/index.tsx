@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import ClassifyList from "./classify-list/ClassifyList";
 import {observer} from "mobx-react";
 import { Layout, Menu, MenuProps, Tabs } from 'antd';
 import { AppstoreOutlined, ContainerOutlined, CopyOutlined, DesktopOutlined, PieChartOutlined } from '@ant-design/icons';
@@ -49,7 +48,7 @@ const items: MenuItem[] = [
 const { Content, Sider } = Layout;
 const DesignerLeft = () => {
     // const [collapsed, setCollapsed] = useState(true);
-    const { setLeftSiderWidth } = mainStore;
+    const { setLeftSiderWidth, setLeftSelectedKeys } = mainStore;
     //更新图层列表状态
     const { setVisible } = layerListStore;
     // 当前菜单内容区域显示状态
@@ -58,6 +57,7 @@ const DesignerLeft = () => {
     const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
     // 选中菜单事件
     const onSelect = ({ selectedKeys }: { selectedKeys: string[] }) => {
+        setLeftSelectedKeys(selectedKeys);
         setSelectedKeys(selectedKeys);
         setSiderCollapsed(selectedKeys.length === 0);
         setLeftSiderWidth(340);
@@ -67,6 +67,7 @@ const DesignerLeft = () => {
     const onClick = ({ key }: { key: string }) => {
         if (selectedKeys.includes(key)) {
             setSelectedKeys([]);
+            setLeftSelectedKeys([]);
             setSiderCollapsed(true);
             setLeftSiderWidth(120);
             // setCollapsed(true);
@@ -112,6 +113,7 @@ const DesignerLeft = () => {
                 collapsedWidth={0}
                 defaultCollapsed={true}
                 theme="light"
+                style={{overflow:'auto'}}
             >
                 { 
                     getSiderPanel(selectedKeys[0])

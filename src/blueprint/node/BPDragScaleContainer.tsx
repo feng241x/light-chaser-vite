@@ -1,4 +1,4 @@
-import {useEffect} from "react";
+import React, {useEffect, useRef} from "react";
 import DragScaleProvider from "../../framework/drag-scale/DragScaleProvider";
 import bpStore from "../store/BPStore";
 import {reRenderLine} from "../drag/BPMovable";
@@ -10,8 +10,8 @@ export interface BPDragScaleContainerContainerProps {
 
 export const BPDragScaleContainer: React.FC<BPDragScaleContainerContainerProps> = (props) => {
     const {children} = props;
-    const containerRef = React.useRef<HTMLDivElement>(null);
-    const contentRef = React.useRef<HTMLDivElement>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
+    const contentRef = useRef<HTMLDivElement>(null);
     useEffect(() => {
         const {canvasOffset, setCanvasTranslate, setCanvasScale} = bpStore;
         const container = containerRef.current;

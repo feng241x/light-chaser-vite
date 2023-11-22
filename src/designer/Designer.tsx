@@ -1,4 +1,4 @@
-import {Component} from 'react';
+import {Component, useEffect} from 'react';
 import DesignerLeft from "./left";
 import Right from "./right";
 import MyFooter from "./footer/Footer";
@@ -10,77 +10,49 @@ import DesignerCanvas from "./canvas/DesignerCanvas";
 import {observer} from "mobx-react";
 import Loading from "../ui/loading/Loading";
 import DesignerLoaderFactory from "./loader/DesignerLoaderFactory";
-import { Layout, MenuProps } from 'antd';
+import { App, Layout, theme } from 'antd';
 import mainStore from '../mainStore';
-import { PieChartOutlined, DesktopOutlined, ContainerOutlined } from '@ant-design/icons';
 import './Designer.less';
 const { Header, Footer, Sider, Content } = Layout;
 
-type MenuItem = Required<MenuProps>['items'][number];
-
-function getItem(
-  label: React.ReactNode,
-  key: React.Key,
-  icon?: React.ReactNode,
-  children?: MenuItem[],
-  type?: 'group',
-): MenuItem {
-  return {
-    key,
-    icon,
-    children,
-    label,
-    type,
-  } as MenuItem;
-}
-
-const items: MenuItem[] = [
-    getItem('', '1', <PieChartOutlined />),
-    getItem('', '2', <DesktopOutlined />),
-    getItem('', '3', <ContainerOutlined />)
-];
-
-class Designer extends Component {
-
-    componentDidMount() {
+const Designer = () => {
+    const {loaded} = designerStore;
+    const { leftSiderWidth, rightSiderWidth } = mainStore;
+    const { token: { colorBgContainer } } = theme.useToken();
+    useEffect(() => {
         //加载设计器
         DesignerLoaderFactory.getLoader().load();
         //绑定事件到dom元素
         bindEventToDom();
-    }
-
-    componentWillUnmount() {
-        //卸载dom元素上的事件
-        unbindEventToDom();
-    }
-
-    render() {
-        const {loaded} = designerStore;
-        const { leftSiderWidth } = mainStore;
-        if (!loaded)
-            return <Loading/>;
-        return (
-            <Layout>
-                <Header style={{height: 50, borderBottom: '1px solid rgba(5, 5, 5, 0.06)'}}>
-                    <DesignerHeader/>
-                </Header>
+        return () => {
+            //卸载dom元素上的事件
+            unbindEventToDom();
+        }
+    }, [])
+    return (
+            !loaded ? <Loading/> : 
+            <App>
                 <Layout>
-                    <Sider style={{borderRight: '2px solid rgba(5, 5, 5, 0.06)'}} theme='light' width={leftSiderWidth}>
-                        <DesignerLeft/>
-                    </Sider>
-                    <Content>
-                        <DesignerCanvas/>
-                    </Content>
-                    <Sider theme="light" width={300}>
-                        <Right/>
-                    </Sider>
+                    <Header style={{height: 50, borderBottom: '1px solid rgba(5, 5, 5, 0.06)'}}>
+                        <DesignerHeader/>
+                    </Header>
+                    <Layout style={{overflow:'auto'}}>
+                        <Sider style={{ background: colorBgContainer, borderRight: '1px solid rgba(5, 5, 5, 0.06)' }} theme='light' width={leftSiderWidth}>
+                            <DesignerLeft/>
+                        </Sider>
+                        <Content style={{position:'relative'}}>
+                            <DesignerCanvas/>
+                        </Content>
+                        <Sider style={{ background: colorBgContainer, borderLeft: '1px solid rgba(5, 5, 5, 0.06)' }} theme="light" width={rightSiderWidth}>
+                            <Right/>
+                        </Sider>
+                    </Layout>
+                    <Footer style={{ background: colorBgContainer, borderTop: '1px solid rgba(5, 5, 5, 0.06)' }}>
+                        <MyFooter />
+                    </Footer>
                 </Layout>
-                <Footer>
-                    <MyFooter />
-                </Footer>
-            </Layout>
-        );
-    }
+            </App>
+    );
 }
 
 export default observer(Designer);
@@ -90,7 +62,7 @@ export default observer(Designer);
  */
 function bindEventToDom() {
     document.addEventListener("click", clickHandler);
-    document.addEventListener("contextmenu", contextMenuHandler);
+    // document.addEventListener("contextmenu", contextMenuHandler);
     document.addEventListener("pointerdown", pointerDownHandler);
     document.addEventListener("pointerup", pointerUpHandler);
 }
@@ -100,7 +72,7 @@ function bindEventToDom() {
  */
 function unbindEventToDom() {
     document.removeEventListener("click", clickHandler);
-    document.removeEventListener("contextmenu", contextMenuHandler);
+    // document.removeEventListener("contextmenu", contextMenuHandler);
     document.removeEventListener("pointerdown", pointerDownHandler);
     document.removeEventListener("pointerup", pointerUpHandler);
 }
@@ -117,7 +89,7 @@ const clickHandler = (event: any) => {
 }
 
 const contextMenuHandler = (event: any) => {
-    event.preventDefault();
+    // event.preventDefault();
     const {mouseDownTime, mouseUpTime, setPosition, updateVisible} = contextMenuStore;
     let targetArr = ['lc-comp-item', 'moveable-area'];
     if (targetArr.some((item: string) => event.target.classList.contains(item)) && mouseUpTime - mouseDownTime < 200) {
