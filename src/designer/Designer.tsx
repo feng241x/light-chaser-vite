@@ -33,7 +33,7 @@ const Designer = () => {
             !loaded ? <Loading/> : 
             <App>
                 <Layout>
-                    <Header style={{height: 50, borderBottom: '1px solid rgba(5, 5, 5, 0.06)'}}>
+                    <Header style={{height: 64, borderBottom: '1px solid rgba(5, 5, 5, 0.06)'}}>
                         <DesignerHeader/>
                     </Header>
                     <Layout style={{overflow:'auto'}}>

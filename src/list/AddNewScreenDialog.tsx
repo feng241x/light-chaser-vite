@@ -16,19 +16,12 @@ interface AddNewScreenDialogProps {
 }
 
 const AddNewScreenDialog = (props: AddNewScreenDialogProps) => {
-    const {visible = false, onOk} = props;
-    const [_visible, setVisible] = useState(visible);
+    const {visible = false, onOk, onCancel} = props;
     const [form] = Form.useForm();
-    const onCancel = () => {
-        setVisible(false);
-    }
-    useEffect(() => {
-        setVisible(visible)
-    }, [visible])
     return (
         <Modal 
             title={'新建大屏'} 
-            open={_visible} 
+            open={visible} 
             onCancel={onCancel}
             okText='确定'
             cancelText='取消'
@@ -45,6 +38,8 @@ const AddNewScreenDialog = (props: AddNewScreenDialogProps) => {
             }}
         >
             <Form
+                form={form}
+                style={{padding: 20}}
                 initialValues={{}}
             >
                 <Form.Item
@@ -52,33 +47,33 @@ const AddNewScreenDialog = (props: AddNewScreenDialogProps) => {
                     name="name"
                     rules={[{ required: true, message: '请填写必填项' }]}
                 >
-                    <Input style={{ width: 280 }} />
+                    <Input style={{ width: 300 }} />
                 </Form.Item>
                 <Form.Item
                     label="描述"
                     name="description"
                     >
-                    <Input style={{ width: 280 }} />
+                    <Input style={{ width: 300 }} />
                 </Form.Item>
                 <Form.Item
                     label="宽度"
                     name="width"
                     rules={[{ required: true, message: '宽度必填，最小值不能低于500!' }]}
                     >
-                    <Input style={{ width: 280 }} min={500} max={10000} />
+                    <Input style={{ width: 300 }} min={500} max={10000} />
                 </Form.Item>
                 <Form.Item
                     label="高度"
                     name="height"
                     rules={[{ required: true, message: '高度必填，最小值不能低于300!' }]}
                     >
-                    <Input style={{ width: 280 }} min={300} max={10000} />
+                    <Input style={{ width: 300 }} min={300} max={10000} />
                 </Form.Item>
                 <Form.Item
                     label="存储"
                     name="saveType"
-                    >
-                    <Select options={[{value: '1', label: '本地存储'}]} defaultValue={'1'}/>
+                >
+                    <Select style={{width: 310}} options={[{value: '1', label: '本地存储'}]} defaultValue={'1'}/>
                 </Form.Item>
                 <div className={'add-new-screen-explain'}>
                     <p>说明：</p>

@@ -125,7 +125,7 @@ class LocalOperator extends AbstractOperator {
         // }
     }
 
-    private async doUpdate(projectData: ProjectDataType): Promise<boolean> {
+    public async doUpdate(projectData: ProjectDataType): Promise<boolean> {
         if (!projectData.id) {
             console.log('更新数据id异常', projectData);
             return false;

@@ -52,7 +52,7 @@ const Header = () => {
     return (
         <div className={'designer-header'}>
             <div className={'header-left'}>
-                <Text>高层视图</Text>
+                <Text style={{fontSize: 22, fontWeight: 700}}>数据可视化设计器</Text>
             </div>
             <div className={'header-right'}>
                 <Space.Compact block>
