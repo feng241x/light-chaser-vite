@@ -4,7 +4,6 @@ import {Component, RefObject} from "react";
 import designerStore from "../store/DesignerStore";
 import {MovableItemType} from "./movable/types";
 import ObjectUtil from "../../utils/ObjectUtil";
-import DesignerRuler from "../canvas/DesignerRuler";
 import layerListStore from "../float-configs/layer-list/LayerListStore";
 
 /**
@@ -66,7 +65,7 @@ class EventOperateStore {
     /**
      * 设计器标尺组件实例引用
      */
-    rulerRef: DesignerRuler | null = null;
+    rulerRef: any = null;
     /**
      * 设计器画布拖拽缩放内容dom实例引用（用于同步标尺的缩放）
      */
@@ -129,7 +128,7 @@ class EventOperateStore {
 
     setDsContentRef = (ref: HTMLDivElement | null) => this.dsContentRef = ref;
 
-    setRuleRef = (ref: DesignerRuler | null) => this.rulerRef = ref;
+    setRuleRef = (ref: any) => this.rulerRef = ref;
 
     setRatio = (ratio: number) => this.ratio = ratio;
 
@@ -187,7 +186,6 @@ class EventOperateStore {
     setGroupCoordinate = (coordinate: GroupCoordinateType) => {
         this.groupCoordinate = ObjectUtil.merge(this.groupCoordinate, coordinate);
     }
-
     /**
      * 计算组件多选时的左上角坐标
      * @param compArr

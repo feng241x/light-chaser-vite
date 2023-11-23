@@ -27,7 +27,7 @@ class MyInput extends Component<InputProps> {
     }
 
     render() {
-        const {onChange, label, prefix, suffix, tip, ...rest} = this.props;
+        const { label, prefix, suffix, tip } = this.props;
         return (
             <UIContainer label={label} tip={tip}>
                 <Input onChange={this.onChange} suffix={suffix} prefix={prefix} size='small' />

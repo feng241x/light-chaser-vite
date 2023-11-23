@@ -9,6 +9,7 @@ interface DialogProps {
     width?: number;
     height?: number;
     className?: string;
+    children: any;
 }
 
 class Dialog extends Component<DialogProps> {
@@ -27,20 +28,6 @@ class Dialog extends Component<DialogProps> {
                 {children}
             </Modal>
         )
-        // return ReactDOM.createPortal(
-        //     <div className={`lc-dialog lc-dialog-mask ${className}`}>
-        //         <div className={'dialog-body'}>
-        //             <div className={'dialog-header'}>
-        //                 <div className={'dialog-title'}>{title}</div>
-        //                 <div className={'dialog-close'}><LineOutlined onClick={this.onClose}/></div>
-        //             </div>
-        //             <div className="dialog-content" style={{width, height, minHeight: 100}}>
-        //                 {children}
-        //             </div>
-        //         </div>
-        //     </div>,
-        //     document.body
-        // );
     }
 }
 

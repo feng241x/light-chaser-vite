@@ -61,8 +61,8 @@ export default class LayerGroupItem extends React.Component<GroupItemProps> {
         const {hide, lock, showContent, name} = this.state;
         return (
             <Collapse
-            accordion
-                onChange={(activeKeys: string[]) => activeKeys.length ? this.onSelected() : this.setState({showContent: false})}
+                accordion
+                onChange={(activeKeys: string | string[]) => activeKeys.length ? this.onSelected() : this.setState({showContent: false})}
                 bordered={showContent}
                 size='small'
                 expandIcon={({ isActive }) => isActive ?  <FolderOpenFilled /> : <FolderFilled /> }

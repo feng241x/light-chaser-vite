@@ -6,7 +6,7 @@ import Dialog from "../../ui/dialog/Dialog";
 import HotKeyDes from "./HotKeyDes";
 import footerStore from "./FooterStore";
 import eventOperateStore from "../operate-provider/EventOperateStore";
-import { Button, Divider, Space, Switch, Typography } from 'antd';
+import { Button, Divider, Space, Typography } from 'antd';
 import { AppstoreOutlined, AppstoreTwoTone, ControlOutlined, ControlTwoTone, DashboardOutlined } from '@ant-design/icons';
 import mainStore from '../../mainStore';
 

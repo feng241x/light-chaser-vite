@@ -1,4 +1,4 @@
-import {Component, useEffect} from 'react';
+import {useEffect} from 'react';
 import DesignerLeft from "./left";
 import Right from "./right";
 import MyFooter from "./footer/Footer";
@@ -88,17 +88,17 @@ const clickHandler = (event: any) => {
     }
 }
 
-const contextMenuHandler = (event: any) => {
-    // event.preventDefault();
-    const {mouseDownTime, mouseUpTime, setPosition, updateVisible} = contextMenuStore;
-    let targetArr = ['lc-comp-item', 'moveable-area'];
-    if (targetArr.some((item: string) => event.target.classList.contains(item)) && mouseUpTime - mouseDownTime < 200) {
-        updateVisible && updateVisible(true);
-        setPosition([event.clientX, event.clientY]);
-    } else {
-        updateVisible && updateVisible(false);
-    }
-}
+// const contextMenuHandler = (event: any) => {
+//     // event.preventDefault();
+//     const {mouseDownTime, mouseUpTime, setPosition, updateVisible} = contextMenuStore;
+//     let targetArr = ['lc-comp-item', 'moveable-area'];
+//     if (targetArr.some((item: string) => event.target.classList.contains(item)) && mouseUpTime - mouseDownTime < 200) {
+//         updateVisible && updateVisible(true);
+//         setPosition([event.clientX, event.clientY]);
+//     } else {
+//         updateVisible && updateVisible(false);
+//     }
+// }
 
 const pointerDownHandler = () => {
     const {setMouseDownTime} = contextMenuStore;

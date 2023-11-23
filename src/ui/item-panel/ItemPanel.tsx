@@ -1,8 +1,6 @@
 import React from "react";
 import "./ItemPanel.less";
-import {QuestionCircleOutlined} from "@ant-design/icons";
-import { Card, Divider, Tooltip, Typography } from "antd";
-const { Text } = Typography;
+import { Card, Tooltip } from "antd";
 export interface ItemPanelProps {
     label: string;
     tip?: string;

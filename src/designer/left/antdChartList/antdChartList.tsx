@@ -68,7 +68,7 @@ const AntdChartList = () => {
                 key,
                 renderTabBar,
                 children: (
-                    <CompList category={'chart'} />
+                    <CompList category='chart' />
                 )
             })
         }

@@ -93,7 +93,7 @@ class LayerList extends Component {
                                 {
                                     (item.children && item.children.length) ? (
                                         <LayerGroupItem {...item} ref={ref => layerInstances[item.compId!] = ref!}>
-                                            {item.children.map(i => (
+                                            {item.children.map((i: any) => (
                                                 <LayerItem {...i} ref={ref => layerInstances[i.compId!] = ref!}/>
                                             ))}
                                         </LayerGroupItem>

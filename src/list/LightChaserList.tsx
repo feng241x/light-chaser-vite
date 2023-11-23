@@ -14,8 +14,7 @@ import {ProjectState, SaveType} from "../designer/DesignerType";
 import designerStore from "../designer/store/DesignerStore";
 import EditorDesignerLoader from "../designer/loader/EditorDesignerLoader";
 import Dialog from "../ui/dialog/Dialog";
-import {message} from "antd";
-import Button from "../ui/button/Button";
+import {Button, message} from "antd";
 import Input from "../ui/input/Input";
 import URLUtil from "../utils/URLUtil";
 
@@ -285,7 +284,7 @@ const CloneDialog = (props: CloneDialogProps) => {
                     borderTop: '2px solid #272b34',
                     paddingTop: 10
                 }}>
-                    <Button type={'submit'}>确认</Button>
+                    <Button htmlType='submit'>确认</Button>
                     <Button onClick={onCancel}>取消</Button>
                 </div>
             </form>

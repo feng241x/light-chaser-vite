@@ -19,10 +19,10 @@ import designerStore from "../../store/DesignerStore";
 import {MovableItemType} from "./types";
 import historyRecordOperateProxy from "../undo-redo/HistoryRecordOperateProxy";
 
-class GroupMovable extends React.Component {
+class GroupMovable extends React.Component<any> {
     movableRef = React.createRef<Moveable>();
 
-    constructor(props: {}) {
+    constructor(props: any) {
         super(props);
         this.state = {
             targets: [],

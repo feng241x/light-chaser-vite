@@ -1,11 +1,8 @@
-import {Component} from 'react';
 
-class LcHeader extends Component {
-    render() {
-        return (
-            <div className={'structure-header'}>{this.props.children}</div>
-        );
-    }
+const LcHeader = (props: any) => {
+    return (
+        <div className={'structure-header'}>{props.children}</div>
+    );
 }
 
 export default LcHeader;

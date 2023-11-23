@@ -47,10 +47,6 @@ class MyRadio extends Component<RadioProps> {
     generateOptions = () => {
         const {options = []} = this.props;
         return options.map((option: Option, index: number) => {
-            const value = this.valueControl ? this.props.value : this.state.value;
-            let checked = false;
-            if (option.value === value)
-                checked = true;
             return (
                 <Radio.Button  key={index + ''} value={option.value}>{option.label}</Radio.Button >
                 // <label className="radio-button" key={index + ''}

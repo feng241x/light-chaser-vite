@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import {observer} from "mobx-react";
-import { Layout, Menu, MenuProps, Tabs } from 'antd';
+import { Layout, Menu, MenuProps } from 'antd';
 import { AppstoreOutlined, ContainerOutlined, CopyOutlined, DesktopOutlined, PieChartOutlined } from '@ant-design/icons';
 import mainStore from '../../mainStore';
 import AntdChartList from './antdChartList/antdChartList';
@@ -9,15 +9,6 @@ import { CategoryEnum } from '../../const/index.const';
 import BaseComponents from './baseComponents/baseComponents';
 import LayerList from '../float-configs/layer-list/LayerList';
 import layerListStore from '../float-configs/layer-list/LayerListStore';
-
-// class DesignerLeft extends Component {
-
-//     render() {
-//         return (
-//             <ClassifyList/>
-//         );
-//     }
-// }
 
 type MenuItem = Required<MenuProps>['items'][number];
 

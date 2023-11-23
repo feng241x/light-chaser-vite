@@ -93,7 +93,7 @@ export interface DelDataType {
     id: string;
     data: {
         layoutConfig: MovableItemType;
-        elemConfig: any;
+        elemConfig?: any;
     };
 }
 

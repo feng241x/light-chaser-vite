@@ -63,7 +63,7 @@ const items: MenuProps['items'] = [
     },
 ];
 
-const ContextMenu : React.FC = (props: any) => {
+const ContextMenu : any = (props: any) => {
     const onClick: MenuProps['onClick'] = ({ key }) => {
         switch (key) {
             case ContextMenuType.DO_LOCK:

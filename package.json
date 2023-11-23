@@ -1,5 +1,5 @@
 {
-  "name": "light-chaser-vite-mui",
+  "name": "light-chaser-vite",
   "private": true,
   "version": "0.0.1",
   "type": "module",
@@ -31,8 +31,7 @@
     "react-moveable": "^0.55.0",
     "react-refresh": "^0.14.0",
     "react-router-dom": "^6.18.0",
-    "react-selecto": "^1.26.1",
-    "uuid": "^9.0.1"
+    "react-selecto": "^1.26.1"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.201",
@@ -46,11 +45,6 @@
     "@vitejs/plugin-react": "^4.0.3",
     "@vitejs/plugin-react-swc": "^3.3.2",
     "eslint": "^8.53.0",
-    "eslint-config-react-app": "^7.0.1",
-    "eslint-plugin-flowtype": "^8.0.3",
-    "eslint-plugin-import": "^2.29.0",
-    "eslint-plugin-jsx-a11y": "^6.8.0",
-    "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
     "less": "^4.2.0",

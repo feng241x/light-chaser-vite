@@ -28,7 +28,7 @@ export function setControlPointLineColor(lock: boolean) {
     }
 }
 
-class GroupSelectable extends Component {
+class GroupSelectable extends Component<any> {
     selectorRef = React.createRef<Selecto>();
 
     componentDidMount() {

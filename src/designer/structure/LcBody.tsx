@@ -1,11 +1,8 @@
-import {Component} from 'react';
 
-class LcBody extends Component {
-    render() {
-        return (
-            <div className={'structure-body'}>{this.props.children}</div>
-        );
-    }
+const LcBody = (props: any) => {
+    return (
+        <div className={'structure-body'}>{props.children}</div>
+    );
 }
 
 export default LcBody;

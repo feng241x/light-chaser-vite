@@ -44,13 +44,7 @@ class MyColorPicker extends Component<ColorPickerProps> {
 
     render() {
         const color = this.control ? this.props.value : this.state.value;
-        const {disabled, tip, label, showText, width, height, radius, showBorder, hideControls} = this.props;
-        let hex = null;
-        if (showText && color?.indexOf('gradient') === -1 && color?.indexOf('rgba') !== -1) {
-            hex = ColorUtil.colorConversion(color).hex;
-        } else if (showText && color?.indexOf('#') !== -1) {
-            hex = color;
-        }
+        const {disabled, tip, label, showText} = this.props;
         return (
             <UIContainer tip={tip} label={label} className={'lc-color-pick'}>
                 <ColorPicker disabled={disabled} size='small' showText={showText} value={color} onChange={this.onChangeComplete} />

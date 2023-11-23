@@ -13,7 +13,7 @@ import { Category } from '../../../const/index.const';
 import baseComponentsStore from '../../left/baseComponents/baseComponentsStore';
 import IdGenerate from "../../../utils/IdGenerate";
 
-class CompList extends Component<{}, { twoCategories: string }> {
+class CompList extends Component<any, { twoCategories: string }> {
     private category: Category = 'chart';
     constructor(props: { category: Category }) {
         super(props);

@@ -26,7 +26,7 @@ export const BPRight: React.FC = observer(() => {
                 <div className={'bp-node-config-info'}>{`${nodeConfig?.id} | ${nodeConfig?.type}`}</div>
             </div>
             <div className={'bp-ap-info-list'}>
-                <Accordion label={'锚点信息'}>
+                <Accordion label='锚点信息'>
                     {apList.map(ap => {
                         return (
                             <div className={'bp-ap-info-item'} key={ap.id}>

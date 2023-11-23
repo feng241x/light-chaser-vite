@@ -9,7 +9,7 @@ import {ItemPanel} from "../../../../ui/item-panel/ItemPanel";
 import Input from "../../../../ui/input/Input";
 import {UIContainer} from "../../../../ui/ui-container/UIContainer";
 import {Grid} from "../../../../ui/grid/Grid";
-import Button from "../../../../ui/button/Button";
+import { Button, Form } from 'antd';
 
 /**
  * 主题编辑器
@@ -147,7 +147,7 @@ class ThemeEditor extends Component {
         return (
             <div className={'lc-theme-editor'}>
                 <div className={'editor-left'}>
-                    <form onSubmit={this.doSaveOrUpd}>
+                    <Form onFinish={this.doSaveOrUpd}>
                         <ItemPanel label={'主题信息'}>
                             <UIContainer label={'名称'}>
                                 <Input value={themeConfig.name} onChange={this.nameChanged} required={true}/>
@@ -190,9 +190,9 @@ class ThemeEditor extends Component {
                         <p style={{color: '#6e6e6e'}}>说明：自定义主题色的色值应该保持在同一色系。以确保整体统一的风格。主题色占据主要面积</p>
                         <br/>
                         <div className={'theme-operate-btn'}>
-                            <Button type={"submit"}>添加 / 更新</Button>
+                            <Button htmlType='submit'>添加 / 更新</Button>
                         </div>
-                    </form>
+                    </Form>
                 </div>
                 <div className={'editor-right'}>
                     <ItemPanel label={'主题列表'}>

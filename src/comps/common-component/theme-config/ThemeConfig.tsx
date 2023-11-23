@@ -6,7 +6,7 @@ import {ConfigType} from "../../../designer/right/ConfigType";
 import {ThemeItemType} from "../../../designer/DesignerType";
 import rightStore from "../../../designer/right/RightStore";
 import designerStore from "../../../designer/store/DesignerStore";
-import Button from "../../../ui/button/Button";
+import { Button } from 'antd';
 
 class ThemeConfig extends Component<ConfigType> {
     state = {

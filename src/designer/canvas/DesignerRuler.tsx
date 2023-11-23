@@ -7,6 +7,7 @@ import { observer } from 'mobx-react';
 
 interface DesignerRulerProps {
     offset?: PointType;
+    children: any;
 }
 
 /**

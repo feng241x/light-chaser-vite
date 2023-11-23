@@ -1,4 +1,4 @@
-import {MutableRefObject, useEffect, useRef, useState} from "react";
+import {MutableRefObject, useRef} from "react";
 import "./Select.less";
 import { Option } from './SelectType'
 import {UIContainer, UIContainerProps} from "../ui-container/UIContainer";
@@ -19,7 +19,7 @@ interface SelectProps extends UIContainerProps {
 }
 
 const MySelect: React.FC<SelectProps> = (props) => {
-    const {options, placeholder = "请选择", value, defaultValue, onChange, disabled = false, tip, label} = props;
+    const {options, placeholder = "请选择", defaultValue, onChange, disabled = false, tip, label} = props;
     const dom: MutableRefObject<HTMLDivElement | null> = useRef(null);
     const handleOptionClick = (value: string, option: any): void => {
         onChange && onChange(option.value || '');

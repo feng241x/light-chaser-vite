@@ -1,5 +1,4 @@
 import {Component, Suspense} from 'react';
-import {LineOutlined} from "@ant-design/icons";
 import rightStore from "./RightStore";
 import {observer} from "mobx-react";
 import './ConfigContent.less';
@@ -56,14 +55,6 @@ class ConfigContent extends Component {
     }
 
     render() {
-        const {activeMenu, menus} = rightStore;
-        let activeMenuName = '';
-        for (let i = 0; i < menus.length; i++) {
-            if (menus[i].key === activeMenu) {
-                activeMenuName = menus[i].name;
-                break;
-            }
-        }
         return (
             <>{this.buildConfigContent()}</>
         );

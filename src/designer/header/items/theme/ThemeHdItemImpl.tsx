@@ -6,7 +6,7 @@ import ThemeList from "../../../../comps/common-component/theme-config/theme-lis
 import {ThemeItemType} from "../../../DesignerType";
 import designerStore from "../../../store/DesignerStore";
 import ThemeEditor from "../../../../comps/common-component/theme-config/theme-editor/ThemeEditor";
-import Button from "../../../../ui/button/Button";
+import { Button } from 'antd';
 
 class ThemeHdItemImpl extends Component {
 
