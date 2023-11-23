@@ -1,5 +1,5 @@
 import {AbstractHeaderItem, HeaderItemProps} from "../../HeaderTypes";
-import {EyeFilled} from "@ant-design/icons";
+import {EyeOutlined} from "@ant-design/icons";
 import designerStore from "../../../store/DesignerStore";
 
 /**
@@ -8,7 +8,7 @@ import designerStore from "../../../store/DesignerStore";
 export default class PreViewHdItem extends AbstractHeaderItem {
     getHeaderItemInfo(): HeaderItemProps {
         return {
-            icon: EyeFilled,
+            icon: EyeOutlined,
             name: '预览',
             order: 4,
             onClick: () => window.open(`/view?id=${designerStore.id}&saveType=${designerStore.projectConfig.saveType}&action=view`)

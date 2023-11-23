@@ -1,5 +1,5 @@
 import {Component} from 'react';
-import {Skeleton} from "antd";
+import {Spin} from "antd";
 
 interface LoadingProps {
     width?: string | number;
@@ -16,12 +16,12 @@ class Loading extends Component<LoadingProps> {
             justifyContent: 'center',
             alignItems: 'center',
             fontSize: '20px',
-            fontWeight: '300'
+            fontWeight: '400',
         }
         return (
-            <div style={style}>
-                <Skeleton />
-            </div>
+            <Spin tip="加载中..." size='large'>
+                <div style={style}></div>
+            </Spin>
         );
     }
 }

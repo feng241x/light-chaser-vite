@@ -24,8 +24,11 @@ const App = () => {
                     Layout: {
                         headerBg: themeVal === 'light' ? '#fff' : 'rgb(20, 20, 20)',
                         footerBg: themeVal === 'light' ? '#fff' : 'rgb(20, 20, 20)',
-                        
+                        headerPadding: '0 20px',
                         // bodyBg: themeVal === 'light' ? '#fff' : 'rgb(20, 20, 20)'
+                    },
+                    Spin: {
+                        contentHeight: 1000,
                     }
                 },
                 algorithm: themeVal === 'light' ? theme.defaultAlgorithm : theme.darkAlgorithm

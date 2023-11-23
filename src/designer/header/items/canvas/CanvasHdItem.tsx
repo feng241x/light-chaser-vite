@@ -1,5 +1,5 @@
 import {AbstractHeaderItem, HeaderItemProps} from "../../HeaderTypes";
-import {SettingFilled} from "@ant-design/icons";
+import {FundOutlined} from "@ant-design/icons";
 import headerStore from "../../HeaderStore";
 
 /**
@@ -9,7 +9,7 @@ export default class CanvasHdItem extends AbstractHeaderItem {
     getHeaderItemInfo(): HeaderItemProps {
         const {setCanvasVisible} = headerStore;
         return {
-            icon: SettingFilled,
+            icon: FundOutlined,
             name: '画布设置',
             order: 1,
             onClick: () => {

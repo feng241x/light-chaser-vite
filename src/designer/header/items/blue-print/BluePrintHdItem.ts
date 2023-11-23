@@ -1,13 +1,13 @@
 import {AbstractHeaderItem, HeaderItemProps} from "../../HeaderTypes";
 import headerStore from "../../HeaderStore";
-import {CodeSandboxSquareFilled} from "@ant-design/icons";
+import {CodeSandboxOutlined} from "@ant-design/icons";
 import eventOperateStore from "../../../operate-provider/EventOperateStore";
 
 export default class BluePrintHdItem extends AbstractHeaderItem {
     getHeaderItemInfo(): HeaderItemProps {
         const {setBluePrintVisible} = headerStore;
         return {
-            icon: CodeSandboxSquareFilled,
+            icon: CodeSandboxOutlined,
             name: '蓝图交互',
             order: 0,
             onClick: () => {

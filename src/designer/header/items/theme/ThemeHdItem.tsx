@@ -1,5 +1,5 @@
 import {AbstractHeaderItem, HeaderItemProps} from "../../HeaderTypes";
-import {SkinFilled} from "@ant-design/icons";
+import {SkinOutlined} from "@ant-design/icons";
 import headerStore from "../../HeaderStore";
 
 /**
@@ -9,7 +9,7 @@ export default class ThemeHdItem extends AbstractHeaderItem {
     getHeaderItemInfo(): HeaderItemProps {
         const {setThemeVisible} = headerStore;
         return {
-            icon: SkinFilled,
+            icon: SkinOutlined,
             name: '主题设置',
             order: 2,
             onClick: () => {

@@ -66,16 +66,6 @@ class ConfigContent extends Component {
         }
         return (
             <>{this.buildConfigContent()}</>
-            // <div className={'lc-config-panel'}>
-            //     <div className={'lc-panel-top'}>
-            //         <div className={'panel-title'}>
-            //             <span>{activeMenuName}</span></div>
-            //         <div className={'panel-operate'} onClick={this.onClose}><LineOutlined/></div>
-            //     </div>
-            //     <div className={'lc-panel-content'}>
-            //         {this.buildConfigContent()}
-            //     </div>
-            // </div>
         );
     }
 }

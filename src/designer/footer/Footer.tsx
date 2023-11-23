@@ -7,7 +7,7 @@ import HotKeyDes from "./HotKeyDes";
 import footerStore from "./FooterStore";
 import eventOperateStore from "../operate-provider/EventOperateStore";
 import { Button, Divider, Space, Switch, Typography } from 'antd';
-import { AppstoreOutlined, AppstoreTwoTone, DashboardOutlined, SettingOutlined, SettingTwoTone } from '@ant-design/icons';
+import { AppstoreOutlined, AppstoreTwoTone, ControlOutlined, ControlTwoTone, DashboardOutlined } from '@ant-design/icons';
 import mainStore from '../../mainStore';
 
 const { Text } = Typography;
@@ -58,7 +58,7 @@ const MyFooter: React.FC = () => {
             <div className={'footer-left'} >
                 <Space size='small'>
                     <Button onClick={componentSwitchClick} icon={componentSwitch ? <AppstoreTwoTone /> : <AppstoreOutlined />} type='text' title='组件控件'></Button>
-                    <Button onClick={attributesSwitchClick} icon={attributesSwitch ? <SettingTwoTone /> : <SettingOutlined />} type='text' title='属性控件'></Button>
+                    <Button onClick={attributesSwitchClick} icon={attributesSwitch ? <ControlTwoTone /> : <ControlOutlined />} type='text' title='属性控件'></Button>
                     <Button type='text' icon={<DashboardOutlined />} onClick={toggleHotKeyDes}>快捷键</Button>
                 </Space>
             </div>
