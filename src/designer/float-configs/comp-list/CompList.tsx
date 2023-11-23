@@ -7,7 +7,7 @@ import {MovableItemType} from "../../operate-provider/movable/types";
 import eventOperateStore from "../../operate-provider/EventOperateStore";
 import {BaseInfoType} from "../../DesignerType";
 import DesignerLoaderFactory from "../../loader/DesignerLoaderFactory";
-import { Card } from 'antd';
+import { Card, notification } from 'antd';
 import antdChartListStore from '../../left/antdChartList/antdChartListStore';
 import { Category } from '../../../const/index.const';
 import baseComponentsStore from '../../left/baseComponents/baseComponentsStore';
@@ -75,6 +75,14 @@ class CompList extends Component<{}, { twoCategories: string }> {
     drop = (event: any) => {
         event.preventDefault();
         const type = (event as any).dataTransfer.getData('type');
+        if (!type) {
+            notification.error({
+                message: '创建组件失败',
+                description: '当前操作出现异常,请重新尝试',
+                key: 'dropError'
+            })
+            return;
+        }
         const name = (event as any).dataTransfer.getData('name');
         //获取鼠标位置,添加元素
         const {scale, dsContentRef} = eventOperateStore;
