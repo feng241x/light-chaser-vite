@@ -64,7 +64,8 @@ class RightStore {
         //更新菜单列表
         this.menus = (DesignerLoaderFactory.getLoader()?.customComponentInfoMap[type] as AbstractComponentDefinition)?.getMenuList() || [];
         if (this.menus.length > 0) {
-            setRightSiderWidth(300)
+            setRightSiderWidth(300);
+            this.setContentVisible(true);
             let setNewActiveMenu = true;
             for (let i = 0; i < this.menus.length; i++) {
                 if (this.menus[i].key === this.activeMenu) {
