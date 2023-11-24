@@ -21,7 +21,7 @@ const MyFooter: React.FC = () => {
     const [modal, contextHolder] = Modal.useModal();
     const {layoutConfigs, projectConfig: {name, state} } = designerStore;
     const {hotKeyVisible, setHotKeyVisible} = footerStore;
-    const { setLeftSiderWidth, leftSelectedKeys, setRightSiderWidth } = mainStore;
+    const { setLeftSiderWidth, leftSelectedKeys, rightSiderWidth, setRightSiderWidth } = mainStore;
     const [stateStr, setStateStr] = useState('');
     const {scale} = eventOperateStore;
     // 控制组件面板显示隐藏
@@ -42,6 +42,10 @@ const MyFooter: React.FC = () => {
         setAttributesSwitch(!attributesSwitch);
         setRightSiderWidth(!attributesSwitch ? 300 : 0)
     }
+
+    useEffect(() => {
+        if (rightSiderWidth === 0) setAttributesSwitch(false);
+    }, [rightSiderWidth])
 
     useEffect(() => {
         let _str = '';

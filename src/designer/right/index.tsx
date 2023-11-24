@@ -1,44 +1,30 @@
 import ConfigContent from "./ConfigContent";
 import rightStore from "./RightStore";
 import {observer} from "mobx-react";
-import { Tabs, TabsProps } from 'antd';
+import { Tabs } from 'antd';
 import './index.less'
+import { useEffect, useState } from "react";
+import { MenuInfo } from "./MenuType";
+import mainStore from "../../mainStore";
 
 const Right = () => {
-    const { setActiveMenu } = rightStore;
+    const { setActiveMenu, menus, visible, setContentVisible } = rightStore;
+    const { setRightSiderWidth } = mainStore;
+    const [tabsList, setTabsList] = useState<any[]>([]);
     const onChange = (key: string) => {
         setActiveMenu(key);
+        setContentVisible && setContentVisible(true);
       };
-      
-      const items: TabsProps['items'] = [
-        {
-          key: 'style',
-          label: '基  础',
-          children: <ConfigContent />,
-        },
-        {
-          key: 'data',
-          label: '数  据',
-          children: <ConfigContent />,
-        },
-        {
-          key: 'mapping',
-          label: '映  射',
-          children: <ConfigContent />,
-        },
-        {
-          key: 'theme',
-          label: '主  题',
-          children: <ConfigContent />,
-        },
-        // {
-        //   key: 'events',
-        //   label: '交  互',
-        //   children: <ConfigContent />,
-        // },
-      ];
+    useEffect(() => {
+      setTabsList(menus.map((item: MenuInfo) => ({
+        key: item.key,
+        label: item.name,
+        children: visible && <ConfigContent />,
+      })))
+      if (menus.length === 0) setRightSiderWidth(0)
+    }, [menus, visible])
     return (
-      <Tabs style={{height: '100%'}} rootClassName='rightTabsContentPanel' defaultActiveKey="1" indicatorSize={40} tabBarGutter={42} items={items} onChange={onChange} tabBarStyle={{paddingLeft: 30 }} />
+      <Tabs style={{height: '100%'}} rootClassName='rightTabsContentPanel' defaultActiveKey="1" indicatorSize={40} tabBarGutter={42} items={tabsList} onChange={onChange} tabBarStyle={{paddingLeft: 30 }} />
     )
 }
 

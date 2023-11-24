@@ -4,6 +4,7 @@ import {AbstractComponentDefinition} from "../../framework/core/AbstractComponen
 import {ActiveElem} from "../DesignerType";
 import {PictureFilled} from "@ant-design/icons";
 import DesignerLoaderFactory from "../loader/DesignerLoaderFactory";
+import mainStore from "../../mainStore";
 
 
 export const bgMenu: MenuInfo[] = [{
@@ -53,6 +54,7 @@ class RightStore {
     setContentVisible = (visible: boolean) => this.visible = visible;
 
     activeConfig = (id: string | null, type: string | null) => {
+        const { setRightSiderWidth } = mainStore;
         if (!id || !type) {
             this.activeMenu = '';
             this.activeElem = {};
@@ -62,6 +64,7 @@ class RightStore {
         //更新菜单列表
         this.menus = (DesignerLoaderFactory.getLoader()?.customComponentInfoMap[type] as AbstractComponentDefinition)?.getMenuList() || [];
         if (this.menus.length > 0) {
+            setRightSiderWidth(300)
             let setNewActiveMenu = true;
             for (let i = 0; i < this.menus.length; i++) {
                 if (this.menus[i].key === this.activeMenu) {
