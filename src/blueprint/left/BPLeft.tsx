@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import './BPLeft.less';
 import {
     ApartmentOutlined,
@@ -105,21 +105,8 @@ export const BPNodeList = observer(() => {
 })
 
 export const BPLayerNodeList = observer(() => {
-    const [listData, setListData] = useState<any[]>([])
-
     const {layoutConfigs} = designerStore;
     const {usedLayerNodes} = bpLeftStore;
-    useEffect(() => {
-        let _listData = layoutConfigs && Object.keys(layoutConfigs).map((key, index) => {
-            const item = layoutConfigs[key];
-            const used = usedLayerNodes[key];
-            return {
-                item,
-                used
-            }
-        })
-        setListData(_listData);
-    }, [layoutConfigs, usedLayerNodes])
     return (
         <List
             grid={{ column: 1 }}
