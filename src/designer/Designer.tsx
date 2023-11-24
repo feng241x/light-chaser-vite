@@ -36,7 +36,7 @@ const Designer = () => {
                     <Header style={{height: 64, borderBottom: '1px solid rgba(5, 5, 5, 0.06)'}}>
                         <DesignerHeader/>
                     </Header>
-                    <Layout style={{overflow:'auto'}}>
+                    <Layout style={{overflow:'hidden'}}>
                         <Sider style={{ background: colorBgContainer, borderRight: '1px solid rgba(5, 5, 5, 0.06)' }} theme='light' width={leftSiderWidth}>
                             <DesignerLeft/>
                         </Sider>

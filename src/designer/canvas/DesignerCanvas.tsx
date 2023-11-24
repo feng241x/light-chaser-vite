@@ -54,20 +54,21 @@ class DesignerCanvas extends PureComponent<DesignerStore | any> {
                 <DesignerContainer>
                     <GroupSelectable>
                         <DesignerRuler>
-                            <LcRightMenu>
-                                <div
-                                    className="site-dropdown-context-menu"
-                                    style={{
-                                        height: '100%',
-                                    }}
+                            <DesignerDragScaleContainer onDoubleClick={this.updateActive}>
+                                <LcRightMenu>
+                                    <div
+                                        className="site-dropdown-context-menu"
+                                        style={{
+                                            height: '100%',
+                                        }}
                                     >
-                                        <DesignerDragScaleContainer onDoubleClick={this.updateActive}>
                                         <GroupMovable>
                                             {layerBuilder.buildCanvasComponents(layoutConfigs)}
                                         </GroupMovable>
-                                    </DesignerDragScaleContainer>
-                                </div>
-                            </LcRightMenu>
+                                
+                                    </div>
+                                </LcRightMenu>
+                            </DesignerDragScaleContainer>
                         </DesignerRuler>
                     </GroupSelectable>
                 </DesignerContainer>

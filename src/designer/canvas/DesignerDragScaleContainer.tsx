@@ -46,7 +46,8 @@ export const DesignerDragScaleContainer: React.FC<DesignerDragScaleContainerProp
              style={{
                  overflow: "hidden",
                  height: window.innerHeight - 110,
-                 width: window.innerWidth - 95,
+                 width: '100%',
+                //  width: window.innerWidth - 95,
                 //  backgroundColor: '#434343',
                  position: 'relative'
              }}>

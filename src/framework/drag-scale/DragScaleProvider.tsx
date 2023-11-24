@@ -70,7 +70,7 @@ export default class DragScaleProvider {
         //初始化被拖拽对象位置
         this.content!.style.transform = 'translate3d(' + this.position.x + 'px, ' + this.position.y + 'px, 0) scale(' + this.scaleCore.scale + ')';
         //阻止系统右键菜单显示
-        // this.container?.addEventListener("contextmenu", (e) => e.preventDefault())
+        this.container?.addEventListener("contextmenu", (e) => e.preventDefault())
         this.onDragStart();
         this.onDragEnd();
     }
@@ -109,7 +109,7 @@ export default class DragScaleProvider {
 
     private onDragStart = (): void => {
         this.container?.addEventListener('pointerdown', (e: any) => {
-            if (e.button === 2) {
+            if (e.button === 2 && e.ctrlKey) {
                 this.container?.setPointerCapture(e.pointerId);
                 this.container?.addEventListener('pointermove', this.onDragMove);
                 if (this.dragStartCallback) {

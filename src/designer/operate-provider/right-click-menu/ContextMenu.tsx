@@ -98,7 +98,10 @@ const ContextMenu : any = (props: any) => {
         }
     }
     return (
-        <Dropdown menu={{ items, onClick: onClick }} trigger={['contextMenu']}>
+        <Dropdown 
+            menu={{ items, onClick: onClick }} 
+            trigger={['contextMenu']}
+        >
             {props.children}
         </Dropdown>
     );

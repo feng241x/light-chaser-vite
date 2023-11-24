@@ -40,7 +40,7 @@ class GroupSelectable extends Component<any> {
         let {selected} = e;
         const {movableRef, setTargetIds} = eventOperateStore;
         if (!movableRef) return;
-        const movable: Moveable = movableRef!.current!;
+        const movable: Moveable = movableRef?.current!;
         //如果为拖拽，则将当前的整个dom事件传递给movable，确保选中元素后可以立马拖拽
         if (e.isDragStart) {
             e.inputEvent.preventDefault();
@@ -98,9 +98,9 @@ class GroupSelectable extends Component<any> {
 
     onDragStart = (e: any) => {
         const {movableRef, targets} = eventOperateStore;
-        const movable: Moveable = movableRef!.current!;
+        const movable: Moveable = movableRef?.current!;
         const target = e.inputEvent.target;
-        if ((movable.isMoveableElement(target))
+        if ((movable?.isMoveableElement(target))
             || targets.some((t: any) => t === target || t.contains(target))
         ) {
             e.stop();
