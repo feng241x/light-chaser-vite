@@ -1,4 +1,4 @@
-import {DatabaseFilled, InteractionFilled, MediumCircleFilled, SkinFilled, VideoCameraFilled} from "@ant-design/icons";
+import {DatabaseFilled, InteractionFilled, MediumCircleFilled, SkinFilled} from "@ant-design/icons";
 import {MenuInfo} from "./MenuType";
 
 export const getDefaultMenuList = (): Array<MenuInfo> => {

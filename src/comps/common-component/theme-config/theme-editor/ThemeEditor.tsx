@@ -9,7 +9,7 @@ import {ItemPanel} from "../../../../ui/item-panel/ItemPanel";
 import Input from "../../../../ui/input/Input";
 import {UIContainer} from "../../../../ui/ui-container/UIContainer";
 import {Grid} from "../../../../ui/grid/Grid";
-import { Button, Form } from 'antd';
+import { Button } from 'antd';
 
 /**
  * 主题编辑器

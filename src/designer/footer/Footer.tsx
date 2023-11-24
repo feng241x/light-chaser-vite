@@ -11,7 +11,6 @@ import { AppstoreOutlined, AppstoreTwoTone, CameraTwoTone, ControlOutlined, Cont
 import mainStore from '../../mainStore';
 import { LocalConstant } from '../../framework/LocalConstant';
 import { ImgUtil } from '../../utils/ImgUtil';
-import LocalOperator from '../../framework/operate/LocalOperator';
 import localforage from 'localforage';
 import { SaveType } from '../DesignerType';
 import EditorDesignerLoader from '../loader/EditorDesignerLoader';

@@ -1,4 +1,3 @@
-import {useEffect, useState} from 'react';
 import './style/AddNewScreenDialog.less';
 import { Form, Input, Modal, Select } from 'antd';
 

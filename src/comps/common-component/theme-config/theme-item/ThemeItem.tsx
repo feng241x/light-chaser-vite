@@ -1,10 +1,8 @@
 import {Component} from 'react';
 import './ThemeItem.less';
 import {ThemeColors, ThemeItemType} from "../../../../designer/DesignerType";
-import { Card, ColorPicker, Flex, Typography } from 'antd';
+import { Card, ColorPicker, Flex } from 'antd';
 import { CloseOutlined } from '@ant-design/icons';
-
-const { Text } = Typography;
 
 interface ThemeItemProps extends ThemeColors {
     //用于标识。 该主题是否被选中被选中的主题边框颜色与其他主题不同。
@@ -26,7 +24,7 @@ class ThemeItem extends Component<ThemeItemProps> {
     }
 
     render() {
-        const {colors, selected = false, itemStyle, name, id, showOperator = false, onDel} = this.props;
+        const {colors, selected = false, name, id, showOperator = false, onDel} = this.props;
         return (
             <Card
                 className={`themeItem ${selected ? 'selected' : ''}`}
