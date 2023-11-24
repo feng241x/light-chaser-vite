@@ -1,6 +1,7 @@
 import {ReactNode} from "react";
 import './FrameLayout.less';
-
+import { Layout } from "antd";
+const { Header, Sider, Content, Footer } = Layout;
 export interface FrameLayoutProps {
     header?: ReactNode;
     footer?: ReactNode;
@@ -12,18 +13,14 @@ export interface FrameLayoutProps {
 export const FrameLayout: React.FC<FrameLayoutProps> = (props) => {
     const {header, footer, left, right, content} = props;
     return (
-        <div className={'frame-layout'}>
-            <div className={'fl-header'}>fffffffff{header}</div>
-            <div className={'fl-body'}>
-                <div className={'fl-left'}>{left}</div>
-                <div className={'fl-crf-box'}>
-                    <div className={'fl-cr-box'}>
-                        <div className={'fl-content'}>{content}</div>
-                        <div className={'fl-right'}>{right}</div>
-                    </div>
-                    <div className={'fl-footer'}>{footer}</div>
-                </div>
-            </div>
-        </div>
+        <Layout style={{overflow: 'hidden'}}>
+            <Header style={{height: 64, borderBottom: '1px solid rgba(5, 5, 5, 0.06)'}}>{header}</Header>
+            <Layout>
+                <Sider theme='light' width={300} style={{overflow: 'hidden'}}>{left}</Sider>
+                <Content>{content}</Content>
+                <Sider theme='light' width={300} >{right}</Sider>
+            </Layout>
+            <Footer>{footer}</Footer>
+        </Layout>
     )
 }

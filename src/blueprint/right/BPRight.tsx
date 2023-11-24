@@ -5,6 +5,8 @@ import bpStore from "../store/BPStore";
 import bpRightStore from "./BPRightStore";
 import Accordion from "../../ui/accordion/Accordion";
 import {AbstractBPNodeController} from "../node/core/AbstractBPNodeController";
+import { Typography } from 'antd';
+const { Text } = Typography;
 
 export interface BPRightConfigProps {
     controller?: AbstractBPNodeController;
@@ -22,7 +24,7 @@ export const BPRight: React.FC = observer(() => {
     return (
         <div className={'bp-right bp-node-config'}>
             <div className={'bp-node-config-header'}>
-                <div className={'bp-node-config-name'}>{nodeConfig?.name}</div>
+                <div className={'bp-node-config-name'}><Text>{nodeConfig?.name}</Text></div>
                 <div className={'bp-node-config-info'}>{`${nodeConfig?.id} | ${nodeConfig?.type}`}</div>
             </div>
             <div className={'bp-ap-info-list'}>

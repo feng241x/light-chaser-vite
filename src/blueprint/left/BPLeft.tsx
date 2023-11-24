@@ -1,4 +1,4 @@
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import './BPLeft.less';
 import {
     ApartmentOutlined,
@@ -12,27 +12,21 @@ import bpLeftStore from "./BPLeftStore";
 import {observer} from "mobx-react";
 import designerStore from "../../designer/store/DesignerStore";
 import IdGenerate from "../../utils/IdGenerate";
+import { Button, Divider, List, Tabs } from "antd";
 
 export const BPLeft: React.FC = () => {
-    return (
-        <div className={'bp-left'}>
-            <BPNodeSortList/>
-            <BPNodeList/>
-        </div>
-    )
-}
-
-export const BPNodeSortList = () => {
     const nodeSortList = [
         {
             icon: <CodeSandboxOutlined/>,
             label: '图层节点',
-            key: 'layer'
+            key: 'layer',
+            children: <BPNodeList/>
         },
         {
             icon: <ApartmentOutlined/>,
             label: '逻辑节点',
-            key: 'logical'
+            key: 'logical',
+            children: <BPNodeList/>
         },
         // {
         //     icon: <GatewayOutlined/>,
@@ -46,20 +40,14 @@ export const BPNodeSortList = () => {
         // }
     ]
     return (
-        <div className={'bp-node-sort-list'}>
-            {
-                nodeSortList.map((item, index) => {
-                    return (
-                        <div className={'bp-left-item'} key={index} onClick={() => {
-                            bpLeftStore.setActiveMenu(item.key)
-                        }}>
-                            <div className={'bp-item-icon'}>{item.icon}</div>
-                            <div className={'bp-item-label'}>{item.label}</div>
-                        </div>
-                    )
-                })
-            }
-        </div>
+        <Tabs
+            style={{height: '100%'}}
+            tabPosition='left'
+            items={nodeSortList}
+            onChange={(activeKey: string) => {
+                bpLeftStore.setActiveMenu(activeKey)
+            }}
+        />
     )
 }
 
@@ -96,6 +84,7 @@ export const BPNodeList = observer(() => {
     const NodeList = nodeListMapping[activeMenu];
 
     useEffect(() => {
+        console.log(activeMenu)
         const dropContainer = document.getElementById("blue-print");
         const dragElements = document.getElementsByClassName("bp-node-list-item");
         Array.from(dragElements).forEach((element) => {
@@ -108,41 +97,45 @@ export const BPNodeList = observer(() => {
         dropContainer && dropContainer.addEventListener('drop', drop);
     }, [activeMenu])
     return (
-        <div className={'bp-node-list'}>
-            <div className={'bp-node-list-header'}>
-                <div className={'bp-node-list-header-label'}>图层节点(取自画布已有组件)</div>
-            </div>
-            <div className={'bp-node-list-body'}>
-                <div className={'bp-node-list-container'} style={{overflow: "scroll"}}>
-                    {NodeList && <NodeList/>}
-                </div>
-            </div>
+        <div style={{height: '100%', overflow: 'auto'}}>
+            <Divider orientation="left">{activeMenu === 'layer' ? '图层节点' : '逻辑节点'}</Divider>
+            <NodeList/>
         </div>
     )
 })
 
 export const BPLayerNodeList = observer(() => {
+    const [listData, setListData] = useState<any[]>([])
+
     const {layoutConfigs} = designerStore;
     const {usedLayerNodes} = bpLeftStore;
-
+    useEffect(() => {
+        let _listData = layoutConfigs && Object.keys(layoutConfigs).map((key, index) => {
+            const item = layoutConfigs[key];
+            const used = usedLayerNodes[key];
+            return {
+                item,
+                used
+            }
+        })
+        setListData(_listData);
+    }, [layoutConfigs, usedLayerNodes])
     return (
-        <>
+        <List
+            grid={{ column: 1 }}
+        >
             {
                 layoutConfigs && Object.keys(layoutConfigs).map((key, index) => {
                     const item = layoutConfigs[key];
                     const used = usedLayerNodes[key];
                     return (
-                        <div className={`bp-node-list-item ${used ? 'bp-node-list-item-used' : ''}`}
-                             data-id={item.id}
-                             data-type={'layer-node'}
-                             draggable={!used} key={index}>
-                            <div className={'bpn-li-icon'}><BlockOutlined/></div>
-                            <div className={'bpn-li-label'}>{item.name}</div>
-                        </div>
+                        <List.Item className={`bp-node-list-item ${used ? 'bp-node-list-item-used' : ''}`} data-type='layer-node' data-id={item.id} draggable={!used} key={index} >
+                            <Button disabled={used} icon={<BlockOutlined/>} block>{item.name}</Button>
+                        </List.Item>
                     )
                 })
             }
-        </>
+        </List>
     )
 })
 
@@ -154,22 +147,18 @@ export const BPLogicalNodeList = () => {
     ]
 
     return (
-        <>
-            {
-                logicalNodeList.map((item, index) => {
-                    return (
-                        <div className={`bp-node-list-item`}
-                             data-type={item.type}
-                             draggable={true} key={index}>
-                            <div className={'bpn-li-icon'}>
-                                <item.icon/>
-                            </div>
-                            <div className={'bpn-li-label'}>{item.name}</div>
-                        </div>
-                    )
-                })
-            }
-        </>
+        <List
+            grid={{ column: 1 }}
+            dataSource={logicalNodeList}
+            renderItem={(item: any, index) => {
+                return (
+                    <List.Item className={'bp-node-list-item'} data-type={item.type} data-id={item.id} draggable={true} key={index} >
+                        <Button icon={<item.icon/>} block>{item.name}</Button>
+                    </List.Item>
+                )
+            }}
+        >
+        </List>
     )
 }
 

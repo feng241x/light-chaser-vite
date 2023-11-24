@@ -41,7 +41,7 @@ export const BPDragScaleContainer: React.FC<BPDragScaleContainerContainerProps> 
     return (
         <div className={'bp-ds-container'} ref={containerRef} style={{
             overflow: "hidden",
-            width: window.innerWidth - 670,
+            width: '100%',
             height: window.innerHeight - 75,
         }}>
             <div className={'bp-ds-content'} ref={contentRef}
