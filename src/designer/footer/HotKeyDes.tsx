@@ -14,7 +14,7 @@ class HotKeyDes extends Component {
         {name: '元素置底', key: 'ctrl + down-arrow(方向下键)'},
         {name: '删除组件', key: 'delete'},
         {name: '缩放画布', key: 'alt + wheel(鼠标滑轮)'},
-        {name: '拖拽画布', key: '长按鼠标右键'},
+        {name: '拖拽画布', key: 'ctrl + 长按鼠标右键'},
         {name: '组件上移', key: '方向上键'},
         {name: '组件下移', key: '方向下键'},
         {name: '组件左移', key: '方向左键'},

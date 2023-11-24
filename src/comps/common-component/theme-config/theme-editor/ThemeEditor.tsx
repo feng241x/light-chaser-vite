@@ -147,7 +147,7 @@ class ThemeEditor extends Component {
         return (
             <div className={'lc-theme-editor'}>
                 <div className={'editor-left'}>
-                    <Form onFinish={this.doSaveOrUpd}>
+                    <form onSubmit={this.doSaveOrUpd}>
                         <ItemPanel label={'主题信息'}>
                             <UIContainer label={'名称'}>
                                 <Input value={themeConfig.name} onChange={this.nameChanged} required={true}/>
@@ -192,7 +192,7 @@ class ThemeEditor extends Component {
                         <div className={'theme-operate-btn'}>
                             <Button htmlType='submit'>添加 / 更新</Button>
                         </div>
-                    </Form>
+                    </form>
                 </div>
                 <div className={'editor-right'}>
                     <ItemPanel label={'主题列表'}>

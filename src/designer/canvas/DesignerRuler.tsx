@@ -49,8 +49,9 @@ class DesignerRuler extends PureComponent<RulerProps & DesignerRulerProps> {
     ruleWheel = (scale: number) => {
         const {dsContentRef} = eventOperateStore;
         const {x, y} = dsContentRef?.getBoundingClientRect()!;
-        this.scrollPos.x = -(x - 80) / scale;
-        this.scrollPos.y = -(y - 70) / scale;
+        const { leftSiderWidth } = mainStore;
+        this.scrollPos.x = -(x - leftSiderWidth - 20) / scale;
+        this.scrollPos.y = -(y - 83) / scale;
 
         this.unit = Math.floor(50 / scale);
         this.setState({render: this.state.render + 1})
@@ -58,9 +59,11 @@ class DesignerRuler extends PureComponent<RulerProps & DesignerRulerProps> {
 
     ruleDrag = () => {
         const {dsContentRef, scale} = eventOperateStore;
+        const { leftSiderWidth } = mainStore;
         const {x, y} = dsContentRef?.getBoundingClientRect()!;
-        this.scrollPos.x = -(x - 140) / scale;
-        this.scrollPos.y = -(y - 70) / scale;
+        // 这里需要计算标尺坐标轴距离坐标原点 left 距离
+        this.scrollPos.x = -(x - leftSiderWidth - 20) / scale;
+        this.scrollPos.y = -(y - 83) / scale;
         this.rulerX && this.rulerX.scroll(this.scrollPos.x);
         this.rulerY && this.rulerY.scroll(this.scrollPos.y);
     }

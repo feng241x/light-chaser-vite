@@ -22,10 +22,20 @@ const Right = () => {
           children: <ConfigContent />,
         },
         {
-          key: 'events',
-          label: '交  互',
+          key: 'mapping',
+          label: '映  射',
           children: <ConfigContent />,
         },
+        {
+          key: 'theme',
+          label: '主  题',
+          children: <ConfigContent />,
+        },
+        // {
+        //   key: 'events',
+        //   label: '交  互',
+        //   children: <ConfigContent />,
+        // },
       ];
     return (
       <Tabs style={{height: '100%'}} rootClassName='rightTabsContentPanel' defaultActiveKey="1" indicatorSize={40} tabBarGutter={42} items={items} onChange={onChange} tabBarStyle={{paddingLeft: 30 }} />

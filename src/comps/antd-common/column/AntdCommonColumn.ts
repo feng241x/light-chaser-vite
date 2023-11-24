@@ -45,40 +45,40 @@ export default class AntdCommonColumn extends AntdBaseDesignerController<Column,
         if ((styleConfig.legend) && (styleConfig.legend.itemName?.style as ShapeAttrs))
             (styleConfig!.legend!.itemName!.style as ShapeAttrs).fill = mainText;
         //x轴-文本
-        if ((styleConfig?.xAxis) && (styleConfig?.xAxis?.label?.style as ShapeAttrs).fill)
+        if ((styleConfig?.xAxis) && (styleConfig?.xAxis?.label?.style as ShapeAttrs)?.fill)
             (styleConfig!.xAxis!.label!.style as ShapeAttrs).fill = subText;
         //x轴-标题
-        if ((styleConfig?.xAxis) && (styleConfig?.xAxis?.title as ShapeAttrs))
+        if ((styleConfig?.xAxis) && (styleConfig?.xAxis?.title as ShapeAttrs)?.fill)
             (styleConfig!.xAxis!.title!.style as ShapeAttrs).fill = mainText;
         //x轴-轴线
-        if ((styleConfig?.xAxis) && (styleConfig?.xAxis?.line?.style as ShapeAttrs))
+        if ((styleConfig?.xAxis) && (styleConfig?.xAxis?.line?.style as ShapeAttrs)?.stroke)
             (styleConfig!.xAxis!.line!.style as ShapeAttrs).stroke = supplementFirst;
         //x轴-网格线
-        if ((styleConfig?.xAxis) && (styleConfig?.xAxis?.grid?.line?.style as ShapeAttrs))
+        if ((styleConfig?.xAxis) && (styleConfig?.xAxis?.grid?.line?.style as ShapeAttrs)?.stroke)
             (styleConfig!.xAxis!.grid!.line!.style as ShapeAttrs).stroke = supplementFirst;
         //x轴-刻度线
-        if ((styleConfig?.xAxis) && (styleConfig?.xAxis?.tickLine?.style as ShapeAttrs))
+        if ((styleConfig?.xAxis) && (styleConfig?.xAxis?.tickLine?.style as ShapeAttrs)?.stroke)
             (styleConfig!.xAxis!.tickLine!.style as ShapeAttrs).stroke = supplementFirst;
         //x轴-子刻度线
-        if ((styleConfig?.xAxis) && (styleConfig?.xAxis?.subTickLine?.style as ShapeAttrs))
+        if ((styleConfig?.xAxis) && (styleConfig?.xAxis?.subTickLine?.style as ShapeAttrs)?.stroke)
             (styleConfig!.xAxis!.subTickLine!.style as ShapeAttrs).stroke = supplementSecond;
         //y轴-文本
-        if ((styleConfig?.yAxis) && (styleConfig?.yAxis?.label?.style as ShapeAttrs))
+        if ((styleConfig?.yAxis) && (styleConfig?.yAxis?.label?.style as ShapeAttrs)?.fill)
             (styleConfig!.yAxis!.label!.style as ShapeAttrs).fill = mainText;
         //y轴-标题
-        if ((styleConfig?.yAxis) && (styleConfig?.yAxis?.title as ShapeAttrs))
+        if ((styleConfig?.yAxis) && (styleConfig?.yAxis?.title as ShapeAttrs)?.fill)
             (styleConfig!.yAxis!.title!.style as ShapeAttrs).fill = mainText;
         //y轴-轴线
-        if ((styleConfig?.yAxis) && (styleConfig?.yAxis?.line?.style as ShapeAttrs))
+        if ((styleConfig?.yAxis) && (styleConfig?.yAxis?.line?.style as ShapeAttrs)?.stroke)
             (styleConfig!.yAxis!.line!.style as ShapeAttrs).stroke = supplementFirst;
         //y轴-网格线
-        if ((styleConfig?.yAxis) && (styleConfig?.yAxis?.grid?.line?.style as ShapeAttrs))
+        if ((styleConfig?.yAxis) && (styleConfig?.yAxis?.grid?.line?.style as ShapeAttrs)?.stroke)
             (styleConfig!.yAxis!.grid!.line!.style as ShapeAttrs).stroke = supplementFirst;
         //y轴-刻度线
-        if ((styleConfig?.yAxis) && (styleConfig?.yAxis?.tickLine?.style as ShapeAttrs))
+        if ((styleConfig?.yAxis) && (styleConfig?.yAxis?.tickLine?.style as ShapeAttrs)?.stroke)
             (styleConfig!.yAxis!.tickLine!.style as ShapeAttrs).stroke = supplementFirst;
         //y轴-子刻度线
-        if ((styleConfig?.yAxis) && (styleConfig?.yAxis?.subTickLine?.style as ShapeAttrs))
+        if ((styleConfig?.yAxis) && (styleConfig?.yAxis?.subTickLine?.style as ShapeAttrs)?.stroke)
             (styleConfig!.yAxis!.subTickLine!.style as ShapeAttrs).stroke = supplementSecond;
         //重新渲染
         this.update({style: styleConfig}, {reRender: true, operateType: OperateType.OPTIONS});

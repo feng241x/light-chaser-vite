@@ -1,4 +1,5 @@
 import {action, makeObservable, observable} from "mobx";
+import eventOperateStore from "./designer/operate-provider/EventOperateStore";
 
 type ThemeType = 'light' | 'dark';
 
@@ -28,12 +29,22 @@ class MainStore {
     }
     setLeftSiderWidth = (width: number) => {
         this.leftSiderWidth = width;
+        // 修改侧边栏宽度后 需要重新渲染标尺
+        const {scale, rulerRef} = eventOperateStore;
+        setTimeout(() => {
+            rulerRef?.ruleWheel(scale);
+        }, 300);
     }
     setLeftSelectedKeys = (leftSelectedKeys: string[]) => {
         this.leftSelectedKeys = leftSelectedKeys;
     }
     setRightSiderWidth = (width: number) => {
         this.rightSiderWidth = width;
+        // 修改侧边栏宽度后 需要重新渲染标尺
+        const {scale, rulerRef} = eventOperateStore;
+        setTimeout(() => {
+            rulerRef?.ruleWheel(scale);
+        }, 300);
     }
 }
 

@@ -20,7 +20,7 @@ export interface DragScaleProviderParams {
 
 /**
  * 拖拽缩放容器，独立提供拖拽与缩放功能。
- * 1.拖拽画布统一操作方式为长按鼠标右键
+ * 1.拖拽画布统一操作方式为ctrl + 长按鼠标右键
  * 2.缩放画布统一操作方式alt+鼠标滚轮
  * 上述两种操作的相关事件均在此组件内部完成（除缩放逻辑外，缩放逻辑调用外部方法获取scale比例）
  */
@@ -68,6 +68,7 @@ export default class DragScaleProvider {
     /************************注册拖拽事件************************/
     private registerDrag() {
         //初始化被拖拽对象位置
+        console.log('position', this.position, this)
         this.content!.style.transform = 'translate3d(' + this.position.x + 'px, ' + this.position.y + 'px, 0) scale(' + this.scaleCore.scale + ')';
         //阻止系统右键菜单显示
         this.container?.addEventListener("contextmenu", (e) => e.preventDefault())

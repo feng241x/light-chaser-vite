@@ -1,4 +1,4 @@
-import {DatabaseFilled, MediumCircleFilled, VideoCameraFilled} from "@ant-design/icons";
+import {DatabaseFilled, InteractionFilled, MediumCircleFilled, SkinFilled, VideoCameraFilled} from "@ant-design/icons";
 import {MenuInfo} from "./MenuType";
 
 export const getDefaultMenuList = (): Array<MenuInfo> => {
@@ -14,10 +14,20 @@ export const getDefaultMenuList = (): Array<MenuInfo> => {
             name: '数  据',
         },
         {
-            icon: VideoCameraFilled,
-            key: 'events',
-            name: '交  互',
+            icon: InteractionFilled,
+            key: 'mapping',
+            name: '映  射',
         },
+        {
+            icon: SkinFilled,
+            name: '主题',
+            key: 'theme',
+        }
+        // {
+        //     icon: VideoCameraFilled,
+        //     key: 'events',
+        //     name: '交  互',
+        // },
     ]
     // return [
     //     {
