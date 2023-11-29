@@ -7,9 +7,9 @@ import eventOperateStore from "../../operate-provider/EventOperateStore";
 import layerBuilder from "./LayerBuilder";
 import {MovableItemType} from "../../operate-provider/movable/types";
 import LayerUtil from "./util/LayerUtil";
-import LayerGroupItem from './group/LayerGroupItem';
 import LayerItem from './item/LayerItem';
 import { List } from 'antd';
+import LayerGroupItem from './item/LayerGroupItem';
 
 class LayerList extends Component {
     floatPanelRef: any = null;
@@ -92,11 +92,7 @@ class LayerList extends Component {
                             <List.Item>
                                 {
                                     (item.children && item.children.length) ? (
-                                        <LayerGroupItem {...item} ref={ref => layerInstances[item.compId!] = ref!}>
-                                            {item.children.map((i: any) => (
-                                                <LayerItem {...i} ref={ref => layerInstances[i.compId!] = ref!}/>
-                                            ))}
-                                        </LayerGroupItem>
+                                        <LayerGroupItem childrenData={item.children} {...item} ref={ref => layerInstances[item.compId!] = ref!}></LayerGroupItem>
                                     ) : (
                                         <LayerItem {...item} ref={ref => layerInstances[item.compId!] = ref!}/>
                                     )

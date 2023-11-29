@@ -5,7 +5,7 @@ import Loading from "./ui/loading/Loading";
 import { ConfigProvider, theme } from 'antd';
 import mainStore from './mainStore';
 import { observer } from "mobx-react";
-import LayerGroupItem from "./designer/float-configs/layer-list/group/LayerGroupItem";
+import LayerGroupItem from "./designer/float-configs/layer-list/item/LayerGroupItem";
 import DemoMain from "./test/DemoMain";
 
 const LightChaserList = lazy(() => import('./list/LightChaserList'));

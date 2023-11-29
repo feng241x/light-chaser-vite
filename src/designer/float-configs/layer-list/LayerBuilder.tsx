@@ -1,10 +1,7 @@
 import {MovableItemType} from "../../operate-provider/movable/types";
 import {ReactElement} from "react";
-import LayerItem from "./item/LayerItem";
-import LayerGroupItem from "./group/LayerGroupItem";
 import eventOperateStore from "../../operate-provider/EventOperateStore";
 import {cloneDeep} from "lodash";
-import layerListStore from "./LayerListStore";
 import ComponentContainer from "../../../framework/core/ComponentContainer";
 
 export enum RenderOrder {
@@ -56,9 +53,8 @@ class LayerBuilder {
 
 
     private buildLayer = (layer: MovableItemType): any => {
-        const {type, children} = layer;
+        const {children} = layer;
         const {targetIds} = eventOperateStore;
-        const {layerInstances} = layerListStore;
         let _props = {
             key: layer.id,
             name: layer.name,
@@ -70,19 +66,19 @@ class LayerBuilder {
             selected: targetIds.includes(layer.id!)
         }
         return _props;
-        if (type === 'group') {
-            //先生成子元素再包裹groupItem
-            const childDomArr: ReactElement[] = [];
-            children?.forEach((item: MovableItemType) => {
-                childDomArr.push(this.buildLayer(item));
-            });
-            return <LayerGroupItem {..._props} ref={ref => layerInstances[layer.id!] = ref!}>
-                {childDomArr}
-            </LayerGroupItem>;
-        } else {
-            //直接生成layerItem
-            return <LayerItem {..._props} ref={ref => layerInstances[layer.id!] = ref!}/>;
-        }
+        // if (type === 'group') {
+        //     //先生成子元素再包裹groupItem
+        //     const childDomArr: ReactElement[] = [];
+        //     children?.forEach((item: MovableItemType) => {
+        //         childDomArr.push(this.buildLayer(item));
+        //     });
+        //     return <LayerGroupItem {..._props} ref={ref => layerInstances[layer.id!] = ref!}>
+        //         {childDomArr}
+        //     </LayerGroupItem>;
+        // } else {
+        //     //直接生成layerItem
+        //     return <LayerItem {..._props} ref={ref => layerInstances[layer.id!] = ref!}/>;
+        // }
     }
 
     /**
