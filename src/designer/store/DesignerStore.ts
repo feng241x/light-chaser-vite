@@ -24,7 +24,7 @@ class DesignerStore implements AbstractBaseStore {
         makeObservable(this, {
             canvasConfig: observable,
             projectConfig: observable,
-            layoutConfigs: observable,
+            layerConfigs: observable,
             statisticInfo: observable,
             themeConfig: observable,
             extendParams: observable,
@@ -84,12 +84,12 @@ class DesignerStore implements AbstractBaseStore {
     /**
      * 布局配置
      */
-    layoutConfigs: { [key: string]: MovableItemType } = {};
+    layerConfigs: { [key: string]: MovableItemType } = {};
 
     /**
      * 初始状态的布局配置（用于回退场景）
      */
-    initLayoutConfigs: { [key: string]: MovableItemType } = {};
+    initlayerConfigs: { [key: string]: MovableItemType } = {};
 
     /**
      * 统计信息
@@ -148,8 +148,8 @@ class DesignerStore implements AbstractBaseStore {
         this.elemConfigs = store.elemConfigs
             ? {...this.elemConfigs, ...store.elemConfigs}
             : this.elemConfigs;
-        this.layoutConfigs = store.layoutConfigs || this.layoutConfigs;
-        this.initLayoutConfigs = cloneDeep(this.layoutConfigs);
+        this.layerConfigs = store.layerConfigs || this.layerConfigs;
+        this.initlayerConfigs = cloneDeep(this.layerConfigs);
         this.statisticInfo = store.statisticInfo
             ? {...this.statisticInfo, ...store.statisticInfo}
             : this.statisticInfo;
@@ -172,7 +172,7 @@ class DesignerStore implements AbstractBaseStore {
             canvasConfig: toJS(this.canvasConfig),
             projectConfig: toJS(this.projectConfig),
             elemConfigs: elemConfigs,
-            layoutConfigs: toJS(this.layoutConfigs),
+            layerConfigs: toJS(this.layerConfigs),
             statisticInfo: toJS(this.statisticInfo),
             themeConfig: toJS(this.themeConfig)!,
             extendParams: toJS(this.extendParams),
@@ -187,7 +187,7 @@ class DesignerStore implements AbstractBaseStore {
         this.canvasConfig = {};
         this.projectConfig = {};
         this.elemConfigs = {};
-        this.layoutConfigs = {};
+        this.layerConfigs = {};
         this.statisticInfo = {};
         this.themeConfig = null;
         this.extendParams = {};
@@ -210,9 +210,9 @@ class DesignerStore implements AbstractBaseStore {
      * 添加元素
      */
     addItem = (item: MovableItemType) => {
-        this.layoutConfigs[item.id + ""] = item;
+        this.layerConfigs[item.id + ""] = item;
         if (this.statisticInfo)
-            this.statisticInfo.count = Object.keys(this.layoutConfigs).length;
+            this.statisticInfo.count = Object.keys(this.layerConfigs).length;
     };
 
     /**
@@ -220,7 +220,7 @@ class DesignerStore implements AbstractBaseStore {
      */
     delItem = (ids: string[]) => {
         for (const id of ids) {
-            delete this.layoutConfigs[id];
+            delete this.layerConfigs[id];
             delete this.compInstances[id];
         }
     };
@@ -230,9 +230,9 @@ class DesignerStore implements AbstractBaseStore {
      */
     updateLayout = (items: MovableItemType[], reRender: boolean = true) => {
         for (const item of items) {
-            let oldItem = this.layoutConfigs[item.id + ""];
+            let oldItem = this.layerConfigs[item.id + ""];
             if (!isEqual(oldItem, item))
-                this.layoutConfigs[item.id + ""] = reRender ? {...ObjectUtil.merge(oldItem, item)} : ObjectUtil.merge(oldItem, item);
+                this.layerConfigs[item.id + ""] = reRender ? {...ObjectUtil.merge(oldItem, item)} : ObjectUtil.merge(oldItem, item);
         }
     };
     /**
@@ -241,8 +241,8 @@ class DesignerStore implements AbstractBaseStore {
      */
     delLayout = (ids: string[]) => {
         for (const id of ids) {
-            if (this.layoutConfigs[id] && this.layoutConfigs[id].type === "group")
-                delete this.layoutConfigs[id];
+            if (this.layerConfigs[id] && this.layerConfigs[id].type === "group")
+                delete this.layerConfigs[id];
         }
     };
     updateThemeConfig = (data: any) => {

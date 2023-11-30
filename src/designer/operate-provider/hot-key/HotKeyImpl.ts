@@ -19,9 +19,9 @@ import {OperateResult} from "../../../framework/operate/AbstractOperator";
 import {Modal, message} from "antd";
 
 export const selectAll = () => {
-    const {layoutConfigs} = designerStore;
+    const {layerConfigs} = designerStore;
     const {setTargetIds, calculateGroupCoordinate} = eventOperateStore;
-    const selected = Object.values(layoutConfigs).map((item: MovableItemType) => {
+    const selected = Object.values(layerConfigs).map((item: MovableItemType) => {
         if (!item.lock && !item.hide)
             return item.id;
     });
@@ -47,10 +47,10 @@ export const doCopy = () => {
 export const doLock = () => {
     const {targetIds, setTargetIds} = eventOperateStore;
     if (!targetIds || targetIds.length === 0) return;
-    const {layoutConfigs} = designerStore;
+    const {layerConfigs} = designerStore;
     let toBeUpdate = [];
     for (const targetId of targetIds) {
-        let item = layoutConfigs[targetId];
+        let item = layerConfigs[targetId];
         toBeUpdate.push({...item, lock: true})
     }
     historyRecordOperateProxy.doLockUpd(toBeUpdate);
@@ -61,11 +61,11 @@ export const doLock = () => {
 export const doUnLock = () => {
     const {setTargetIds, targetIds} = eventOperateStore;
     if (!targetIds || targetIds.length === 0) return;
-    const {layoutConfigs} = designerStore;
+    const {layerConfigs} = designerStore;
     let toUpdate: MovableItemType[] = [];
     targetIds.filter(id => {
         //过滤出被锁定的组件
-        return layoutConfigs[id].lock;
+        return layerConfigs[id].lock;
     }).forEach((id) => {
         toUpdate.push({id, lock: false})
     })
@@ -76,10 +76,10 @@ export const doUnLock = () => {
 export const toTop = () => {
     let {maxLevel, setMaxLevel, targetIds} = eventOperateStore;
     if (!targetIds || targetIds.length === 0) return;
-    const {layoutConfigs} = designerStore;
+    const {layerConfigs} = designerStore;
     let toBeUpdate: MovableItemType[] = [];
     targetIds.forEach((id: string) => {
-        let item = layoutConfigs[id];
+        let item = layerConfigs[id];
         toBeUpdate.push({...item, order: ++maxLevel});
     });
     setMaxLevel(maxLevel)
@@ -89,10 +89,10 @@ export const toTop = () => {
 export const toBottom = () => {
     let {minLevel, setMinLevel, targetIds} = eventOperateStore;
     if (!targetIds || targetIds.length === 0) return;
-    const {layoutConfigs} = designerStore;
+    const {layerConfigs} = designerStore;
     let toBeUpdate: MovableItemType[] = [];
     targetIds.forEach((id: string) => {
-        let item = layoutConfigs[id];
+        let item = layerConfigs[id];
         toBeUpdate.push({...item, order: --minLevel});
     });
     setMinLevel(minLevel)
@@ -160,10 +160,10 @@ export const doSave = throttle(() => {
 export const doHide = () => {
     const {targetIds, setTargetIds} = eventOperateStore;
     if (!targetIds || targetIds.length === 0) return;
-    const {layoutConfigs} = designerStore;
+    const {layerConfigs} = designerStore;
     let toBeUpdate: MovableItemType[] = [];
     targetIds.forEach((id: string) => {
-        let item = layoutConfigs[id];
+        let item = layerConfigs[id];
         toBeUpdate.push({...item, hide: true});
     });
     historyRecordOperateProxy.doHideUpd(toBeUpdate);
@@ -190,10 +190,10 @@ export const doUnGrouping = () => {
 export const doMoveUp = () => {
     const {targets, movableRef, groupCoordinate} = eventOperateStore;
     if (!targets || targets.length === 0) return;
-    const {layoutConfigs, canvasConfig: {dragStep = 1}} = designerStore;
+    const {layerConfigs, canvasConfig: {dragStep = 1}} = designerStore;
     if (targets.length === 1) {
         let id = targets[0].id;
-        let yPos = layoutConfigs[id].position![1] - dragStep;
+        let yPos = layerConfigs[id].position![1] - dragStep;
         movableRef?.current?.request("draggable", {y: yPos}, true);
     } else {
         const yPos = groupCoordinate?.minY! - dragStep;
@@ -204,10 +204,10 @@ export const doMoveUp = () => {
 export const doMoveDown = () => {
     const {targets, movableRef, groupCoordinate} = eventOperateStore;
     if (!targets || targets.length === 0) return;
-    const {layoutConfigs, canvasConfig: {dragStep = 1}} = designerStore;
+    const {layerConfigs, canvasConfig: {dragStep = 1}} = designerStore;
     if (targets.length === 1) {
         let id = targets[0].id;
-        let yPos = layoutConfigs[id].position![1] + dragStep;
+        let yPos = layerConfigs[id].position![1] + dragStep;
         movableRef?.current?.request("draggable", {y: yPos}, true);
     } else {
         const yPos = groupCoordinate?.minY! + dragStep;
@@ -218,10 +218,10 @@ export const doMoveDown = () => {
 export const doMoveLeft = () => {
     const {targets, movableRef, groupCoordinate} = eventOperateStore;
     if (!targets || targets.length === 0) return;
-    const {layoutConfigs, canvasConfig: {dragStep = 1}} = designerStore;
+    const {layerConfigs, canvasConfig: {dragStep = 1}} = designerStore;
     if (targets.length === 1) {
         let id = targets[0].id;
-        let xPos = layoutConfigs[id].position![0];
+        let xPos = layerConfigs[id].position![0];
         movableRef?.current?.request("draggable", {x: xPos - dragStep}, true);
     } else {
         const xPos = groupCoordinate?.minX! - dragStep;
@@ -232,10 +232,10 @@ export const doMoveLeft = () => {
 export const doMoveRight = () => {
     const {targets, movableRef, groupCoordinate} = eventOperateStore;
     if (!targets || targets.length === 0) return;
-    const {layoutConfigs, canvasConfig: {dragStep = 1}} = designerStore;
+    const {layerConfigs, canvasConfig: {dragStep = 1}} = designerStore;
     if (targets.length === 1) {
         let id = targets[0].id;
-        let xPos = layoutConfigs[id].position![0];
+        let xPos = layerConfigs[id].position![0];
         movableRef?.current?.request("draggable", {x: xPos + dragStep}, true);
     } else {
         const xPos = groupCoordinate?.minX! + dragStep;
@@ -251,11 +251,11 @@ export const doMoveRight = () => {
 export const doBaseBottomEnlargeUp = () => {
     const {targets, movableRef, groupCoordinate} = eventOperateStore;
     if (!targets || targets.length === 0) return;
-    const {layoutConfigs, canvasConfig: {resizeStep = 1}} = designerStore;
+    const {layerConfigs, canvasConfig: {resizeStep = 1}} = designerStore;
     let height;
     if (targets.length === 1) {
         let id = targets[0].id;
-        height = layoutConfigs[id].height! + resizeStep;
+        height = layerConfigs[id].height! + resizeStep;
     } else {
         height = groupCoordinate.groupHeight! + resizeStep;
     }
@@ -268,11 +268,11 @@ export const doBaseBottomEnlargeUp = () => {
 export const doBaseUpEnlargeDown = () => {
     const {targets, movableRef, groupCoordinate} = eventOperateStore;
     if (!targets || targets.length === 0) return;
-    const {layoutConfigs, canvasConfig: {resizeStep = 1}} = designerStore;
+    const {layerConfigs, canvasConfig: {resizeStep = 1}} = designerStore;
     let height;
     if (targets.length === 1) {
         let id = targets[0].id;
-        height = layoutConfigs[id].height! + resizeStep;
+        height = layerConfigs[id].height! + resizeStep;
     } else {
         height = groupCoordinate.groupHeight! + resizeStep;
     }
@@ -285,11 +285,11 @@ export const doBaseUpEnlargeDown = () => {
 export const doBaseRightEnlargeLeft = () => {
     const {targets, movableRef, groupCoordinate} = eventOperateStore;
     if (!targets || targets.length === 0) return;
-    const {layoutConfigs, canvasConfig: {resizeStep = 1}} = designerStore;
+    const {layerConfigs, canvasConfig: {resizeStep = 1}} = designerStore;
     let width;
     if (targets.length === 1) {
         let id = targets[0].id;
-        width = layoutConfigs[id].width! + resizeStep;
+        width = layerConfigs[id].width! + resizeStep;
     } else {
         width = groupCoordinate.groupWidth! + resizeStep;
     }
@@ -302,11 +302,11 @@ export const doBaseRightEnlargeLeft = () => {
 export const doBaseLeftEnlargeRight = () => {
     const {targets, movableRef, groupCoordinate} = eventOperateStore;
     if (!targets || targets.length === 0) return;
-    const {layoutConfigs, canvasConfig: {resizeStep = 1}} = designerStore;
+    const {layerConfigs, canvasConfig: {resizeStep = 1}} = designerStore;
     let width;
     if (targets.length === 1) {
         let id = targets[0].id;
-        width = layoutConfigs[id].width! + resizeStep;
+        width = layerConfigs[id].width! + resizeStep;
     } else {
         width = groupCoordinate.groupWidth! + resizeStep;
     }
@@ -320,10 +320,10 @@ export const doBaseLeftEnlargeRight = () => {
 export const doBaseBottomDecreaseUp = () => {
     const {targets, movableRef, groupCoordinate} = eventOperateStore;
     if (!targets || targets.length === 0) return;
-    const {layoutConfigs, canvasConfig: {resizeStep = 1}} = designerStore;
+    const {layerConfigs, canvasConfig: {resizeStep = 1}} = designerStore;
     let height;
     if (targets.length === 1) {
-        height = layoutConfigs[targets[0].id].height! - resizeStep;
+        height = layerConfigs[targets[0].id].height! - resizeStep;
     } else {
         height = groupCoordinate.groupHeight! - resizeStep;
     }
@@ -336,11 +336,11 @@ export const doBaseBottomDecreaseUp = () => {
 export const doBaseUpDecreaseDown = () => {
     const {targets, movableRef, groupCoordinate} = eventOperateStore;
     if (!targets || targets.length === 0) return;
-    const {layoutConfigs, canvasConfig: {resizeStep = 1}} = designerStore;
+    const {layerConfigs, canvasConfig: {resizeStep = 1}} = designerStore;
     let height;
     if (targets.length === 1) {
         let id = targets[0].id;
-        height = layoutConfigs[id].height! - resizeStep;
+        height = layerConfigs[id].height! - resizeStep;
     } else {
         height = groupCoordinate.groupHeight! - resizeStep;
     }
@@ -353,11 +353,11 @@ export const doBaseUpDecreaseDown = () => {
 export const doBaseRightDecreaseLeft = () => {
     const {targets, movableRef, groupCoordinate} = eventOperateStore;
     if (!targets || targets.length === 0) return;
-    const {layoutConfigs, canvasConfig: {resizeStep = 1}} = designerStore;
+    const {layerConfigs, canvasConfig: {resizeStep = 1}} = designerStore;
     let width;
     if (targets.length === 1) {
         let id = targets[0].id;
-        width = layoutConfigs[id].width! - resizeStep;
+        width = layerConfigs[id].width! - resizeStep;
     } else {
         width = groupCoordinate.groupWidth! - resizeStep;
     }
@@ -370,11 +370,11 @@ export const doBaseRightDecreaseLeft = () => {
 export const doBaseLeftDecreaseRight = () => {
     const {targets, movableRef, groupCoordinate} = eventOperateStore;
     if (!targets || targets.length === 0) return;
-    const {layoutConfigs, canvasConfig: {resizeStep = 1}} = designerStore;
+    const {layerConfigs, canvasConfig: {resizeStep = 1}} = designerStore;
     let width;
     if (targets.length === 1) {
         let id = targets[0].id;
-        width = layoutConfigs[id].width! - resizeStep;
+        width = layerConfigs[id].width! - resizeStep;
     } else {
         width = groupCoordinate.groupWidth! - resizeStep;
     }

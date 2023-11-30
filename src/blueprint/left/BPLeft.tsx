@@ -105,15 +105,15 @@ export const BPNodeList = observer(() => {
 })
 
 export const BPLayerNodeList = observer(() => {
-    const {layoutConfigs} = designerStore;
+    const {layerConfigs} = designerStore;
     const {usedLayerNodes} = bpLeftStore;
     return (
         <List
             grid={{ column: 1 }}
         >
             {
-                layoutConfigs && Object.keys(layoutConfigs).map((key, index) => {
-                    const item = layoutConfigs[key];
+                layerConfigs && Object.keys(layerConfigs).map((key, index) => {
+                    const item = layerConfigs[key];
                     const used = usedLayerNodes[key];
                     return (
                         <List.Item className={`bp-node-list-item ${used ? 'bp-node-list-item-used' : ''}`} data-type='layer-node' data-id={item.id} draggable={!used} key={index} >

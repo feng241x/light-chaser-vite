@@ -19,7 +19,7 @@ const { Text } = Typography;
 
 const MyFooter: React.FC = () => {
     const [modal, contextHolder] = Modal.useModal();
-    const {layoutConfigs, projectConfig: {name, state} } = designerStore;
+    const {layerConfigs, projectConfig: {name, state} } = designerStore;
     const {hotKeyVisible, setHotKeyVisible} = footerStore;
     const { setLeftSiderWidth, leftSelectedKeys, rightSiderWidth, setRightSiderWidth } = mainStore;
     const [stateStr, setStateStr] = useState('');
@@ -108,7 +108,7 @@ const MyFooter: React.FC = () => {
             <div className={'footer-right'} style={{opacity: 0.6}}>
                 <Space split={<Divider type="vertical" />}>
                     <Text>缩放 : {(scale * 100).toFixed(0)}%</Text>
-                    <Text>当前组件数 : {Object.keys(layoutConfigs).length}</Text>
+                    <Text>当前组件数 : {Object.keys(layerConfigs).length}</Text>
                     <Text>项目 : {name}</Text>
                     <Text>状态 : {stateStr}</Text>
                 </Space>
