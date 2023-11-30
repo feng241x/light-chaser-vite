@@ -9,7 +9,7 @@ const ProjectHdItemImpl = () => {
     const {projectVisible, setProjectVisible} = headerStore;
     const [form] = Form.useForm();
     const doSave = (values: any) => {
-        debugger;
+        
         updateProjectConfig(values);
         setProjectVisible(false);
     }

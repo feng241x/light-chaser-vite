@@ -261,7 +261,7 @@ class DesignerStore implements AbstractBaseStore {
      * 更新画布设置
      */
     updateCanvasConfig = (data: CanvasConfig) => {
-        debugger;
+        
         this.canvasConfig = {...this.canvasConfig, ...data}
     }
 

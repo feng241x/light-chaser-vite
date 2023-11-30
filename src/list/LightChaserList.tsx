@@ -74,7 +74,7 @@ const LightChaserList = () => {
                 let imageIdToUrl: any = {};
                 Promise.all(promise).then((res: any) => {
                     res.forEach((item: any) => {
-                        debugger;
+                        
                         const key = Object.keys(item)[0];
                         imageIdToUrl[key] = item[key];
                     });

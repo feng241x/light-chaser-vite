@@ -16,7 +16,7 @@ const Right = () => {
         setContentVisible && setContentVisible(true);
       };
     useEffect(() => {
-      debugger;
+      
       setTabsList(menus.map((item: MenuInfo) => ({
         key: item.key,
         label: item.name,
