@@ -3,9 +3,8 @@ import compListStore from "./CompListStore";
 import './CompList.less';
 import {observer} from "mobx-react";
 import designerStore from "../../store/DesignerStore";
-import {MovableItemType} from "../../operate-provider/movable/types";
 import eventOperateStore from "../../operate-provider/EventOperateStore";
-import {BaseInfoType} from "../../DesignerType";
+import {BaseInfoType, ILayerItem} from "../../DesignerType";
 import DesignerLoaderFactory from "../../loader/DesignerLoaderFactory";
 import { Card, notification } from 'antd';
 import antdChartListStore from '../../left/antdChartList/antdChartListStore';
@@ -95,7 +94,7 @@ class CompList extends Component<any, { twoCategories: string }> {
     addItem = (compKey: string, name: string, position?: [number, number]) => {
         const {addItem} = designerStore;
         let {maxLevel, setMaxLevel, setAddRecordCompId} = eventOperateStore;
-        let movableItem: MovableItemType = {
+        let movableItem: ILayerItem = {
             name: name,
             type: compKey,
             width: 320,

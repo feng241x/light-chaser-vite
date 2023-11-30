@@ -1,10 +1,8 @@
 /**
  * 主题
  */
-import {MovableItemType} from "./operate-provider/movable/types";
 import {BPLineType} from "../blueprint/BPTypes";
 import {BPNodeLayoutType} from "../blueprint/store/BPStore";
-import { Category, ChartType } from "../const/index.const";
 
 export interface ThemeColors {
     //主体色
@@ -27,26 +25,6 @@ export interface ThemeItemType {
     id: string;
 }
 
-/**
- * 图层
- */
-export interface LayerInfo {
-    //id
-    id?: number;
-    //名称
-    name?: string;
-    //可见性
-    visible?: boolean;
-}
-
-export interface LayerConfigType {
-    //图层信息
-    layers?: LayerInfo[];
-    //最大层级（用于置顶）
-    maxLevel?: number;
-    //最小层级（用于置底）
-    minLevel?: number;
-}
 
 /**
  * 统计信息
@@ -102,7 +80,7 @@ export interface StaticConfig {
 /**
  * 扩展参数
  */
-export interface extendParams {
+export interface IExtendParams {
     maxLevel?: number;
     minLevel?: number;
 }
@@ -118,26 +96,6 @@ export interface DataConfigType {
     apiData?: APIConfig;
     databaseData?: any;
     excelData?: any;
-}
-
-/**
- * 数据配置验证回调
- */
-export interface DataConfigVerifyCallback {
-    staticDataVerify?: (data: any) => string | boolean;
-}
-
-/**
- * 元素配置
- */
-export interface ElemConfig {
-    [key: string]: any;
-
-    info?: Object;
-    style?: Object;
-    data?: DataConfigType;
-    animation?: Object;
-    theme?: Object;
 }
 
 /**
@@ -183,44 +141,6 @@ export interface ProjectConfig {
 }
 
 /**
- * 背景模式
- */
-export enum BackgroundMode {
-    //无背景
-    NONE = '0',
-    //图片背景
-    PICTURE = '1',
-    //颜色背景
-    COLOR = '2'
-}
-
-/**
- * 背景图重复模式
- */
-export enum BackgroundImgRepeat {
-    //不重复
-    NO_REPEAT = 'no-repeat',
-    //铺满
-    REPEAT = 'repeat',
-    //x轴重复
-    REPEAT_X = 'repeat-x',
-    //y轴重复
-    REPEAT_Y = 'repeat-y'
-}
-
-/**
- * 背景颜色模式
- */
-export enum BackgroundColorMode {
-    //单色
-    SINGLE = '0',
-    //线性渐变
-    LINEAR_GRADIENT = '1',
-    //径向渐变
-    RADIAL_GRADIENT = '2',
-}
-
-/**
  * 激活元素
  */
 export interface ActiveElem {
@@ -244,8 +164,6 @@ export interface CanvasConfig {
     width?: number;
     //画布高
     height?: number;
-    //背景色
-    backgroundColor?: string;
 }
 
 /**
@@ -261,17 +179,13 @@ export interface BaseInfoType {
      */
     compKey: string;
     /**
-     * 分组标识
-     */
-    category: Category;
-    /**
      * 类型名称
      */
     type: string;
     /**
      * 类型标识
      */
-    typeKey: ChartType;
+    typeKey: string;
     /**
      * 组件描述
      */
@@ -290,14 +204,14 @@ export interface ProjectDataType {
     projectConfig?: ProjectConfig;
     //元素样式
     elemConfigs?: { [key: string]: Record<string, any> };
-    //布局信息
-    layerConfigs?: { [key: string]: MovableItemType };
+    //图层信息
+    layerConfigs?: { [key: string]: ILayerItem };
     //统计信息
     statisticInfo?: Statistic;
     //全局主题
     themeConfig?: Array<ThemeItemType>;
     //扩展参数
-    extendParams?: extendParams;
+    extendParams?: IExtendParams;
 
     //蓝图节点布局
     bpNodeLayoutMap?: Record<string, BPNodeLayoutType>;

@@ -16,7 +16,7 @@ import Moveable, {
 import {observer} from "mobx-react";
 import eventOperateStore from "../EventOperateStore";
 import designerStore from "../../store/DesignerStore";
-import {MovableItemType} from "./types";
+import {ILayerItem} from "../../DesignerType";
 import historyRecordOperateProxy from "../undo-redo/HistoryRecordOperateProxy";
 
 class GroupMovable extends React.Component<any> {
@@ -47,7 +47,7 @@ class GroupMovable extends React.Component<any> {
         const {lastEvent, target} = e;
         if (lastEvent) {
             const {beforeTranslate} = lastEvent;
-            const data: MovableItemType[] = [
+            const data: ILayerItem[] = [
                 {
                     id: target.id,
                     width: (target as HTMLDivElement).offsetWidth,
@@ -73,7 +73,7 @@ class GroupMovable extends React.Component<any> {
         if (firstLock) return false;
 
         let {backoff, setBackoff, setGroupCoordinate, groupCoordinate} = eventOperateStore;
-        let data: MovableItemType[] = [];
+        let data: ILayerItem[] = [];
         e.events.forEach((ev: any) => {
             const {target, lastEvent} = ev;
             if (lastEvent) {
@@ -108,7 +108,7 @@ class GroupMovable extends React.Component<any> {
         const {target, lastEvent} = e;
         if (lastEvent) {
             const {width, height, drag: {translate}, direction} = lastEvent;
-            const data: MovableItemType[] = [
+            const data: ILayerItem[] = [
                 {
                     id: target.id,
                     width: width,
@@ -129,7 +129,7 @@ class GroupMovable extends React.Component<any> {
     onResizeGroupEnd = (e: OnResizeGroupEnd) => {
         const {updateLayout} = designerStore;
         let {backoff, setBackoff} = eventOperateStore;
-        let data: MovableItemType[] = [];
+        let data: ILayerItem[] = [];
         e.events.forEach((ev: any) => {
             const {target, lastEvent} = ev;
             if (lastEvent) {
