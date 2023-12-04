@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {ConfigType} from "../../../designer/right/ConfigType";
+import {ConfigType} from "../../../designer/right/ConfigContent";
 import BaseImageController from "./BaseImageController";
 import {FieldChangeData, LCGUI} from "../../../json-schema/LCGUI";
 import {Control} from "../../../json-schema/SchemaTypes";

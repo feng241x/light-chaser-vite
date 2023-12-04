@@ -13,7 +13,6 @@ class AntdStackAreaDefinition extends AbstractAreaDefinition {
             category: CategoryEnum.CHART,
             type: ChartTypeCNEnum.area,
             typeKey: ChartTypeEnum.AREA,
-            desc: "基于Antd Designer实现的堆叠面积图组件",
         };
     }
 
@@ -820,11 +819,10 @@ class AntdStackAreaDefinition extends AbstractAreaDefinition {
             }
         ];
         return {
-            info: {
+            base: {
                 id: "",
                 name: '堆叠面积图',
                 type: 'AntdStackArea',
-                desc: '基于antd实现的堆叠面积图',
             },
             style: {
                 data: data,

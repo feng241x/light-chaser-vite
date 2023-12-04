@@ -27,9 +27,9 @@ class MyInput extends Component<InputProps> {
     }
 
     render() {
-        const { label, prefix, suffix, tip, ...rest } = this.props;
+        const {onChange, label, prefix, suffix, tip, gridColumn, ...rest} = this.props;
         return (
-            <UIContainer label={label} tip={tip}>
+            <UIContainer label={label} tip={tip} gridColumn={gridColumn}>
                 <Input {...rest} onChange={this.onChange} suffix={suffix} prefix={prefix} size='small' />
             </UIContainer>
         );

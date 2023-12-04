@@ -13,7 +13,6 @@ class AntdMultiLineDefinition extends AbstractLineDefinition {
             category: CategoryEnum.CHART,
             type: ChartTypeCNEnum.line,
             typeKey: ChartTypeEnum.LINE,
-            desc: "基于Antd Designer实现的多折线图组件",
         };
     }
 
@@ -66,11 +65,10 @@ class AntdMultiLineDefinition extends AbstractLineDefinition {
         ]
 
         return {
-            info: {
+            base: {
                 id: "",
                 name: '多折线图',
                 type: 'AntdMultiLine',
-                desc: '基于antd实现的多折线图',
             },
             style: {
                 data: data,

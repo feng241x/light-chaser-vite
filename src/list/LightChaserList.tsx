@@ -37,11 +37,11 @@ const LightChaserList = () => {
         setAddNewScreen(false);
     }
     const confirmDel = () => {
-        EditorDesignerLoader.getInstance().abstractOperatorMap[SaveType.LOCAL].deleteProject(selectId);
+        EditorDesignerLoader.getInstance().operatorMap[SaveType.LOCAL].deleteProject(selectId);
         setProjectDataList(projectDataList.filter((item: any) => item.id !== selectId));
     }
     const confirmClone = (name: string) => {
-        const operator = EditorDesignerLoader.getInstance().abstractOperatorMap[SaveType.LOCAL];
+        const operator = EditorDesignerLoader.getInstance().operatorMap[SaveType.LOCAL];
         operator.copyProject(selectId, name).then((copyProject) => {
             //重新加载项目列表
             operator.getProjectSimpleInfoList().then((simpleInfoList: any) => {
@@ -61,7 +61,7 @@ const LightChaserList = () => {
     useEffect(() => {
         EditorDesignerLoader.getInstance().scannerProjectOperators();
         const {projectConfig: {saveType = SaveType.LOCAL}} = designerStore;
-        EditorDesignerLoader.getInstance().abstractOperatorMap[saveType]?.getProjectSimpleInfoList().then((data: any) => {
+        EditorDesignerLoader.getInstance().operatorMap[saveType]?.getProjectSimpleInfoList().then((data: any) => {
             if (data && data.length > 0) {
                 setProjectDataList(data);
                 let imageIds: any = [];

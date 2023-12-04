@@ -1,5 +1,5 @@
 import {Component, useState} from 'react';
-import {ConfigType} from "../../../designer/right/ConfigType";
+import {ConfigType} from "../../../designer/right/ConfigContent";
 import {WritableRoseOptions} from "../../antd-common/types";
 import AntdCommonRose from "../../antd-common/rose/AntdCommonRose";
 import {ColorAttr, RingProgressOptions, StatisticText} from "@antv/g2plot";

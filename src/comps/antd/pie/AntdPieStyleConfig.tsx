@@ -1,5 +1,5 @@
 import {Component, useState} from 'react';
-import {ConfigType} from "../../../designer/right/ConfigType";
+import {ConfigType} from "../../../designer/right/ConfigContent";
 import AntdPieController from "./AntdPieController";
 import {WritablePieOptions} from "../../antd-common/types";
 import {PieOptions, StatisticText} from "@antv/g2plot";

@@ -13,7 +13,6 @@ class AntdBaseBarDefinition extends AbstractBarDefinition {
             category: CategoryEnum.CHART,
             type: ChartTypeCNEnum.bar,
             typeKey: ChartTypeEnum.BAR,
-            desc: "基于Antd Designer实现的基础条形图组件",
         };
     }
 
@@ -37,11 +36,10 @@ class AntdBaseBarDefinition extends AbstractBarDefinition {
             }
         ]
         return {
-            info: {
+            base: {
                 id: "",
                 name: '基础条形图',
                 type: 'AntdBaseBar',
-                desc: '基于antd实现的基础条形图',
             },
             style: {
                 data: data,

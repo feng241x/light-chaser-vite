@@ -13,7 +13,6 @@ class AntdPercentBarDefinition extends AbstractBarDefinition {
             category: CategoryEnum.CHART,
             type: ChartTypeCNEnum.bar,
             typeKey: ChartTypeEnum.BAR,
-            desc: "基于Antd Designer实现的百分比条形图组件",
         };
     }
 
@@ -70,11 +69,10 @@ class AntdPercentBarDefinition extends AbstractBarDefinition {
             }
         ];
         return {
-            info: {
+            base: {
                 id: "",
                 name: 'Antd百分比条形图',
                 type: 'AntdPercentBar',
-                desc: '基于Antd Designer实现的百分比条形图组件',
             },
             style: {
                 data: data,

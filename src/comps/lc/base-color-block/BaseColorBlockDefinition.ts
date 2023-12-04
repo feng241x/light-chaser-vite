@@ -1,13 +1,13 @@
 import {
-    AbstractComponentDefinition,
+    AbstractDefinition,
     MenuToConfigMappingType
-} from "../../../framework/core/AbstractComponentDefinition";
+} from "../../../framework/core/AbstractDefinition";
 import {BaseInfoType} from "../../../designer/DesignerType";
 import {ClazzTemplate} from "../../common-component/common-types";
 import {MenuInfo} from "../../../designer/right/MenuType";
 import baseColorBlockImg from './base-color-block.png';
 import {getDefaultMenuList} from "../../../designer/right/util";
-import {BaseColorBlock} from "./BaseColorBlock";
+import {BaseColorBlockController} from "./BaseColorBlockController";
 import {BaseColorBlockComponentProps} from "./BaseColorBlockComponent";
 import BaseInfo from "../../common-component/base-info/BaseInfo";
 import AnimationConfig from "../../common-component/animation-config/AnimationConfig";
@@ -15,7 +15,7 @@ import ThemeConfig from "../../common-component/theme-config/ThemeConfig";
 import {BaseColorBlockConfig} from "./BaseColorBlockConfig";
 import { CategoryEnum, ChartTypeCNEnum, ChartTypeEnum } from "../../../const/index.const";
 
-export default class BaseColorBlockDefinition extends AbstractComponentDefinition<BaseColorBlock, BaseColorBlockComponentProps> {
+export default class BaseColorBlockDefinition extends AbstractDefinition<BaseColorBlockController, BaseColorBlockComponentProps> {
     getBaseInfo(): BaseInfoType {
         return {
             compName: "基础色块",
@@ -23,7 +23,6 @@ export default class BaseColorBlockDefinition extends AbstractComponentDefinitio
             category: CategoryEnum.BASE,
             type: ChartTypeCNEnum.base,
             typeKey: ChartTypeEnum.BASE,
-            desc: "标准提供的基础色块",
         };
     }
 
@@ -31,17 +30,16 @@ export default class BaseColorBlockDefinition extends AbstractComponentDefinitio
         return baseColorBlockImg;
     }
 
-    getComponent(): ClazzTemplate<BaseColorBlock> | null {
-        return BaseColorBlock;
+    getComponent(): ClazzTemplate<BaseColorBlockController> | null {
+        return BaseColorBlockController;
     }
 
     getInitConfig(): BaseColorBlockComponentProps {
         return {
-            info: {
+            base: {
                 id: "",
                 name: '基础色块',
                 type: 'LcBaseColorBlock',
-                desc: '标准提供的基础色块',
             },
             style: {
                 background: '#009DFF33',
@@ -55,7 +53,7 @@ export default class BaseColorBlockDefinition extends AbstractComponentDefinitio
 
     getMenuToConfigContentMap(): MenuToConfigMappingType | null {
         return {
-            info: BaseInfo,
+            base: BaseInfo,
             style: BaseColorBlockConfig,
             animation: AnimationConfig,
             theme: ThemeConfig

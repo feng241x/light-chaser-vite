@@ -1,5 +1,5 @@
 import {Component} from 'react';
-import {ConfigType} from "../../../designer/right/ConfigType";
+import {ConfigType} from "../../../designer/right/ConfigContent";
 import {AntdCartesianCoordinateSys} from "../config/AntdFragment";
 import {Scatter, ScatterOptions} from "@antv/g2plot";
 import {Legend} from "@antv/g2plot/lib/types/legend";

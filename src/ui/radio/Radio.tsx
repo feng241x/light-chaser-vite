@@ -62,10 +62,10 @@ class MyRadio extends Component<RadioProps> {
     }
 
     render() {
-        const {label, tip, padding, margin, disabled = false} = this.props;
+        const {label, tip, padding, margin, disabled = false, gridColumn} = this.props;
         const value = this.valueControl ? this.props.value : this.state.value;
         return (
-            <UIContainer label={label} tip={tip} className={'lc-radio'} padding={padding} margin={margin}>
+            <UIContainer label={label} tip={tip} gridColumn={gridColumn} className={'lc-radio'} padding={padding} margin={margin}>
                 <Radio.Group buttonStyle="solid" defaultValue={value} name={this.timestamp} size='small' disabled={disabled} onChange={this.onChange}>
                     {this.generateOptions()}
                 </Radio.Group>

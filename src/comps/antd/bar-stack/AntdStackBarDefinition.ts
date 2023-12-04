@@ -13,7 +13,6 @@ class AntdStackBarDefinition extends AbstractBarDefinition {
             category: CategoryEnum.CHART,
             type: ChartTypeCNEnum.bar,
             typeKey: ChartTypeEnum.BAR,
-            desc: "基于Antd Designer实现的堆叠条形图组件",
         };
     }
 
@@ -55,11 +54,10 @@ class AntdStackBarDefinition extends AbstractBarDefinition {
             },
         ];
         return {
-            info: {
+            base: {
                 id: "",
                 name: 'Antd堆叠条形图',
                 type: 'AntdStackBar',
-                desc: '基于Antd Designer实现的堆叠条形图组件',
             },
             style: {
                 data: data,

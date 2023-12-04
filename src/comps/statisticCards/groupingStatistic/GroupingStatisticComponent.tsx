@@ -5,7 +5,11 @@ import { useState } from 'react';
 
 const { Divider } = StatisticCard;
 export interface GroupingStatisticComponentStyle {
-
+  fontWeight?: string;
+  fontSize: string | number;
+  color: string;
+  alignItems: string;
+  justifyContent: string;
 }
 
 export interface GroupingStatisticComponentProps extends ComponentBaseProps {

@@ -13,7 +13,6 @@ class AntdGroupColumnDefinition extends AbstractColumnDefinition {
             category: CategoryEnum.CHART,
             type: ChartTypeCNEnum.column,
             typeKey: ChartTypeEnum.COLUMN,
-            desc: "基于Antd Designer实现的分组柱状图组件",
         };
     }
 
@@ -55,11 +54,10 @@ class AntdGroupColumnDefinition extends AbstractColumnDefinition {
             }
         ];
         return {
-            info: {
+            base: {
                 id: "",
                 name: "Antd分组柱状图",
                 type: "AntdGroupColumn",
-                desc: '基于Antd Designer实现的分组柱状图组件',
             },
             style: {
                 data: data,

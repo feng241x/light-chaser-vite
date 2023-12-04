@@ -1,7 +1,7 @@
 import {
-    AbstractComponentDefinition,
+    AbstractDefinition,
     MenuToConfigMappingType
-} from "../../../framework/core/AbstractComponentDefinition";
+} from "../../../framework/core/AbstractDefinition";
 import {BaseInfoType} from "../../../designer/DesignerType";
 import {ClazzTemplate} from "../../common-component/common-types";
 import {MenuInfo} from "../../../designer/right/MenuType";
@@ -16,7 +16,7 @@ import { GroupingStatisticComponentProps } from "./GroupingStatisticComponent";
 import { GroupingStatisticConfig } from "./GroupingStatisticConfig";
 import { TemplateEnum } from "../../../designer/left/templateList/templateType";
 
-export default class GroupingStatisticDefinition extends AbstractComponentDefinition<GroupingStatisticController, GroupingStatisticComponentProps> {
+export default class GroupingStatisticDefinition extends AbstractDefinition<GroupingStatisticController, GroupingStatisticComponentProps> {
     getBaseInfo(): BaseInfoType {
         return {
             compName: "指标卡",
@@ -24,7 +24,6 @@ export default class GroupingStatisticDefinition extends AbstractComponentDefini
             category: CategoryEnum.TEMPLATE,
             type: '指标卡',
             typeKey: TemplateEnum.STATISTICCARD,
-            desc: "标准提供的基础文本",
         };
     }
 
@@ -38,11 +37,10 @@ export default class GroupingStatisticDefinition extends AbstractComponentDefini
 
     getInitConfig(): GroupingStatisticComponentProps {
         return {
-            info: {
+            base: {
                 id: "",
                 name: '基础文本',
                 type: 'LcBaseText',
-                desc: '标准提供的基础文本',
             },
             style: {
                 color: '#a7a7a7',
@@ -65,7 +63,7 @@ export default class GroupingStatisticDefinition extends AbstractComponentDefini
 
     getMenuToConfigContentMap(): MenuToConfigMappingType | null {
         return {
-            info: BaseInfo,
+            base: BaseInfo,
             style: GroupingStatisticConfig,
             animation: AnimationConfig,
             theme: ThemeConfig

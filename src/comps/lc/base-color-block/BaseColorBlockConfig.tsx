@@ -1,10 +1,10 @@
 import React from 'react';
-import {ConfigType} from "../../../designer/right/ConfigType";
+import {ConfigType} from "../../../designer/right/ConfigContent";
 import {FieldChangeData, LCGUI} from "../../../json-schema/LCGUI";
 import {Control} from "../../../json-schema/SchemaTypes";
-import {BaseColorBlock} from "./BaseColorBlock";
+import { BaseColorBlockController } from './BaseColorBlockController';
 
-export const BaseColorBlockConfig: React.FC<ConfigType<BaseColorBlock>> = ({controller}) => {
+export const BaseColorBlockConfig: React.FC<ConfigType<BaseColorBlockController>> = ({controller}) => {
 
     const {background} = controller.getConfig()?.style!;
 

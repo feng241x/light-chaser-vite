@@ -1,5 +1,5 @@
 import {Component, useState} from 'react';
-import {ConfigType} from "../../../designer/right/ConfigType";
+import {ConfigType} from "../../../designer/right/ConfigContent";
 import {WritableRoseOptions} from "../types";
 import {RoseOptions} from "@antv/g2plot";
 import {Legend} from "@antv/g2plot/lib/types/legend";

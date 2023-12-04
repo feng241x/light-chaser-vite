@@ -13,7 +13,6 @@ class AntdBaseRoseDefinition extends AbstractRoseDefinition {
             category: CategoryEnum.CHART,
             type: ChartTypeCNEnum.rose,
             typeKey: ChartTypeEnum.ROSE,
-            desc: "基于Antd Designer实现的基础玫瑰图组件",
         };
     }
 
@@ -29,11 +28,10 @@ class AntdBaseRoseDefinition extends AbstractRoseDefinition {
             {type: 'sort4', value: 15}
         ];
         return {
-            info: {
+            base: {
                 id: "",
                 name: 'Antd基础玫瑰图',
                 type: 'AntdBaseRose',
-                desc: '基于Antd Designer实现的基础玫瑰图组件',
             },
             style: {
                 data: data,

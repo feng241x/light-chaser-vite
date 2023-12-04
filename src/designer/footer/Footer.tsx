@@ -65,7 +65,7 @@ const MyFooter: React.FC = () => {
 
     const updateScreenshot = () => {
         const projectData = designerStore.getData();
-        const operator = EditorDesignerLoader.getInstance().abstractOperatorMap[SaveType.LOCAL];
+        const operator = EditorDesignerLoader.getInstance().operatorMap[SaveType.LOCAL];
         let imgDom: any = document.querySelector('.lc-drag-scale-provider');
         const screenShotId = LocalConstant.LOCAL_PROJECT_SCREENSHOT + projectData.id;
         projectData!.projectConfig!.screenshot = screenShotId; //截图

@@ -11,6 +11,7 @@ import antdChartListStore from '../../left/antdChartList/antdChartListStore';
 import { Category } from '../../../const/index.const';
 import baseComponentsStore from '../../left/baseComponents/baseComponentsStore';
 import IdGenerate from "../../../utils/IdGenerate";
+import EditorDesignerLoader from "../../loader/EditorDesignerLoader";
 
 class CompList extends Component<any, { twoCategories: string }> {
     private category: Category = 'chart';
@@ -63,7 +64,6 @@ class CompList extends Component<any, { twoCategories: string }> {
         if (event.target.classList.contains('droppable-element')) {
             const element = event.target;
             (event as any).dataTransfer.setData('type', element.getAttribute('data-type'));
-            (event as any).dataTransfer.setData('name', element.getAttribute('data-name'));
         }
     }
     //拖拽覆盖
@@ -82,28 +82,30 @@ class CompList extends Component<any, { twoCategories: string }> {
             })
             return;
         }
-        const name = (event as any).dataTransfer.getData('name');
         //获取鼠标位置,添加元素
         const {scale, dsContentRef} = eventOperateStore;
         const contentPos = dsContentRef?.getBoundingClientRect();
         const x = (event.clientX - (contentPos?.x || 0)) / scale;
         const y = (event.clientY - (contentPos?.y || 0)) / scale;
-        this.addItem(type, name, [x, y]);
+        this.addItem(type, [x, y]);
     }
 
-    addItem = (compKey: string, name: string, position?: [number, number]) => {
+    addItem = (compKey: string, position?: [number, number]) => {
         const {addItem} = designerStore;
         let {maxLevel, setMaxLevel, setAddRecordCompId} = eventOperateStore;
+        const {definitionMap} = EditorDesignerLoader.getInstance();
+        const {compName, width = 320, height = 200} = definitionMap[compKey].getBaseInfo();
         let movableItem: ILayerItem = {
-            name: name,
+            name: compName,
             type: compKey,
-            width: 320,
-            height: 200,
-            position: position || [0, 0],
+            x: position![0],
+            y: position![1],
             id: IdGenerate.generateId(),
             lock: false,
             hide: false,
             order: ++maxLevel,
+            width,
+            height,
         }
         setAddRecordCompId(movableItem.id!)
         setMaxLevel && setMaxLevel(maxLevel);
@@ -114,7 +116,6 @@ class CompList extends Component<any, { twoCategories: string }> {
         let chartDom = [];
         let { twoCategories } = this.state
         let {compInfoArr, compKey} = compListStore;
-        debugger;
         if (this.category) {
             compInfoArr = compInfoArr.filter((item: BaseInfoType) => {
                 return item.category === this.category;
@@ -133,14 +134,14 @@ class CompList extends Component<any, { twoCategories: string }> {
         for (let i = 0; i < compInfoArr.length; i++) {
             let compInfo: any = compInfoArr[i];
             const {compName, compKey} = compInfo;
-            let lcCompInit: any = DesignerLoaderFactory.getLoader().customComponentInfoMap[compKey];
+            let lcCompInit: any = DesignerLoaderFactory.getLoader().definitionMap[compKey];
             let chartImg = lcCompInit.getChartImg();
             chartDom.push(
                 <Card 
                     key={i + ''}
                     className={'list-item droppable-element'}
                     draggable={true}
-                    onDoubleClick={() => this.addItem(compKey, compName)}
+                    onDoubleClick={() => this.addItem(compKey)}
                     data-type={compKey}
                     data-name={compName}
                     type="inner"

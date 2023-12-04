@@ -1,6 +1,6 @@
 import {Component} from 'react';
 import './DataConfig.less';
-import {ConfigType} from "../../../designer/right/ConfigType";
+import {ConfigType} from "../../../designer/right/ConfigContent";
 import {DataConfigType} from "../../../designer/DesignerType";
 import AbstractController, {UpdateType} from "../../../framework/core/AbstractController";
 import {message} from "antd";

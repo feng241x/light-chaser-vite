@@ -1,12 +1,12 @@
 import {PureComponent} from 'react';
 import Ruler, {RulerProps} from "@scena/react-ruler";
 import eventOperateStore from "../operate-provider/EventOperateStore";
-import {PointType} from "../../blueprint/BPTypes";
+import {IPoint} from "../../blueprint/store/BPStore";
 import mainStore from '../../mainStore';
 import { observer } from 'mobx-react';
 
 interface DesignerRulerProps {
-    offset?: PointType;
+    offset?: IPoint;
     children: any;
 }
 
@@ -42,7 +42,7 @@ class DesignerRuler extends PureComponent<RulerProps & DesignerRulerProps> {
 
     unit = 50;
 
-    scrollPos: PointType = {x: 0, y: 0};
+    scrollPos: IPoint = {x: 0, y: 0};
 
     baseOffset = 20;
 

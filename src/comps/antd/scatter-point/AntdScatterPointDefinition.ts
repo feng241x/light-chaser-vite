@@ -13,7 +13,6 @@ class AntdScatterPointDefinition extends AbstractScatterDefinition {
             category: CategoryEnum.CHART,
             type: ChartTypeCNEnum.scatter,
             typeKey: ChartTypeEnum.SCATTER,
-            desc: "基于Antd Designer实现的散点图组件",
         };
     }
 
@@ -50,11 +49,10 @@ class AntdScatterPointDefinition extends AbstractScatterDefinition {
             },
         ];
         return {
-            info: {
+            base: {
                 id: "",
                 name: 'Antd散点图',
                 type: 'AntdScatterPoint',
-                desc: '基于antd实现的散点图',
             },
             style: {
                 data: data,

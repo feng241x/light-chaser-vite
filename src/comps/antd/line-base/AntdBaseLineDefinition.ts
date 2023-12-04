@@ -2,7 +2,7 @@ import {BaseInfoType} from "../../../designer/DesignerType";
 import baseLineImg from "./base-line.png";
 import AbstractLineDefinition from "../../antd-common/line/AbstractLineDefinition";
 import {AntdLineProps} from "../../antd-common/line/AntdCommonLineController";
-import {MenuToConfigMappingType} from "../../../framework/core/AbstractComponentDefinition";
+import {MenuToConfigMappingType} from "../../../framework/core/AbstractDefinition";
 import React from "react";
 import { CategoryEnum, ChartTypeCNEnum, ChartTypeEnum } from "../../../const/index.const";
 
@@ -17,7 +17,6 @@ class AntdBaseLineDefinition extends AbstractLineDefinition {
             category: CategoryEnum.CHART,
             type: ChartTypeCNEnum.line,
             typeKey: ChartTypeEnum.LINE,
-            desc: "基于Antd Designer实现的基础折线图组件",
         };
     }
 
@@ -41,11 +40,10 @@ class AntdBaseLineDefinition extends AbstractLineDefinition {
             {"name": "1995", "value": 250},
             {"name": "1996", "value": 156}];
         return {
-            info: {
+            base: {
                 id: "",
                 name: '基础折线图',
                 type: 'AntdBaseLine',
-                desc: '基于antd实现的基础折线图',
             },
             style: {
                 data: data,

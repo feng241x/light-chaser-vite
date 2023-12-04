@@ -1,5 +1,5 @@
 import {Component} from 'react';
-import {ConfigType} from "../../../designer/right/ConfigType";
+import {ConfigType} from "../../../designer/right/ConfigContent";
 import {AreaOptions, ShapeStyle} from "@antv/g2plot";
 import AntdCommonAreaController from "../../antd-common/area/AntdCommonAreaController";
 import {AntdCartesianCoordinateSys} from "../../antd-common/config/AntdFragment";

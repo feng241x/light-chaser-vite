@@ -13,7 +13,6 @@ class AntdRangeColumnDefinition extends AbstractColumnDefinition {
             category: CategoryEnum.CHART,
             type: ChartTypeCNEnum.column,
             typeKey: ChartTypeEnum.COLUMN,
-            desc: "基于Antd Designer实现的区间柱状图组件",
         };
     }
 
@@ -29,11 +28,10 @@ class AntdRangeColumnDefinition extends AbstractColumnDefinition {
             {type: 'sort4', values: [38, 129]},
         ];
         return {
-            info: {
+            base: {
                 id: "",
                 name: 'Antd区间柱状图',
                 type: 'AntdRangeColumn',
-                desc: '基于Antd Designer实现的区间柱状图组件',
             },
             style: {
                 data: data,

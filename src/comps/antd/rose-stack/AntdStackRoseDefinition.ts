@@ -13,7 +13,6 @@ class AntdStackRoseDefinition extends AbstractRoseDefinition {
             category: CategoryEnum.CHART,
             type: ChartTypeCNEnum.rose,
             typeKey: ChartTypeEnum.ROSE,
-            desc: "基于Antd Designer实现的堆叠玫瑰图组件",
         };
     }
 
@@ -75,11 +74,10 @@ class AntdStackRoseDefinition extends AbstractRoseDefinition {
             },
         ];
         return {
-            info: {
+            base: {
                 id: "",
                 name: 'Antd堆叠玫瑰图',
                 type: 'AntdStackRose',
-                desc: '基于Antd Designer实现的堆叠玫瑰图组件',
             },
             style: {
                 data: data,

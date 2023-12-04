@@ -1,8 +1,7 @@
 /**
  * 主题
  */
-import {BPLineType} from "../blueprint/BPTypes";
-import {BPNodeLayoutType} from "../blueprint/store/BPStore";
+import {BPNodeLayoutType, IBPLine} from "../blueprint/store/BPStore";
 
 export interface ThemeColors {
     //主体色
@@ -156,6 +155,8 @@ export interface ActiveElem {
 export interface CanvasConfig {
     //开启栅格化
     rasterize?: boolean;
+    //背景色
+    backgroundColor?: string;
     //栅格化拖拽步长
     dragStep?: number;
     //栅格化缩放步长
@@ -191,9 +192,17 @@ export interface BaseInfoType {
      */
     typeKey: string;
     /**
-     * 组件描述
+     * 版本
      */
-    desc: string;
+    version?: string;
+    /**
+     * 初始宽度
+     */
+    width?: number;
+    /**
+     * 初始高度
+     */
+    height?: number;
 }
 
 /**
@@ -222,7 +231,7 @@ export interface ProjectDataType {
     //蓝图节点配置
     bpNodeConfigMap?: Record<string, any>;
     //蓝图线条
-    bpLines?: Record<string, BPLineType>;
+    bpLines?: Record<string, IBPLine>;
     //蓝图锚点之间的连线关系映射
     bpAPMap?: Record<string, string[]>;
     //蓝图锚点与线条之间的关系映射
@@ -241,7 +250,9 @@ export interface ILayerItem {
     //高度
     height?: number;
     //坐标
-    position?: [number, number];
+    x?: number;
+    //y坐标
+    y?: number;
     //是否隐藏
     hide?: boolean;
     //是否锁定

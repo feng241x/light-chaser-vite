@@ -1,12 +1,12 @@
 import React from 'react';
-import {ConfigType} from "../../../designer/right/ConfigType";
-import {BaseIframe} from "./BaseIframe";
+import {ConfigType} from "../../../designer/right/ConfigContent";
+import {BaseIframeController} from "./BaseIframeController";
 import {FieldChangeData, LCGUI} from "../../../json-schema/LCGUI";
 import {Control} from "../../../json-schema/SchemaTypes";
 
-export const BaseIframeStyleConfig: React.FC<ConfigType<BaseIframe>> = ({controller}) => {
+export const BaseIframeStyleConfig: React.FC<ConfigType<BaseIframeController>> = ({controller}) => {
 
-    const {src} = (controller as BaseIframe).getConfig()?.style!;
+    const {src} = (controller as BaseIframeController).getConfig()?.style!;
 
     const onFieldChange = (fieldChangeData: FieldChangeData) => {
         const {dataFragment} = fieldChangeData;

@@ -1,5 +1,5 @@
 import React from "react";
-import {MenuToConfigMappingType} from "../../../framework/core/AbstractComponentDefinition";
+import {MenuToConfigMappingType} from "../../../framework/core/AbstractDefinition";
 import {MenuInfo} from "../../../designer/right/MenuType";
 import {getDefaultMenuList} from "../../../designer/right/util";
 import {ClazzTemplate} from "../../common-component/common-types";
@@ -28,7 +28,7 @@ class AntdPieDefinition extends AntdCommonDefinition<AntdPieController, AntdPieP
 
     getMenuToConfigContentMap(): MenuToConfigMappingType | null {
         return {
-            info: BaseInfo,
+            base: BaseInfo,
             data: DataConfig,
             style: AntdPieConfig,
             animation: AnimationConfig,
@@ -44,7 +44,6 @@ class AntdPieDefinition extends AntdCommonDefinition<AntdPieController, AntdPieP
             category: CategoryEnum.CHART,
             type: ChartTypeCNEnum.pie,
             typeKey: ChartTypeEnum.PIE,
-            desc: "基于Antd Designer实现的饼图组件",
         };
     }
 
@@ -60,11 +59,10 @@ class AntdPieDefinition extends AntdCommonDefinition<AntdPieController, AntdPieP
             {type: 'sort4', value: 25}
         ];
         return {
-            info: {
+            base: {
                 id: "",
                 name: 'Antd饼图',
                 type: 'AntdPie',
-                desc: '基于Antd Designer实现的饼图组件',
             },
             style: {
                 data,

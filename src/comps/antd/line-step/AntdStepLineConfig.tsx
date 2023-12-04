@@ -1,5 +1,5 @@
 import {Component} from 'react';
-import {ConfigType} from "../../../designer/right/ConfigType";
+import {ConfigType} from "../../../designer/right/ConfigContent";
 import {Line, LineOptions} from "@antv/g2plot";
 import AntdCommonLineController, {AntdLineProps} from "../../antd-common/line/AntdCommonLineController";
 import {AntdCartesianCoordinateSys} from "../../antd-common/config/AntdFragment";

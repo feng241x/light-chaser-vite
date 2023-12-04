@@ -13,7 +13,6 @@ class AntdGroupBarDefinition extends AbstractBarDefinition {
             category: CategoryEnum.CHART,
             type: ChartTypeCNEnum.bar,
             typeKey: ChartTypeEnum.BAR,
-            desc: "基于Antd Designer实现的分组条形图组件",
         };
     }
 
@@ -55,11 +54,10 @@ class AntdGroupBarDefinition extends AbstractBarDefinition {
             }
         ];
         return {
-            info: {
+            base: {
                 id: "",
                 name: "Antd分组条形图",
                 type: "AntdGroupBar",
-                desc: '基于Antd Designer实现的分组条形图组件',
             },
             style: {
                 data: data,

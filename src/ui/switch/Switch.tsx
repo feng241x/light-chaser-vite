@@ -36,9 +36,9 @@ class MySwitch extends Component<SwitchProps> {
     };
 
     render() {
-        const {disabled = false, tip, label} = this.props;
+        const {disabled = false, tip, label, gridColumn} = this.props;
         return (
-            <UIContainer tip={tip} label={label} className={'lc-switch'}>
+            <UIContainer tip={tip} label={label} gridColumn={gridColumn} className={'lc-switch'}>
                 <Switch
                     style={{marginLeft: 6}}
                     size="small"

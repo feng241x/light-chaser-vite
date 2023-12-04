@@ -13,7 +13,6 @@ class AntdScatterBubbleDefinition extends AbstractScatterDefinition {
             category: CategoryEnum.CHART,
             type: ChartTypeCNEnum.scatter,
             typeKey: ChartTypeEnum.SCATTER,
-            desc: "基于Antd Designer实现的气泡图组件",
         };
     }
 
@@ -97,11 +96,10 @@ class AntdScatterBubbleDefinition extends AbstractScatterDefinition {
             }
         ];
         return {
-            info: {
+            base: {
                 id: "",
                 name: 'Antd气泡图',
                 type: 'AntdScatterBubble',
-                desc: '基于antd实现的气泡图',
             },
             style: {
                 data: data,

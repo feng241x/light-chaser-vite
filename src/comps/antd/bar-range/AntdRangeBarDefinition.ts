@@ -13,7 +13,6 @@ class AntdRangeBarDefinition extends AbstractBarDefinition {
             category: CategoryEnum.CHART,
             type: ChartTypeCNEnum.bar,
             typeKey: ChartTypeEnum.BAR,
-            desc: "基于Antd Designer实现的区间条形图组件",
         };
     }
 
@@ -29,11 +28,10 @@ class AntdRangeBarDefinition extends AbstractBarDefinition {
             {type: 'sort4', values: [20, 135]},
         ];
         return {
-            info: {
+            base: {
                 id: "",
                 name: 'Antd区间条形图',
                 type: 'AntdRangeBar',
-                desc: '基于Antd Designer实现的区间条形图组件',
             },
             style: {
                 data: data,

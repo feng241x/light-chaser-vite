@@ -14,7 +14,7 @@ const BaseInfo = React.lazy(() => import("../../common-component/base-info/BaseI
 const DataConfig = React.lazy(() => import("../../common-component/data-config/DataConfig"));
 
 
-class AntdLiquidDefinition /*extends AbstractComponentDefinition<AntdLiquid, BaseMenuMapping, AntdLiquidProps>*/ {
+class AntdLiquidDefinition /*extends AbstractDefinition<AntdLiquid, BaseMenuMapping, AntdLiquidProps>*/ {
 
     getComponent(): ClazzTemplate<AntdLiquidController> | null {
         return AntdLiquidController;
@@ -26,7 +26,7 @@ class AntdLiquidDefinition /*extends AbstractComponentDefinition<AntdLiquid, Bas
 
     getMenuToConfigContentMap(): BaseMenuMapping | null {
         return {
-            info: BaseInfo,
+            base: BaseInfo,
             data: DataConfig,
             style: AntdLiquidConfig,
             animation: AnimationConfig,
@@ -41,7 +41,6 @@ class AntdLiquidDefinition /*extends AbstractComponentDefinition<AntdLiquid, Bas
             category: CategoryEnum.CHART,
             type: ChartTypeCNEnum.liquid,
             typeKey: ChartTypeEnum.LIQUID,
-            desc: "基于Antd Designer实现的水波图组件",
         };
     }
 
@@ -51,11 +50,10 @@ class AntdLiquidDefinition /*extends AbstractComponentDefinition<AntdLiquid, Bas
 
     getInitConfig(): AntdLiquidProps {
         return {
-            info: {
+            base: {
                 id: "",
                 name: 'Antd水波图',
                 type: 'AntdLiquid',
-                desc: '基于Antd Designer实现的水波图组件',
             },
             style: {
                 percent: 0.25,

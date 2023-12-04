@@ -13,7 +13,6 @@ class AntdPercentColumnDefinition extends AbstractColumnDefinition {
             category: CategoryEnum.CHART,
             type: ChartTypeCNEnum.column,
             typeKey: ChartTypeEnum.COLUMN,
-            desc: "基于Antd Designer实现的百分比柱状图组件",
         };
     }
 
@@ -70,11 +69,10 @@ class AntdPercentColumnDefinition extends AbstractColumnDefinition {
             }
         ];
         return {
-            info: {
+            base: {
                 id: "",
                 name: 'Antd百分比柱状图',
                 type: 'AntdPercentColumn',
-                desc: '基于Antd Designer实现的百分比柱状图组件',
             },
             style: {
                 data: data,

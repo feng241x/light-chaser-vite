@@ -1,19 +1,16 @@
-import {
-    AbstractComponentDefinition,
-    MenuToConfigMappingType
-} from "../../../framework/core/AbstractComponentDefinition";
+import {AbstractDefinition, MenuToConfigMappingType} from "../../../framework/core/AbstractDefinition";
 import {BaseInfoType} from "../../../designer/DesignerType";
 import {ClazzTemplate} from "../../common-component/common-types";
 import {MenuInfo} from "../../../designer/right/MenuType";
 import baseIframeImg from './base-iframe.png';
-import {BaseIframe} from "./BaseIframe";
+import {BaseIframeController} from "./BaseIframeController";
 import {BaseIframeComponentProps} from "./BaseIframeComponent";
 import BaseInfo from "../../common-component/base-info/BaseInfo";
 import {BaseIframeStyleConfig} from "./BaseIframeConfig";
-import {HighlightFilled, MediumCircleFilled} from "@ant-design/icons";
 import { CategoryEnum, ChartTypeCNEnum, ChartTypeEnum } from "../../../const/index.const";
+import {AppstoreFilled, HighlightFilled} from "@ant-design/icons";
 
-export default class BaseIframeDefinition extends AbstractComponentDefinition<BaseIframe, BaseIframeComponentProps> {
+export default class BaseIframeDefinition extends AbstractDefinition<BaseIframeController, BaseIframeComponentProps> {
     getBaseInfo(): BaseInfoType {
         return {
             compName: "基础iframe",
@@ -21,7 +18,6 @@ export default class BaseIframeDefinition extends AbstractComponentDefinition<Ba
             category: CategoryEnum.BASE,
             type: ChartTypeCNEnum.base,
             typeKey: ChartTypeEnum.BASE,
-            desc: "标准提供的基础iframe",
         };
     }
 
@@ -29,17 +25,16 @@ export default class BaseIframeDefinition extends AbstractComponentDefinition<Ba
         return baseIframeImg;
     }
 
-    getComponent(): ClazzTemplate<BaseIframe> | null {
-        return BaseIframe;
+    getComponent(): ClazzTemplate<BaseIframeController> | null {
+        return BaseIframeController;
     }
 
     getInitConfig(): BaseIframeComponentProps {
         return {
-            info: {
+            base: {
                 id: "",
                 name: '基础iframe',
                 type: 'LcBaseIframe',
-                desc: '标准提供的基础iframe',
             },
             style: {
                 src: '',
@@ -50,9 +45,9 @@ export default class BaseIframeDefinition extends AbstractComponentDefinition<Ba
     getMenuList(): Array<MenuInfo> | null {
         return [
             {
-                icon: MediumCircleFilled,
-                name: '信息',
-                key: 'info',
+                icon: AppstoreFilled,
+                name: '基础',
+                key: 'base',
             },
             {
                 icon: HighlightFilled,
@@ -64,7 +59,7 @@ export default class BaseIframeDefinition extends AbstractComponentDefinition<Ba
 
     getMenuToConfigContentMap(): MenuToConfigMappingType | null {
         return {
-            info: BaseInfo,
+            base: BaseInfo,
             style: BaseIframeStyleConfig,
         };
     }

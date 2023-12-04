@@ -25,7 +25,7 @@ const Right = () => {
       if (menus.length === 0) setRightSiderWidth(0)
     }, [menus, visible])
     return (
-      <Tabs style={{height: '100%'}} rootClassName='rightTabsContentPanel' defaultActiveKey="1" indicatorSize={40} tabBarGutter={42} items={tabsList} onChange={onChange} tabBarStyle={{paddingLeft: 30 }} />
+      <Tabs style={{height: '100%'}} rootClassName='rightTabsContentPanel' defaultActiveKey="1" indicatorSize={40} tabBarGutter={20} items={tabsList} onChange={onChange} tabBarStyle={{paddingLeft: 30 }} />
     )
 }
 
