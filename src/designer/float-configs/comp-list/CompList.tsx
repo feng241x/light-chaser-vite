@@ -20,7 +20,7 @@ class CompList extends Component<any, { twoCategories: string }> {
         const {doInit} = compListStore;
         doInit && doInit();
         this.state = {
-            twoCategories: ''
+            twoCategories: 'all'
         }
     }
 
@@ -114,6 +114,7 @@ class CompList extends Component<any, { twoCategories: string }> {
         let chartDom = [];
         let { twoCategories } = this.state
         let {compInfoArr, compKey} = compListStore;
+        debugger;
         if (this.category) {
             compInfoArr = compInfoArr.filter((item: BaseInfoType) => {
                 return item.category === this.category;

@@ -31,5 +31,4 @@ export enum ClassifyEnum {
     SUNBURST = 'sunburst',
     //矩阵图
     TREEMAP = 'treemap',
-
 }

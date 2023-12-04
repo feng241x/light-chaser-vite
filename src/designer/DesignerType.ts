@@ -179,6 +179,10 @@ export interface BaseInfoType {
      */
     compKey: string;
     /**
+     * 分类名称
+     */
+    category: string;
+    /**
      * 类型名称
      */
     type: string;

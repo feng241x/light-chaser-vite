@@ -4,6 +4,7 @@
 import {ConfigureObjectFragments} from "../../../utils/ObjectUtil";
 import {ILayerItem} from "../../DesignerType";
 
+
 export enum OperateType {
     /**
      * 拖拽
@@ -45,6 +46,7 @@ export enum OperateType {
      * 更新图层数据
      */
     UPD_LAYER_GROUP,
+    OPTIONS
 }
 
 /**

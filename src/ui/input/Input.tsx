@@ -27,18 +27,10 @@ class MyInput extends Component<InputProps> {
     }
 
     render() {
-        const { label, prefix, suffix, tip } = this.props;
+        const { label, prefix, suffix, tip, ...rest } = this.props;
         return (
             <UIContainer label={label} tip={tip}>
-                <Input onChange={this.onChange} suffix={suffix} prefix={prefix} size='small' />
-                {/* <div className={'lc-input-content'}>
-                    {prefix && <div className={'lc-input-prefix'}>{prefix}&nbsp;</div>}
-                    <div className={'lc-input-body'}>
-                        <input {...rest} onChange={this.onChange} className={'lc-input'}/>
-                        <span className={'lc-input-span'}/>
-                    </div>
-                    {suffix && <div className={'lc-input-suffix'}>&nbsp;{suffix}</div>}
-                </div> */}
+                <Input {...rest} onChange={this.onChange} suffix={suffix} prefix={prefix} size='small' />
             </UIContainer>
         );
     }
