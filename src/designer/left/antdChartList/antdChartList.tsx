@@ -68,7 +68,7 @@ const AntdChartList = () => {
                 key,
                 renderTabBar,
                 children: (
-                    <CompList category='chart' />
+                    <CompList category='chart' twoCategories={key} />
                 )
             })
         }
@@ -92,6 +92,7 @@ const AntdChartList = () => {
             </div>
             <Tabs
                 size={'small'}
+                destroyInactiveTabPane
                 tabPosition={'left'}
                 items={tabsList}
                 style={{height: 'calc(100% - 110px)'}}

@@ -74,6 +74,7 @@ const TemplateList = () => {
             </div>
             <Tabs
                 size={'small'}
+                destroyInactiveTabPane
                 tabPosition={'left'}
                 items={tabsList}
                 style={{height: 'calc(100% - 110px)'}}

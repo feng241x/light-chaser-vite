@@ -51,9 +51,9 @@ export abstract class BaseLayer extends React.PureComponent<LayerProps, LayerPro
         const {inputMode, compId, name} = this.state;
         debugger;
         if (inputMode && name !== this.layerName) {
-            const {updateLayer, compInstances} = designerStore;
+            const {updateLayer, compController} = designerStore;
             updateLayer([{id: compId!, name: this.layerName}], false);
-            const compInstance = compInstances[compId!];
+            const compInstance = compController[compId!];
             compInstance && compInstance.update({base: {name: this.layerName}});
             this.setState({inputMode: false, name: this.layerName});
         } else {
