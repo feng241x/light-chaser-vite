@@ -19,7 +19,7 @@ interface SelectProps extends UIContainerProps {
 }
 
 const MySelect: React.FC<SelectProps> = (props) => {
-    const {options, placeholder = "请选择", defaultValue, onChange, disabled = false, tip, label} = props;
+    const {options, placeholder = "请选择", defaultValue, value, onChange, disabled = false, tip, label} = props;
     const dom: MutableRefObject<HTMLDivElement | null> = useRef(null);
     const handleOptionClick = (value: string, option: any): void => {
         onChange && onChange(option.value || '');
@@ -29,6 +29,7 @@ const MySelect: React.FC<SelectProps> = (props) => {
         <UIContainer tip={tip} label={label}>
             <Select
                 disabled={disabled}
+                value={value}
                 defaultValue={defaultValue}
                 placeholder={placeholder}
                 style={{width: dom?.current?.offsetWidth || 90}}

@@ -1,92 +1,87 @@
 import {ComponentBaseProps} from "../../common-component/common-types";
 import { StatisticCard } from '@ant-design/pro-components';
-import RcResizeObserver from 'rc-resize-observer';
-import { useState } from 'react';
+import { Component } from 'react';
+import { Line } from '@ant-design/plots';
+import './GroupingStatisticComponent.less';
+import { Column } from "@ant-design/charts";
+import CountUp from "react-countup";
 
-const { Divider } = StatisticCard;
 export interface GroupingStatisticComponentStyle {
-  fontWeight?: string;
-  fontSize: string | number;
-  color: string;
-  alignItems: string;
-  justifyContent: string;
+  title: string;
+  description: string;
+  tip: string;
+  fontSize: number;
+  fontWeight: number;
+  prefix: string;
+  suffix: string;
+  layout: 'vertical' | 'horizontal' | 'inline';
+  CountUp: boolean;
+  xAxis: boolean;
+  yAxis: boolean;
+  chart: 'Column' | 'Line';
+  xField: string;
+  yField: string;
+  countField: string;
 }
 
 export interface GroupingStatisticComponentProps extends ComponentBaseProps {
     style?: GroupingStatisticComponentStyle;
 }
 
-// class GroupingStatisticComponent extends Component<GroupingStatisticComponentProps, GroupingStatisticComponentProps> {
-
-//     constructor(props: GroupingStatisticComponentProps) {
-//         super(props);
-//         this.state = {...props};
-//     }
-
-//     render() {
-//         return (
-            
-//         );
-//     }
-// }
-const GroupingStatisticComponent = () => {
-    const [responsive, setResponsive] = useState(false);
-  
-    return (
-      <RcResizeObserver
-        key="resize-observer"
-        onResize={(offset: any) => {
-          setResponsive(offset.width < 596);
-        }}
-      >
-        <StatisticCard.Group direction={responsive ? 'column' : 'row'}>
-          <StatisticCard
-            statistic={{
-              title: '冻结金额',
-              value: 20190102,
-              precision: 2,
-              suffix: '元',
-            }}
-            chart={
-              <img
-                src="https://gw.alipayobjects.com/zos/alicdn/RLeBTRNWv/bianzu%25252043x.png"
-                alt="直方图"
-                width="100%"
-              />
-            }
-          />
-          <Divider type={responsive ? 'horizontal' : 'vertical'} />
-          <StatisticCard
-            statistic={{
-              title: '设计资源数',
-              value: 234,
-            }}
-            chart={
-              <img
-                src="https://gw.alipayobjects.com/zos/alicdn/RLeBTRNWv/bianzu%25252043x.png"
-                alt="直方图"
-                width="100%"
-              />
-            }
-          />
-          <Divider type={responsive ? 'horizontal' : 'vertical'} />
-          <StatisticCard
-            statistic={{
-              title: '信息完成度',
-              value: 5,
-              suffix: '/ 100',
-            }}
-            chart={
-              <img
-                src="https://gw.alipayobjects.com/zos/alicdn/RLeBTRNWv/bianzu%25252043x.png"
-                alt="直方图"
-                width="100%"
-              />
-            }
-          />
-        </StatisticCard.Group>
-      </RcResizeObserver>
-    );
+class GroupingStatisticComponent extends Component<any, any>  {
+    constructor(props: any) {
+        super(props);
+        this.state = {...props, jsonData: []};
+    }
+    componentDidMount(): void {
+      const { data } = this.state;
+      if (data.dataSource === 'static') {
+        try {
+          this.setState({jsonData: data.staticData.data})
+        } catch (error) {}
+      }
+    }
+    render() {
+      const { jsonData, style } : any = this.state;
+      const config = {
+        data: jsonData,
+        xField: style.xField,
+        yField: style.yField,
+        xAxis: style.xAxis ? {
+          label: {}
+        } : {
+          label: null,
+        },
+        yAxis: style.yAxis ? {label: {}} : {
+          label: null,
+        },
+      };
+      const formatter: any = (value: number) => <CountUp end={value} separator="," />;
+      return (
+        <StatisticCard
+          style={{height: '100%'}}
+          bodyStyle={{height: '100%'}}
+          className="GroupingStatisticComponent"
+          statistic={{
+            title: style.title,
+            valueStyle: {
+              fontSize: style.fontSize || 26,
+              fontWeight: style.fontWeight || 700
+            },
+            value: jsonData.reduce((acc: number, obj: any) => acc + obj[style.countField], 0),
+            prefix: style.prefix,
+            tip: style.tip,
+            suffix: style.suffix,
+            description: style.description,
+            layout: style.layout || 'vertical',
+            formatter: style.CountUp ? formatter : undefined
+          }}
+          chart={
+            style.chart === 'Line' ? <Line autoFit {...config} /> : <Column {...config} />
+          }
+        />
+      );
+    }
 };
 
 export default GroupingStatisticComponent;
