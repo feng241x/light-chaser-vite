@@ -102,6 +102,19 @@ export abstract class AntdBaseDesignerController<I extends Plot<any> = Plot<Opti
         });
     }
 
+    public async commonCreateByCustom(container: HTMLElement, CustomComponent: any, config: C): Promise<this> {
+        this.config = config;
+        this.container = container;
+        this.instance = await ComponentUtil.createAndRender(container, CustomComponent, config);
+        //todo 这个地方因为数据的更新导致组件的重新渲染可能会导致组件动画的加载效果受到影响，后续需要优化
+        setTimeout(() => {
+            //5s后开始加载数据
+            this.commonLoadData(this);
+        }, 5000);
+        return this;
+        
+    }
+
     public async commonCreate(container: HTMLElement, Clazz: new (...args: any[]) => I, config: C): Promise<this> {
         this.config = config;
         this.container = container;

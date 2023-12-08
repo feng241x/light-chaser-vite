@@ -3,25 +3,25 @@ import {ConfigType} from "../../../designer/right/ConfigContent";
 import {FieldChangeData, LCGUI} from "../../../json-schema/LCGUI";
 import {Control} from "../../../json-schema/SchemaTypes";
 import AntdCommonUtil from '../../antd-common/AntdCommonUtil';
-import { Legend } from '@antv/g2plot/lib/types/legend';
-import { LineOptions } from '@antv/g2plot';
+import { ColumnOptions, LineOptions } from '@antv/g2plot';
 import AntdCommonLineController from '../../antd-common/line/AntdCommonLineController';
+import { AntdCartesianCoordinateSys } from '../../antd-common/config/AntdFragment';
 
 
-class GroupingStatisticStyleConfig extends Component<ConfigType> {
+class ColumnStatisticStyleConfig extends Component<ConfigType> {
 
-    legendChange = (legend: Legend) => {
-        const controller = this.props.controller as AntdCommonLineController;
-        controller.update({style: {legend}});
-    }
-
-    lineCoordinateSysChange = (config: LineOptions) => {
+    lineGraphicsChange = (config: LineOptions) => {
         const controller = this.props.controller as AntdCommonLineController;
         controller.update({style: config});
     }
 
-    lineGraphicsChange = (config: LineOptions) => {
-        const controller = this.props.controller as AntdCommonLineController;
+    barGraphicsChange = (config: ColumnOptions) => {
+        const controller= this.props.controller as AntdCommonLineController;
+        controller.update({style: config});
+    }
+
+    barCoordinateSysChange = (config: ColumnOptions) => {
+        const controller= this.props.controller as AntdCommonLineController;
         controller.update({style: config});
     }
 
@@ -30,21 +30,22 @@ class GroupingStatisticStyleConfig extends Component<ConfigType> {
         const config: LineOptions = controller.getConfig().style;
         return (
             <>
-                <GroupingStatisticGraphics onChange={this.lineGraphicsChange} config={config}/>
+                <ColumnStatisticGraphics onChange={this.lineGraphicsChange} config={config}/>
+                <AntdCartesianCoordinateSys onChange={this.barCoordinateSysChange} config={config}/>
             </>
         );
     }
 }
 
-export {GroupingStatisticStyleConfig};
+export {ColumnStatisticStyleConfig};
 
-export interface GroupingStatisticGraphicsProps {
+export interface ColumnStatisticGraphicsProps {
     config?: any;
 
     onChange(config: any): void;
 }
 
-export const GroupingStatisticGraphics: React.FC<GroupingStatisticGraphicsProps> = ({config, onChange}) => {
+export const ColumnStatisticGraphics: React.FC<ColumnStatisticGraphicsProps> = ({config, onChange}) => {
 
     const onFieldChange = (fieldChangeData: FieldChangeData) => {
         const {dataFragment} = fieldChangeData;
@@ -56,14 +57,32 @@ export const GroupingStatisticGraphics: React.FC<GroupingStatisticGraphicsProps>
         label: '配置',
         children: [
             {
-                key: 'title',
-                type: 'input',
-                label: '名称',
-                value: config?.title,
-                config: {
-                    width: 80,
-                    type: 'text'
-                }
+                type: 'item-panel',
+                label: '卡片',
+                children: [
+                    {
+                        key: 'title',
+                        type: 'input',
+                        label: '名称',
+                        value: config?.title,
+                        config: {
+                            width: 80,
+                            type: 'text'
+                        }
+                    },
+                    {
+                        key: 'hoverable',
+                        type: 'switch',
+                        label: '鼠标移过时浮起',
+                        value: config?.hoverable,
+                    },
+                    {
+                        key: 'bordered',
+                        type: 'switch',
+                        label: '是否有边框',
+                        value: config?.bordered,
+                    }
+                ]
             },
             {
                 type: 'item-panel',
@@ -181,19 +200,7 @@ export const GroupingStatisticGraphics: React.FC<GroupingStatisticGraphicsProps>
                                 type: 'switch',
                                 label: 'y轴',
                                 value: config?.yAxis,
-                            },
-                            {
-                                key: 'chart',
-                                type: 'select',
-                                label: '类型',
-                                value: config?.chart,
-                                config: {
-                                    options: [
-                                        {value: 'Line', label: '折线图'},
-                                        {value: 'Column', label: '柱状图'},
-                                    ]
-                                }
-                            },
+                            }
                         ]
                     }
                 ]
@@ -206,7 +213,7 @@ export const GroupingStatisticGraphics: React.FC<GroupingStatisticGraphicsProps>
     )
 }
 
-export const GroupingStatisticMapping: React.FC<ConfigType> = (props) => {
+export const ColumnStatisticMapping: React.FC<ConfigType> = (props) => {
     const {controller} = props;
     const {xField, yField, countField} = controller.getConfig().style;
     const options = AntdCommonUtil.getDataFieldOptions(controller);

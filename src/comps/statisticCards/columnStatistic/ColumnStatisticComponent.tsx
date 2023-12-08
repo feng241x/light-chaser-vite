@@ -1,12 +1,11 @@
 import {ComponentBaseProps} from "../../common-component/common-types";
 import { StatisticCard } from '@ant-design/pro-components';
 import { Component } from 'react';
-import { Line } from '@ant-design/plots';
-import './GroupingStatisticComponent.less';
+import './ColumnStatisticComponent.less';
 import { Column } from "@ant-design/charts";
 import CountUp from "react-countup";
 
-export interface GroupingStatisticComponentStyle {
+export interface ColumnStatisticComponentStyle {
   title: string;
   description: string;
   tip: string;
@@ -18,17 +17,20 @@ export interface GroupingStatisticComponentStyle {
   CountUp: boolean;
   xAxis: boolean;
   yAxis: boolean;
-  chart: 'Column' | 'Line';
+  bordered: boolean;
+  hoverable: boolean;
   xField: string;
   yField: string;
   countField: string;
+  color: string;
+  smooth: boolean;
 }
 
-export interface GroupingStatisticComponentProps extends ComponentBaseProps {
-    style?: GroupingStatisticComponentStyle;
+export interface ColumnStatisticComponentProps extends ComponentBaseProps {
+    style?: ColumnStatisticComponentStyle;
 }
 
-class GroupingStatisticComponent extends Component<any, any>  {
+class ColumnStatisticComponent extends Component<any, any>  {
     constructor(props: any) {
         super(props);
         this.state = {...props, jsonData: []};
@@ -41,27 +43,32 @@ class GroupingStatisticComponent extends Component<any, any>  {
         } catch (error) {}
       }
     }
+    componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any): void {
+      const { data, jsonData } = this.state;
+      if (JSON.stringify(data.staticData.data) !== JSON.stringify(jsonData)) {
+        try {
+          this.setState({jsonData: data.staticData.data})
+        } catch (error) {}
+      }
+    }
     render() {
       const { jsonData, style } : any = this.state;
       const config = {
         data: jsonData,
         xField: style.xField,
         yField: style.yField,
-        xAxis: style.xAxis ? {
-          label: {}
-        } : {
-          label: null,
-        },
-        yAxis: style.yAxis ? {label: {}} : {
-          label: null,
-        },
+        xAxis: style.xAxis ? style.xAxis : false,
+        yAxis: style.yAxis ? style.yAxis : false
       };
       const formatter: any = (value: number) => <CountUp end={value} separator="," />;
       return (
         <StatisticCard
           style={{height: '100%'}}
+          headStyle={{color: '#ccc'}}
           bodyStyle={{height: '100%'}}
-          className="GroupingStatisticComponent"
+          hoverable={style.hoverable}
+          bordered={style.bordered}
+          className="ColumnStatisticComponent"
           statistic={{
             title: style.title,
             valueStyle: {
@@ -76,12 +83,10 @@ class GroupingStatisticComponent extends Component<any, any>  {
             layout: style.layout || 'vertical',
             formatter: style.CountUp ? formatter : undefined
           }}
-          chart={
-            style.chart === 'Line' ? <Line autoFit {...config} /> : <Column {...config} />
-          }
+          chart={<Column autoFit {...config} />}
         />
       );
     }
 };
 
-export default GroupingStatisticComponent;
+export default ColumnStatisticComponent;

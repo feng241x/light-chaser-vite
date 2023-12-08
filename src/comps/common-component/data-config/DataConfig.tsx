@@ -247,6 +247,7 @@ class DataConfig extends Component<DataConfigProps> {
         //静态数据保存
         if (id === 'doStaticSave') {
             const dataStr = (this.schema!.children![1].children![0]!.value! as string).replace(/'/g, '"').replace(/\s/g, '');
+            debugger;
             const data = JSON.parse(dataStr);
             const {controller} = this.props;
             controller.update({data: {staticData: {data}}},
