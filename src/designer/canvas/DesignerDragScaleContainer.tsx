@@ -56,8 +56,8 @@ export const DesignerDragScaleContainer: React.FC<DesignerDragScaleContainerProp
                  ref={contentRef}
                  onDoubleClick={onDoubleClick}
                  style={{
-                     width: canvasConfig?.width,
-                     height: canvasConfig?.height,
+                     width: canvasConfig?.width + 'px',
+                     height: canvasConfig?.height + 'px',
                      backgroundColor: canvasConfig?.backgroundColor,
                      position: 'absolute',
                  }}>

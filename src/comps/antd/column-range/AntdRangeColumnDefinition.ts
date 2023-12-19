@@ -1,6 +1,6 @@
 import {BaseInfoType} from "../../../designer/DesignerType";
 import rangeColumnImg from "./range-column.png";
-import {AntdColumnProps} from "../../antd-common/column/AntdCommonColumn";
+import {AntdColumnProps} from "../../antd-common/column/AntdCommonColumnController";
 import AbstractColumnDefinition from "../../antd-common/column/AbstractColumnDefinition";
 import { CategoryEnum, ChartTypeCNEnum, ChartTypeEnum } from "../../../const/index.const";
 

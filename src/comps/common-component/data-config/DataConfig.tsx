@@ -2,19 +2,20 @@ import {Component} from 'react';
 import './DataConfig.less';
 import {ConfigType} from "../../../designer/right/ConfigContent";
 import {DataConfigType} from "../../../designer/DesignerType";
-import AbstractController, {UpdateType} from "../../../framework/core/AbstractController";
+import AbstractController from "../../../framework/core/AbstractController";
 import {message} from "antd";
 import ObjectUtil from "../../../utils/ObjectUtil";
 import {Control} from "../../../json-schema/SchemaTypes";
 import {FieldChangeData, LCGUI} from "../../../json-schema/LCGUI";
 import LCGUIUtil from "../../../json-schema/LCGUIUtil";
 import HttpUtil from "../../../utils/HttpUtil";
+import AbstractDesignerController from "../../../framework/core/AbstractDesignerController";
 
 type DataTypeItem = 'static' | 'api' | 'database' | 'excel';
 
 type DataTypes = (DataTypeItem)[];
 
-export interface DataConfigProps<T extends AbstractController = AbstractController> extends ConfigType<T> {
+export interface DataConfigProps<T extends AbstractController = AbstractDesignerController> extends ConfigType<T> {
     // 限制数据源类型，默认全部。（针对如进度图类型的图表，其数据只是一个简单的数字，一般不通过excel导入）
     dataTypes?: DataTypes;
     // 接口数据转换函数，默认按照json格式转换（对于有自己特殊类型的图表，可以自定义转换函数，比如仪表盘，其数据是一个数字，而不是json）
@@ -26,6 +27,8 @@ class DataConfig extends Component<DataConfigProps> {
     schema: Control = {};
 
     dataConfig: DataConfigType = {};
+
+    apiTestDataResult: any = null;
 
     state = {
         renderCount: 0
@@ -52,6 +55,7 @@ class DataConfig extends Component<DataConfigProps> {
                     reRender: true,
                     value: data?.dataSource || 'static',
                     config: {
+                        width: 120,
                         options: [
                             {value: 'static', label: '静态数据',},
                             {value: 'api', label: '接口(API)',}
@@ -232,11 +236,11 @@ class DataConfig extends Component<DataConfigProps> {
         params = params && typeof params === 'string' ? ObjectUtil.stringToJsObj(this.dataConfig.apiData?.params) : params;
         const {url, method} = this.dataConfig.apiData!;
         HttpUtil.sendHttpRequest(url!, method!, header, params).then(res => {
+            this.apiTestDataResult = res;
             this.schema!.children![2].children![5].children![0].value = JSON.stringify(res, null, 2);
             this.setState({renderCount: this.state.renderCount + 1});
         }).catch(() => {
             this.schema!.children![2].children![5].children![0].value = JSON.stringify({msg: '请求错误'}, null, 2);
-            console.log(this.schema)
             this.setState({renderCount: this.state.renderCount + 1});
         });
     }
@@ -247,11 +251,11 @@ class DataConfig extends Component<DataConfigProps> {
         //静态数据保存
         if (id === 'doStaticSave') {
             const dataStr = (this.schema!.children![1].children![0]!.value! as string).replace(/'/g, '"').replace(/\s/g, '');
-            debugger;
             const data = JSON.parse(dataStr);
             const {controller} = this.props;
             controller.update({data: {staticData: {data}}},
-                {reRender: true, updateType: UpdateType.DATA});
+                {reRender: false});
+            controller.changeData(data)
         }
         if (id === 'doTest') {
             this.testApi();
@@ -263,7 +267,8 @@ class DataConfig extends Component<DataConfigProps> {
             params && typeof params === 'string' && (this.dataConfig.apiData!.params = ObjectUtil.stringToJsObj(params));
             header && typeof header === 'string' && (this.dataConfig.apiData!.header = ObjectUtil.stringToJsObj(header));
             controller.update({data: {apiData: this.dataConfig.apiData}},
-                {reRender: true, updateType: UpdateType.DATA});
+                {reRender: false});
+            controller.changeData(this.apiTestDataResult);
         }
 
         LCGUIUtil.updateSchema(this.schema, schemaKeyPath, data);

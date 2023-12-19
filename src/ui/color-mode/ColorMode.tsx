@@ -72,8 +72,9 @@ class ColorMode extends Component<ColorModeProps> {
         return (
             <UIContainer tip={tip} label={label} margin={margin} padding={padding} gridColumn={gridColumn}>
                 <div className={"lc-color-mode"}>
-                    <div className={'mode-select'} style={{width: 80}}>
+                    <div className={'mode-select'} style={{width: 100, marginRight: 10}}>
                         <Select value={mode || 'general'}
+                                width={100}
                                 onChange={(mode: string) => this.modeChange(mode as ColorModeType)}
                                 options={[
                                     {value: 'general', label: '单色&渐变'},

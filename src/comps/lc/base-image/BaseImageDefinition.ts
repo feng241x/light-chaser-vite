@@ -10,16 +10,14 @@ import {MenuInfo} from "../../../designer/right/MenuType";
 import {getDefaultMenuList} from "../../../designer/right/util";
 import BaseInfo from "../../common-component/base-info/BaseInfo";
 import {BaseImageStyleConfig} from "./BaseImageConfig";
-import { CategoryEnum, ChartTypeCNEnum, ChartTypeEnum } from "../../../const/index.const";
 
 export default class BaseImageDefinition extends AbstractDefinition<BaseImageController, BaseImageComponentProps> {
     getBaseInfo(): BaseInfoType {
         return {
             compName: "基础图片",
-            compKey: "LcBaseImage",
-            category: CategoryEnum.BASE,
-            type: ChartTypeCNEnum.base,
-            typeKey: ChartTypeEnum.BASE,
+            compKey: "BaseImage",
+            type: "基础",
+            typeKey: "base",
         };
     }
 
@@ -27,7 +25,7 @@ export default class BaseImageDefinition extends AbstractDefinition<BaseImageCon
         return baseImage;
     }
 
-    getComponent(): ClazzTemplate<BaseImageController> | null {
+    getController(): ClazzTemplate<BaseImageController> | null {
         return BaseImageController;
     }
 
@@ -36,7 +34,7 @@ export default class BaseImageDefinition extends AbstractDefinition<BaseImageCon
             base: {
                 id: "",
                 name: '基础图片',
-                type: 'LcBaseImage',
+                type: 'BaseImage',
             },
             style: {
                 type: 'online',

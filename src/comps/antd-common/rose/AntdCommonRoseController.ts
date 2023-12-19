@@ -1,7 +1,7 @@
 import {ComponentBaseProps} from "../../common-component/common-types";
 import {WritableRoseOptions} from "../types";
 import {Rose} from "@antv/g2plot";
-import {UpdateType, UpdateOptions} from "../../../framework/core/AbstractController";
+import {UpdateOptions} from "../../../framework/core/AbstractController";
 import {AntdBaseDesignerController} from "../AntdBaseDesignerController";
 import {ThemeItemType} from "../../../designer/DesignerType";
 import {ShapeAttrs} from "@antv/g-base";
@@ -10,10 +10,10 @@ export interface AntdRoseProps extends ComponentBaseProps {
     style?: WritableRoseOptions;
 }
 
-export default class AntdCommonRose extends AntdBaseDesignerController<Rose, AntdRoseProps> {
+export default class AntdCommonRoseController extends AntdBaseDesignerController<Rose, AntdRoseProps> {
 
-    async create(container: HTMLElement, config: AntdRoseProps): Promise<this> {
-        return super.commonCreate(container, Rose, config);
+    async create(container: HTMLElement, config: AntdRoseProps): Promise<void> {
+        await super.commonCreate(container, Rose, config);
     }
 
     destroy(): void {
@@ -49,6 +49,6 @@ export default class AntdCommonRose extends AntdBaseDesignerController<Rose, Ant
         if ((styleConfig?.label) && (styleConfig?.label?.style as ShapeAttrs))
             (styleConfig!.label!.style as ShapeAttrs).fill = mainText;
         //重新渲染
-        this.update({style: styleConfig} as any, {reRender: true, updateType: UpdateType.OPTIONS});
+        this.update({style: styleConfig} as any, {reRender: true});
     }
 }

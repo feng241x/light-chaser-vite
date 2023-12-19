@@ -11,7 +11,7 @@ import Loading from "../../ui/loading/Loading";
 import DesignerLoaderFactory from "../loader/DesignerLoaderFactory";
 import AbstractController from "../../framework/core/AbstractController";
 
-export interface ConfigType<T extends AbstractController = AbstractController> {
+export interface ConfigType<T extends AbstractController = AbstractDesignerController> {
     controller: T;
 }
 

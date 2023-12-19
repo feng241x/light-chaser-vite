@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {ReactNode, useEffect, useState} from 'react';
 import './Accordion.less';
 import {CaretRightOutlined, QuestionCircleOutlined} from "@ant-design/icons";
 import {Collapse, Switch, Tooltip} from "antd";
@@ -16,7 +16,7 @@ interface AccordionProps {
     // 开关状态值（非受控）
     defaultValue?: boolean;
     tip?: string;
-    children?: any;
+    children?: ReactNode;
 }
 
 const MyAccordion = (props: AccordionProps) => {

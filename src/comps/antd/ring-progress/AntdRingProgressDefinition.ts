@@ -18,7 +18,7 @@ const BaseInfo = React.lazy(() => import("../../common-component/base-info/BaseI
 
 class AntdRingProgressDefinition extends AntdCommonDefinition<AntdRingProgressController, AntdRingProgressProps> {
 
-    getComponent(): ClazzTemplate<AntdRingProgressController> | null {
+    getController(): ClazzTemplate<AntdRingProgressController> | null {
         return AntdRingProgressController;
     }
 

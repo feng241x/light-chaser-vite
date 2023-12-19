@@ -1,5 +1,5 @@
 import {ThemeItemType} from "../../../designer/DesignerType";
-import {UpdateType, UpdateOptions} from "../../../framework/core/AbstractController";
+import {UpdateOptions} from "../../../framework/core/AbstractController";
 import AbstractDesignerController from "../../../framework/core/AbstractDesignerController";
 import ComponentUtil from "../../../utils/ComponentUtil";
 import BaseTextComponent, {BaseTextComponentProps} from "./BaseTextComponent";
@@ -7,11 +7,10 @@ import ObjectUtil from "../../../utils/ObjectUtil";
 
 export class BaseTextController extends AbstractDesignerController<BaseTextComponent, BaseTextComponentProps> {
 
-    async create(container: HTMLElement, config: any): Promise<this> {
+    async create(container: HTMLElement, config: any): Promise<void> {
         this.config = config;
         this.container = container;
         this.instance = await ComponentUtil.createAndRender(container, BaseTextComponent, config);
-        return this;
     }
 
     destroy(): void {

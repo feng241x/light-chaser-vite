@@ -1,7 +1,7 @@
 import {BaseInfoType} from "../../../designer/DesignerType";
 import groupColumnImg from "./group-column.png";
 import AbstractColumnDefinition from "../../antd-common/column/AbstractColumnDefinition";
-import {AntdColumnProps} from "../../antd-common/column/AntdCommonColumn";
+import {AntdColumnProps} from "../../antd-common/column/AntdCommonColumnController";
 import { CategoryEnum, ChartTypeCNEnum, ChartTypeEnum } from "../../../const/index.const";
 
 class AntdGroupColumnDefinition extends AbstractColumnDefinition {
@@ -117,7 +117,7 @@ class AntdGroupColumnDefinition extends AbstractColumnDefinition {
                         animation: "scale-in-y",
                         duration: 3000,
                     },
-                },
+                }
             },
             data: {
                 dataSource: 'static',

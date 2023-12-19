@@ -11,18 +11,14 @@ export interface ConditionConfigType extends NodeInfoType {
     handler?: string;
 }
 
-export default class ConditionNodeController extends AbstractBPNodeController<ConditionConfigType> {
+export default class BPConditionNodeController extends AbstractBPNodeController<ConditionConfigType> {
 
     private handler: Function | null = null;
 
-    async create(container: HTMLElement, config: ConditionConfigType): Promise<this> {
+    async create(container: HTMLElement, config: ConditionConfigType): Promise<void> {
         this.config = config;
         this.container = container;
         this.instance = await ComponentUtil.createAndRender(container, BPNode, config);
-        return this;
-    }
-
-    destroy(): void {
     }
 
     execute(executeInfo: ExecuteInfoType, executor: BPExecutor, params: any): void {

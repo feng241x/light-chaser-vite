@@ -8,7 +8,7 @@ import { observer } from "mobx-react";
 import LayerGroupItem from "./designer/float-configs/layer-list/item/LayerGroupItem";
 import DemoMain from "./test/DemoMain";
 
-const LightChaserList = lazy(() => import('./list/LightChaserList'));
+const Home = lazy(() => import('./pages/home/Home'));
 const Designer = lazy(() => import('./designer/Designer'));
 const DesignerView = lazy(() => import('./designer/view/DesignerView'));
 
@@ -40,8 +40,8 @@ const App = () => {
                     <Route path={'/view'} element={<DesignerView />}/>
                     <Route path={'/test'} element={<DemoMain />}/>
                     <Route path={'/layer'} element={<LayerGroupItem />}/>
-                    <Route path={'/list'} element={<LightChaserList />}/>
-                    <Route path={'/'} element={<LightChaserList />}/>
+                    <Route path={'/home'} element={<Home />}/>
+                    <Route path={'/'} element={<Home />}/>
                 </Routes>
             </Suspense>
         </ConfigProvider>

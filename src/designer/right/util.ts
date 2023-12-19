@@ -11,7 +11,7 @@ export const getDefaultMenuList = (): Array<MenuInfo> => {
         {
             icon: MediumCircleFilled,
             key: 'style',
-            name: '样  式'
+            name: '配  置'
         },
         {
             icon: DatabaseFilled,

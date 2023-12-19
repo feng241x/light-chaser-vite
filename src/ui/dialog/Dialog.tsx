@@ -1,4 +1,4 @@
-import {Component} from 'react';
+import {Component, ReactNode} from 'react';
 import './Dialog.less';
 import { Modal } from 'antd';
 
@@ -9,7 +9,7 @@ interface DialogProps {
     width?: number;
     height?: number;
     className?: string;
-    children: any;
+    children?: ReactNode;
 }
 
 class Dialog extends Component<DialogProps> {

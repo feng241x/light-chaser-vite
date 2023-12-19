@@ -3,13 +3,14 @@ import {AntdCartesianCoordinateSys} from "../config/AntdFragment";
 import {Column, ColumnOptions} from "@antv/g2plot";
 import {Legend} from "@antv/g2plot/lib/types/legend";
 import AbstractController from "../../../framework/core/AbstractController";
-import {AntdColumnProps} from "./AntdCommonColumn";
+import {AntdColumnProps} from "./AntdCommonColumnController";
 import {WritableColumnOptions} from "../types";
 import {FieldChangeData, LCGUI} from "../../../json-schema/LCGUI";
 import {Control} from "../../../json-schema/SchemaTypes";
 import AntdCommonUtil from "../AntdCommonUtil";
 import {AntdLegend} from "../config/legend/AntdLegend";
 import {ConfigType} from "../../../designer/right/ConfigContent";
+import { EventConfig } from '../config/events/EventConfig';
 
 class AntdColumnCommonStyleConfig extends Component<ConfigType> {
 
@@ -36,6 +37,7 @@ class AntdColumnCommonStyleConfig extends Component<ConfigType> {
                 <AntdColumnGraphics onChange={this.barGraphicsChange} config={config}/>
                 <AntdLegend controller={controller}/>
                 <AntdCartesianCoordinateSys onChange={this.barCoordinateSysChange} config={config}/>
+                <EventConfig onChange={this.barGraphicsChange} config={config}/>
             </>
         );
     }
@@ -87,8 +89,7 @@ export const AntdColumnGraphics: React.FC<AntdColumnGraphicsProps> = ({config, o
                             min: 0,
                             max: 100,
                         }
-                    },
-
+                    }
                 ]
             },
             {
@@ -118,7 +119,6 @@ export const AntdColumnGraphics: React.FC<AntdColumnGraphicsProps> = ({config, o
     )
 
 }
-
 
 export const AntdColumnCommonFieldMapping: React.FC<ConfigType> = (props) => {
     const {controller} = props;

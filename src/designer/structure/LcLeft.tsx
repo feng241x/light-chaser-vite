@@ -1,8 +1,15 @@
+import {Component, ReactNode} from 'react';
 
-const LcLeft = (props: any) => {
-    return (
-        <div className={'structure-body-left'}>{props.children}</div>
-    );
+export interface LcLeftProps {
+    children?: ReactNode;
+}
+
+class LcLeft extends Component<LcLeftProps> {
+    render() {
+        return (
+            <div className={'structure-body-left'}>{this.props.children}</div>
+        );
+    }
 }
 
 export default LcLeft;

@@ -1,7 +1,7 @@
 import {Component, useState} from 'react';
 import {ConfigType} from "../../../designer/right/ConfigContent";
 import {WritableRoseOptions} from "../../antd-common/types";
-import AntdCommonRose from "../../antd-common/rose/AntdCommonRose";
+import AntdCommonRoseController from "../../antd-common/rose/AntdCommonRoseController";
 import {ColorAttr, RingProgressOptions, StatisticText} from "@antv/g2plot";
 import {FieldChangeData, LCGUI} from "../../../json-schema/LCGUI";
 import {Control} from "../../../json-schema/SchemaTypes";
@@ -11,7 +11,7 @@ import ObjectUtil from "../../../utils/ObjectUtil";
 export class AntdRingProgressStyleConfig extends Component<ConfigType> {
 
     ringProgressGraphicsChange = (config: WritableRoseOptions) => {
-        const controller = this.props.controller as AntdCommonRose;
+        const controller = this.props.controller as AntdCommonRoseController;
         controller.update({style: config});
     }
 

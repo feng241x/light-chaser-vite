@@ -11,18 +11,14 @@ export interface LogicalProcessNodeConfigType extends NodeProps {
     handler?: string;
 }
 
-export default class LogicalProcessNodeController extends AbstractBPNodeController<LogicalProcessNodeConfigType> {
+export default class BPLogicalProcessNodeController extends AbstractBPNodeController<LogicalProcessNodeConfigType> {
 
     private handler: Function | null = null;
 
-    async create(container: HTMLElement, config: LogicalProcessNodeConfigType): Promise<this> {
+    async create(container: HTMLElement, config: LogicalProcessNodeConfigType): Promise<void> {
         this.config = config;
         this.container = container;
         this.instance = await ComponentUtil.createAndRender(container, BPNode, config);
-        return this;
-    }
-
-    destroy(): void {
     }
 
     execute(executeInfo: ExecuteInfoType, executor: BPExecutor, params: any): void {

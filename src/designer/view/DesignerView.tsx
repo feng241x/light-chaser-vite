@@ -18,7 +18,7 @@ class DesignerView extends Component {
         if (!loaded)
             return <Loading/>;
         return (
-            <div style={{width, height, background: backgroundColor, overflow: 'hidden', position: "relative"}}>
+            <div style={{width: width + 'px', height: height + 'px', background: backgroundColor, overflow: 'hidden', position: "relative"}}>
                 {layerBuilder.buildCanvasComponents(layerConfigs)}
             </div>
         );

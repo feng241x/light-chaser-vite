@@ -11,7 +11,11 @@ import { List } from 'antd';
 import LayerGroupItem from './item/LayerGroupItem';
 import {ILayerItem} from "../../DesignerType";
 
-class LayerList extends Component {
+export interface LayerListProps {
+    children?: React.ReactNode;
+}
+
+class LayerList extends Component<LayerListProps> {
     floatPanelRef: any = null;
     layerItemsContainerRef: HTMLDivElement | null = null;
     componentDidMount() {

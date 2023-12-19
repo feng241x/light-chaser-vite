@@ -7,13 +7,16 @@ import designerStore from "../../designer/store/DesignerStore";
 
 export interface GroupLayerStyleProps {
     layer: ILayerItem;
-    children: any;
+    children?: React.ReactNode;
 }
 
 export default class GroupLayer extends React.PureComponent<GroupLayerStyleProps> {
 
     groupLayerRef: HTMLDivElement | null = null;
-
+    
+    /**
+     * 渲染分组组件时不记录操作日志。已在快捷键处记录
+     */
     componentDidMount(): void {
         const {layer} = this.props;
         const {elemConfigs, compController} = designerStore;

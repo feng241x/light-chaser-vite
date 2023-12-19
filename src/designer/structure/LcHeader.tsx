@@ -1,8 +1,15 @@
+import {Component, ReactNode} from 'react';
 
-const LcHeader = (props: any) => {
-    return (
-        <div className={'structure-header'}>{props.children}</div>
-    );
+export interface LcHeaderProps {
+    children?: ReactNode;
+}
+
+class LcHeader extends Component<LcHeaderProps> {
+    render() {
+        return (
+            <div className={'structure-header'}>{this.props.children}</div>
+        );
+    }
 }
 
 export default LcHeader;

@@ -13,16 +13,14 @@ import BaseInfo from "../../common-component/base-info/BaseInfo";
 import AnimationConfig from "../../common-component/animation-config/AnimationConfig";
 import ThemeConfig from "../../common-component/theme-config/ThemeConfig";
 import {BaseColorBlockConfig} from "./BaseColorBlockConfig";
-import { CategoryEnum, ChartTypeCNEnum, ChartTypeEnum } from "../../../const/index.const";
 
 export default class BaseColorBlockDefinition extends AbstractDefinition<BaseColorBlockController, BaseColorBlockComponentProps> {
     getBaseInfo(): BaseInfoType {
         return {
             compName: "基础色块",
-            compKey: "LcBaseColorBlock",
-            category: CategoryEnum.BASE,
-            type: ChartTypeCNEnum.base,
-            typeKey: ChartTypeEnum.BASE,
+            compKey: "BaseColorBlock",
+            type: "基础",
+            typeKey: "base",
         };
     }
 
@@ -30,7 +28,7 @@ export default class BaseColorBlockDefinition extends AbstractDefinition<BaseCol
         return baseColorBlockImg;
     }
 
-    getComponent(): ClazzTemplate<BaseColorBlockController> | null {
+    getController(): ClazzTemplate<BaseColorBlockController> | null {
         return BaseColorBlockController;
     }
 
@@ -39,10 +37,14 @@ export default class BaseColorBlockDefinition extends AbstractDefinition<BaseCol
             base: {
                 id: "",
                 name: '基础色块',
-                type: 'LcBaseColorBlock',
+                type: 'BaseColorBlock',
             },
             style: {
                 background: '#009DFF33',
+                borderRadius: 0,
+                borderWidth: 0,
+                borderColor: '#74747400',
+                borderStyle: 'none',
             },
         };
     }

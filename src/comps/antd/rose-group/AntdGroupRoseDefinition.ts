@@ -1,7 +1,7 @@
 import {BaseInfoType} from "../../../designer/DesignerType";
 import groupRoseImg from "./group-rose.png";
 import AbstractRoseDefinition from "../../antd-common/rose/AbstractRoseDefinition";
-import {AntdRoseProps} from "../../antd-common/rose/AntdCommonRose";
+import {AntdRoseProps} from "../../antd-common/rose/AntdCommonRoseController";
 import { CategoryEnum, ChartTypeCNEnum, ChartTypeEnum } from "../../../const/index.const";
 
 class AntdGroupRoseDefinition extends AbstractRoseDefinition {

@@ -1,28 +1,24 @@
 import { useEffect, useState } from 'react';
 import { SendOutlined, CloseOutlined, CopyOutlined, EditOutlined } from '@ant-design/icons';
 import { Card, Empty, Popconfirm, Tag } from 'antd';
-import { ProjectState } from '../designer/DesignerType';
-import URLUtil from '../utils/URLUtil';
+import { ProjectState } from '../../../designer/DesignerType';
+import { DesignerMode } from '../../../utils/URLUtil';
 
 const { Meta } = Card;
 
-const ProjectItem: any = ({imageIdToUrl, item, setShowCloneDialog, confirmDel, setSelectId}: any) => {
+const ProjectItem: any = ({item, saveType, setShowCloneDialog, confirmDel, setSelectId}: any) => {
     const [bgImgUrl, setBgImgUrl] = useState('');
     const [stateText, setStateText] = useState<string>();
     const [stateColor, setStateColor] = useState<string>();
     const operateHandler = (type: string) => {
-        const { id, savetype, } = item;
+        const { id } = item;
         if (!type) return;
         switch (type) {
             case 'edit':
-                let params = URLUtil.buildUrlParams({
-                    id: id,
-                    action: 'edit'
-                });
-                window.open(`/designer?${params}`, '_blank');
+                window.open(`/designer?id=${id}&saveType=${saveType}&mode=${DesignerMode.EDIT}`, '_blank');
                 break;
             case 'show':
-                window.open(`/view?id=${id}&saveType=${savetype}&action=view`, '_blank');
+                window.open(`/view?id=${id}&saveType=${saveType}&mode=${DesignerMode.VIEW}`, '_blank');
                 break;
             case 'del':
                 setSelectId(item.id)
@@ -37,7 +33,7 @@ const ProjectItem: any = ({imageIdToUrl, item, setShowCloneDialog, confirmDel, s
         }
     }
     useEffect(() => {
-        setBgImgUrl(imageIdToUrl[item?.screenshot]);
+        // setBgImgUrl(imageIdToUrl[item?.screenshot]);
         if (item.state === ProjectState.DRAFT) {
             setStateText('草稿');
             setStateColor('#FFB800');
@@ -45,11 +41,10 @@ const ProjectItem: any = ({imageIdToUrl, item, setShowCloneDialog, confirmDel, s
             setStateText('已发布');
             setStateColor('#00CC66');
         }
-    }, [imageIdToUrl, item])
-    console.log(bgImgUrl)
+    }, [item])
     return (
         <Card
-            style={{width: 300}}
+            style={{width: 300, display: 'inline-block', verticalAlign: 'bottom', marginLeft: 20}}
             bodyStyle={{padding: 8, position: 'absolute', bottom: 50, width: '100%', color: '#fff'}}
             cover={
                 bgImgUrl ?
@@ -88,10 +83,10 @@ const ProjectItem: any = ({imageIdToUrl, item, setShowCloneDialog, confirmDel, s
                 description={
                 (<>
                     <Tag bordered={false} color="processing">
-                        {'项目描述：' + item?.des}
+                        {'项目描述：' + (item?.des || '')}
                     </Tag>
                     <Tag style={{float: 'right'}} color={stateColor}>
-                        {stateText}
+                        {stateText || ''}
                     </Tag>
                 </>)
                 }

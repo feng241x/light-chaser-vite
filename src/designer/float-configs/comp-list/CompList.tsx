@@ -90,7 +90,7 @@ class CompList extends Component<any, { twoCategories: string }> {
         this.addItem(type, [x, y]);
     }
 
-    addItem = (compKey: string, position?: [number, number]) => {
+    addItem = (compKey: string, position = [0, 0]) => {
         const {addItem} = designerStore;
         let {maxLevel, setMaxLevel, setAddRecordCompId} = eventOperateStore;
         const {definitionMap} = EditorDesignerLoader.getInstance();
@@ -98,8 +98,8 @@ class CompList extends Component<any, { twoCategories: string }> {
         let movableItem: ILayerItem = {
             name: compName,
             type: compKey,
-            x: position![0],
-            y: position![1],
+            x: Math.round(position![0]),
+            y: Math.round(position![1]),
             id: IdGenerate.generateId(),
             lock: false,
             hide: false,

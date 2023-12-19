@@ -16,10 +16,12 @@ interface SelectProps extends UIContainerProps {
     // 选中值改变时的回调
     onChange?: (value: string) => void;
     disabled?: boolean;
+    // 宽度
+    width?: number;
 }
 
 const MySelect: React.FC<SelectProps> = (props) => {
-    const {options, placeholder = "请选择", defaultValue, value, onChange, disabled = false, tip, label} = props;
+    const {options, placeholder = "请选择", defaultValue, value, onChange, disabled = false, width = 90, tip, label} = props;
     const dom: MutableRefObject<HTMLDivElement | null> = useRef(null);
     const handleOptionClick = (value: string, option: any): void => {
         onChange && onChange(option.value || '');
@@ -32,7 +34,7 @@ const MySelect: React.FC<SelectProps> = (props) => {
                 value={value}
                 defaultValue={defaultValue}
                 placeholder={placeholder}
-                style={{width: dom?.current?.offsetWidth || 90}}
+                style={{width: dom?.current?.offsetWidth || width}}
                 onChange={handleOptionClick}
                 options={options}
             />

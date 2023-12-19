@@ -1,7 +1,7 @@
 import {BaseInfoType} from "../../../designer/DesignerType";
 import percentColumnImg from "./percent-column.png";
 import AbstractColumnDefinition from "../../antd-common/column/AbstractColumnDefinition";
-import {AntdColumnProps} from "../../antd-common/column/AntdCommonColumn";
+import {AntdColumnProps} from "../../antd-common/column/AntdCommonColumnController";
 import { CategoryEnum, ChartTypeCNEnum, ChartTypeEnum } from "../../../const/index.const";
 
 class AntdPercentColumnDefinition extends AbstractColumnDefinition {

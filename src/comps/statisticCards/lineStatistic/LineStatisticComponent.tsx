@@ -1,8 +1,8 @@
 import {ComponentBaseProps} from "../../common-component/common-types";
 import { StatisticCard } from '@ant-design/pro-components';
 import { Component } from 'react';
-import { Line } from '@ant-design/plots';
 import './LineStatisticComponent.less';
+import { Line } from '@ant-design/charts';
 import CountUp from "react-countup";
 
 export interface LineStatisticComponentStyle {

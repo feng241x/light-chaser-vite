@@ -1,4 +1,4 @@
-import './style/AddNewScreenDialog.less';
+import './AddNewScreenDialog.less';
 import { Form, Input, Modal, Select } from 'antd';
 
 export interface NewProjectInfoType {
