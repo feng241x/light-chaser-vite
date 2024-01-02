@@ -33,14 +33,15 @@ class AxisConfig extends Component<AxisConfigProps> {
         },
     }
     oldData: Axis | undefined = undefined;
-    emptyData: Axis = {
-        grid: null,
-        line: null,
-        title: null,
-        label: null,
-        tickLine: null,
-        subTickLine: null,
-    }
+    // emptyData: Axis = {
+    //     grid: null,
+    //     line: null,
+    //     title: null,
+    //     label: null,
+    //     tickLine: null,
+    //     subTickLine: null,
+    // }
+    emptyData: Axis = false
 
     constructor(props: AxisConfigProps) {
         super(props);

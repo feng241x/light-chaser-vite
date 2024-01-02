@@ -18,6 +18,10 @@ export class ColumnStatisticController extends AntdBaseDesignerController<any, C
     getConfig(): ColumnStatisticComponentProps | null {
         return this.config;
     }
+    changeData(data: any) {
+        const style = ObjectUtil.merge(this.config?.style, {data});
+        this.instance?.setState(style);
+    }
 
     update(config: ColumnStatisticComponentProps, upOp?: UpdateOptions | undefined): void {
         this.config = ObjectUtil.merge(this.config, config);

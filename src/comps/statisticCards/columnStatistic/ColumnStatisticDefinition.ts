@@ -34,7 +34,7 @@ export default class ColumnStatisticDefinition extends AbstractDefinition<Column
         return ColumnStatisticImg;
     }
 
-    getComponent(): ClazzTemplate<ColumnStatisticController> | null {
+    getController(): ClazzTemplate<ColumnStatisticController> | null {
         return ColumnStatisticController;
     }
 

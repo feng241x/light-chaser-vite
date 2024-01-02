@@ -18,7 +18,10 @@ export class LineStatisticController extends AntdBaseDesignerController<any, Lin
     getConfig(): LineStatisticComponentProps | null {
         return this.config;
     }
-
+    changeData(data: any) {
+        const style = ObjectUtil.merge(this.config?.style, {data});
+        this.instance?.setState(style);
+    }
     update(config: LineStatisticComponentProps, upOp?: UpdateOptions | undefined): void {
         this.config = ObjectUtil.merge(this.config, config);
         upOp = upOp || {reRender: true};

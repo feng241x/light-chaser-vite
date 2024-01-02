@@ -255,7 +255,7 @@ class DataConfig extends Component<DataConfigProps> {
             const {controller} = this.props;
             controller.update({data: {staticData: {data}}},
                 {reRender: false});
-            controller.changeData(data)
+            controller.changeData({staticData: {data}})
         }
         if (id === 'doTest') {
             this.testApi();

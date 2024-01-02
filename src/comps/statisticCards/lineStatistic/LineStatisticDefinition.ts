@@ -34,7 +34,7 @@ export default class LineStatisticDefinition extends AbstractDefinition<LineStat
         return LineStatisticImg;
     }
 
-    getComponent(): ClazzTemplate<LineStatisticController> | null {
+    getController(): ClazzTemplate<LineStatisticController> | null {
         return LineStatisticController;
     }
 

@@ -10,7 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@ant-design/charts": "^2.0.3",
+    "@ant-design/charts": "^1.4.3",
     "@ant-design/icons": "^4.7.0",
     "@ant-design/pro-components": "^2.6.43",
     "@antv/g-base": "^0.5.15",
@@ -18,7 +18,9 @@
     "@monaco-editor/react": "^4.6.0",
     "@scena/react-ruler": "^0.17.1",
     "antd": "^5.11.1",
+    "d3-color": "^3.1.0",
     "darkreader": "^4.9.67",
+    "echarts": "^5.4.3",
     "html2canvas": "^1.4.1",
     "localforage": "^1.10.0",
     "lodash": "^4.17.21",

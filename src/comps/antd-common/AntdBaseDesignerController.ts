@@ -43,12 +43,10 @@ export abstract class AntdBaseDesignerController<I extends Plot<any> = Plot<Opti
         });
     }
 
-    public async commonCreateByCustom(container: HTMLElement, CustomComponent: any, config: C): Promise<this> {
+    public async commonCreateByCustom(container: HTMLElement, CustomComponent: any, config: C) {
         this.config = config;
         this.container = container;
         this.instance = await ComponentUtil.createAndRender(container, CustomComponent, config);
-        return this;
-        
     }
 
     public commonCreate(container: HTMLElement, Clazz: new (...args: any[]) => I, config: C): void {

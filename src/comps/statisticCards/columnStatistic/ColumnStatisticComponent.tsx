@@ -57,8 +57,8 @@ class ColumnStatisticComponent extends Component<any, any>  {
         data: jsonData,
         xField: style.xField,
         yField: style.yField,
-        xAxis: style.xAxis ? style.xAxis : false,
-        yAxis: style.yAxis ? style.yAxis : false
+        xAxis: style.xAxis,
+        yAxis: style.yAxis,
       };
       const formatter: any = (value: number) => <CountUp end={value} separator="," />;
       return (
@@ -83,7 +83,9 @@ class ColumnStatisticComponent extends Component<any, any>  {
             layout: style.layout || 'vertical',
             formatter: style.CountUp ? formatter : undefined
           }}
-          chart={<Column autoFit {...config} />}
+          chart={
+            <Column autoFit {...config} />
+          }
         />
       );
     }
